@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'adocoes',
     'gatos',
     'lares_temporarios',
-    'usuarios',
+    'administrador',
 ]
 
 MIDDLEWARE = [
