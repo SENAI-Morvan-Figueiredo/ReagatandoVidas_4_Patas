@@ -1,0 +1,19 @@
+{% extends "administrador/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+  <h2>Login</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="username">Usuário:</label>
+    <input type="text" name="username" required>
+
+    <label for="password">Senha:</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Entrar</button>
+  </form>
+</div>
+{% endblock %}
