@@ -78,3 +78,22 @@ class Adocao(models.Model):
     
     def __str__(self):
         return f"{self.nome} - {self.gato.nome}"
+
+class Adotados(models.Model):
+    imagem = models.ImageField(upload_to="gatos/", verbose_name="Imagem")
+    gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato")
+    adocao = models.ForeignKey(Adocao, on_delete=models.CASCADE, verbose_name="Adoção")
+    data_inicio = models.DateField(verbose_name="Data de início")
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
+    
+    class Meta:
+        verbose_name = "Adotado"
+        verbose_name_plural = "Adotados"
+        db_table = "adotados"
+        ordering = ["-created_at"]
+    
+    def __str__(self):
+        return f"{self.gato}"

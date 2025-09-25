@@ -37,15 +37,8 @@ class LarTemporario(models.Model):
         return f"{self.nome} - {self.bairro}, {self.cidade}"
 
 class HistoricoLarTemporario(models.Model):
-    STATUS_CHOICES = [
-        ("andamento", "Em Andamento"),
-        ("finalizado", "Finalizado"),
-        ("cancelado", "Cancelado"),
-    ]
-    
     gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato")
     lar_temporario = models.ForeignKey(LarTemporario, on_delete=models.CASCADE, verbose_name="Lar temporário")
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, verbose_name="Status")
     data_inicio = models.DateField(verbose_name="Data de início")
     data_fim = models.DateField(blank=True, null=True, verbose_name="Data de fim")
     
@@ -60,4 +53,22 @@ class HistoricoLarTemporario(models.Model):
         ordering = ["-data_inicio"]
     
     def __str__(self):
-        return f"{self.gato.nome} - {self.lar_temporario.nome} ({self.get_status_display()})"
+        return f"{self.gato.nome} - {self.lar_temporario.nome}"
+
+class LarTemporarioAtual(models.Model):
+    gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato")
+    lar_temporario = models.ForeignKey(LarTemporario, on_delete=models.CASCADE, verbose_name="Lar temporário")
+    data_inicio = models.DateField(verbose_name="Data de início")
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
+    
+    class Meta:
+        verbose_name = "Lar Temporario Atual"
+        verbose_name_plural = "Lares Temporários Atuais"
+        db_table = "lar_temporario_atual"
+        ordering = ["-data_inicio"]
+    
+    def __str__(self):
+        return f"{self.gato.nome} - {self.lar_temporario.nome}"
