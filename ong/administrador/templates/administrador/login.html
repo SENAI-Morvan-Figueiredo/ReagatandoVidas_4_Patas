@@ -1,19 +1,48 @@
-{% extends "administrador/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM - Login</title>
+    
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
 
-{% block title %}Login{% endblock %}
+    <a href="/" class="back-link">&larr; Voltar</a>
 
-{% block content %}
-<div class="login-container">
-  <h2>Login</h2>
-  <form method="POST">
-    {% csrf_token %}
-    <label for="username">Usuário:</label>
-    <input type="text" name="username" required>
+    <!-- Contêiner principal que alinha tudo e serve de referência -->
+    <div class="login-wrapper">
+        <!-- A caixa de trás (azul escura) -->
+        <div class="login-background-frame"></div>
 
-    <label for="password">Senha:</label>
-    <input type="password" name="password" required>
+        <!-- A caixa da frente (branca, com o formulário) -->
+        <div class="login-container">
+            <h2>LOGIN  
+ADMINISTRADOR</h2>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required autocomplete="off">
 
-    <button type="submit">Entrar</button>
-  </form>
-</div>
-{% endblock %}
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" required autocomplete="new-password">
+
+                <button type="submit">ENTRAR</button>
+            </form>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
