@@ -5,7 +5,7 @@ from gatos.models import Gato
 class Adocao(models.Model):
   
     # Informações do adotante
-    gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato")
+    gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato")##p/ teste de formulario:
     nome = models.CharField(max_length=255, verbose_name="Nome")
     idade = models.IntegerField(verbose_name="Idade")
     ocupacao_profissional = models.CharField(max_length=100, verbose_name="Ocupação profissional")
