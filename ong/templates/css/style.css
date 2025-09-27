@@ -1,0 +1,30 @@
+body {
+  background: #f2f4fb;
+}
+
+.card-cat {
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(40,40,80,0.06);
+}
+
+.badge-status {
+  background: #6b7;
+  color: #fff;
+  font-weight: 600;
+}
+
+.hero {
+  background: linear-gradient(180deg,#eef0ff,#f7f6ff);
+  padding: 24px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.primary-color {
+  color: #4a4fb6;
+}
+
+.btn-primary {
+  background: #6a63c9;
+  border: none;
+}
