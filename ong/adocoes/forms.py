@@ -29,4 +29,5 @@ class AdocaoForm(forms.ModelForm):
         only_digits = ''.join(c for c in num if c.isdigit())
         if len(only_digits) < 10:
             raise forms.ValidationError("Número de contato inválido.")
+
         return only_digits

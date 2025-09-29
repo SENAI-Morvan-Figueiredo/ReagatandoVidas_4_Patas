@@ -56,7 +56,7 @@ class Sociavel(models.Model):
             caracteristicas.append("Crianças")
         if self.nao_sociavel:
             caracteristicas.append("Não sociável")
-        return f"Sociável com: {", ".join(caracteristicas)}" if caracteristicas else f"Socialização {self.id}"
+        return f"Sociável com: {', '.join(caracteristicas)}" if caracteristicas else f"Socialização {self.id}"
 
 class Cuidado(models.Model):
     castrado = models.BooleanField(default=False, verbose_name="Castrado")
