@@ -6,7 +6,7 @@ class Adocao(models.Model):
   
     # Informações do adotante
     gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato")
-    nome = models.CharField(max_length=255, verbose_name="Nome")
+    nome = models.CharField(max_length=255, verbose_name="Nome Completo")
     idade = models.IntegerField(verbose_name="Idade")
     ocupacao_profissional = models.CharField(max_length=100, verbose_name="Ocupação profissional")
     email = models.EmailField(max_length=255, verbose_name="Email")
