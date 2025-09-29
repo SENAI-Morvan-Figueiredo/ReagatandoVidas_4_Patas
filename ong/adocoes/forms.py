@@ -5,7 +5,7 @@ from .models import Adocao
 class AdocaoForm(forms.ModelForm):
     class Meta:
         model = Adocao
-        exclude = ['created_at', 'updated_at']  
+        # exclude = ['created_at', 'updated_at']  
         widgets = {
             'codicoes_financeiras': forms.CheckboxInput(),
             'animal_externo': forms.CheckboxInput(),
