@@ -33,4 +33,5 @@ def logout_view(request):
 def dashboard_view(request):
     if not request.session.get("admin_id"):
         return redirect("login")  # se não estiver logado, volta para o login
+      
     return render(request, "administrador/dashboard.html")
