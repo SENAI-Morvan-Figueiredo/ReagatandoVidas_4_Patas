@@ -1,0 +1,73 @@
+/* CSS exclusivo do formulário de adoção */
+
+.form-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(40, 40, 80, 0.08);
+  padding: 32px;
+  margin-top: 30px;
+}
+
+.form-card h3 {
+  color: #4a4fb6;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.form-card p {
+  color: #6d738f;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #3e4a75;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%;
+  border: 1px solid #d8d9eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  background: #fafbff;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+  border-color: #6a63c9;
+  box-shadow: 0 0 0 3px rgba(106, 99, 201, 0.15);
+  outline: none;
+  background: #fff;
+}
+
+.form-card .btn-primary {
+  background: #6a63c9;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(106, 99, 201, 0.25);
+  transition: 0.2s;
+}
+
+.form-card .btn-primary:hover {
+  background: #5952b3;
+  box-shadow: 0 8px 18px rgba(106, 99, 201, 0.35);
+}
+
+.form-card .btn-link {
+  margin-left: 12px;
+  color: #9aa3c7;
+  text-decoration: none;
+}
+
+.form-card .btn-link:hover {
+  text-decoration: underline;
+}
