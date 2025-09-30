@@ -46,6 +46,12 @@ class GatoDetailView(DetailView):
     template_name = 'adocoes/adocao_detail.html'
     context_object_name = 'gato'
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        # Outros gatos para exibir — exclui o atual
+        ctx['other_gatos'] = Gato.objects.filter(adotados__isnull=True).exclude(pk=self.object.pk)[:4]
+        return ctx
+
 
 class AdocaoCreateView(CreateView):
     model = Adocao
