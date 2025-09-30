@@ -1,0 +1,42 @@
+/* Reset / Geral */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #5371BA;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background-color: #424874;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Links */
+a {
+    color: #5371BA;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Botões genéricos */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
