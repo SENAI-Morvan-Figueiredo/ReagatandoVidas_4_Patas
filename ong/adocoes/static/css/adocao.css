@@ -1,73 +1,172 @@
-/* CSS exclusivo do formulário de adoção */
-
-.form-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(40, 40, 80, 0.08);
-  padding: 32px;
-  margin-top: 30px;
+body {
+    background-color: #F6F7FF;
 }
 
-.form-card h3 {
-  color: #4a4fb6;
-  font-weight: 800;
-  margin-bottom: 12px;
+/* =================== Formulário de Adoção =================== */
+.form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 50px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #5371BA;
+    box-shadow: 15px 15px 0 #5371BA;
 }
 
-.form-card p {
-  color: #6d738f;
-  margin-bottom: 24px;
-  line-height: 1.5;
+/* Título e Parágrafo Introdutório */
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4F76BB;
 }
 
-.form-label {
-  font-weight: 600;
-  font-size: 14px;
-  color: #3e4a75;
-  margin-bottom: 6px;
-  display: inline-block;
+.form-container p {
+    color: #4F76BB;
+    text-align: center;
+    max-width: 700px;
+    margin: 8px auto 20px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    letter-spacing: 0.2px;
+    display: block;
 }
 
-.form-card input,
-.form-card select,
-.form-card textarea {
-  width: 100%;
-  border: 1px solid #d8d9eb;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
-  background: #fafbff;
+#aviso{
+    font-weight: 600;
 }
 
-.form-card input:focus,
-.form-card select:focus,
-.form-card textarea:focus {
-  border-color: #6a63c9;
-  box-shadow: 0 0 0 3px rgba(106, 99, 201, 0.15);
-  outline: none;
-  background: #fff;
+/* Seções */
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 30px 0 15px;
+    color: #4F76BB;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
 }
 
-.form-card .btn-primary {
-  background: #6a63c9;
-  border-radius: 10px;
-  padding: 12px 24px;
-  font-weight: 700;
-  box-shadow: 0 6px 16px rgba(106, 99, 201, 0.25);
-  transition: 0.2s;
+/* Estrutura dos Campos */
+.form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
 }
 
-.form-card .btn-primary:hover {
-  background: #5952b3;
-  box-shadow: 0 8px 18px rgba(106, 99, 201, 0.35);
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.form-card .btn-link {
-  margin-left: 12px;
-  color: #9aa3c7;
-  text-decoration: none;
+/* Labels (Perguntas) */
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #4F76BB;
 }
 
-.form-card .btn-link:hover {
-  text-decoration: underline;
+/* =================== Inputs de Texto, Textarea e Selects (CORRIGIDO) =================== */
+/*
+  Aplica o estilo APENAS aos tipos de input que devem ocupar 100% da largura.
+  Isso exclui os inputs do tipo "radio" para evitar conflitos.
+*/
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group input[type="url"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+    width: 100%; 
+    padding: 10px 14px;
+    border: 1px solid #4F76BB;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.3s;
+    background-color: #F6F7FF;
+}
+
+/* Efeito de foco para os campos de texto */
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="url"]:focus,
+.form-group input[type="password"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #eee;
+}
+
+
+/* =================== Radios (Sim / Não) - SOLUÇÃO DEFINITIVA =================== */
+
+/*
+  O Django renderiza cada opção (bolinha + texto) dentro de outro <div>.
+  Vamos alinhar a bolinha e o texto corretamente.
+*/
+.form-group > div > div {
+    display: flex;
+    flex-direction: row; /* Alinha a bolinha e o texto lado a lado */
+    align-items: center;
+    gap: 36px; /* Espaço entre a bolinha e o texto "Sim" ou "Não" */
+}
+
+/*
+  Ajuste final para o label de cada opção ("Sim", "Não").
+  Isso evita que ele tenha margens ou pesos de fonte indesejados.
+*/
+.form-group > div > div label {
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/*
+  Reset para os inputs de rádio para garantir que não herdem estilos indesejados.
+*/
+.form-group input[type="radio"] {
+    width: auto; /* Garante que a largura não seja 100% */
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none; /* Remove qualquer sombra que possa ser herdada */
+}
+
+
+/* =================== Botão Submit =================== */
+.btn-submit {
+    background: #4F76BB;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 20px; /* Adiciona um espaço acima do botão */
+}
+
+.btn-submit:hover {
+    background: #3c609e;
+}
+
+/* =================== Responsividade =================== */
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .form-container {
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 10px 10px 0 #5371BA;
+    }
 }
