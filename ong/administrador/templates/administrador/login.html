@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADM - Login</title>
     
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}?v={% now 'U' %}">
+
 </head>
 <body>
 
@@ -29,7 +30,7 @@ ADMINISTRADOR</h2>
                 <input type="email" name="email" id="email" required autocomplete="off">
 
                 <label for="senha">Senha:</label>
-                <input type="password" name="senha" id="senha" required autocomplete="new-password">
+                <input type="password" name="senha" id="senha" required autocomplete="off">
 
                 <button type="submit">ENTRAR</button>
             </form>
