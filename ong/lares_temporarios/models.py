@@ -5,6 +5,7 @@ from gatos.models import Gato
 class LarTemporario(models.Model):
     gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato", null=True, blank=True)
     nome = models.CharField(max_length=255, verbose_name="Nome")
+    cpf = models.CharField(max_length=14, verbose_name="CPF")
     ocupacao_profissional = models.CharField(max_length=255, verbose_name="Ocupação profissional")
     rua = models.CharField(max_length=255, verbose_name="Rua")
     bairro = models.CharField(max_length=255, verbose_name="Bairro")
@@ -17,7 +18,7 @@ class LarTemporario(models.Model):
     animal_externo = models.TextField(verbose_name="Possui outros animais (descrição)")
     mora_casa = models.BooleanField(default=False, verbose_name="Mora em casa")
     restrito = models.BooleanField(default=False, verbose_name="Gato ficará restrito em alguma parte da casa")
-    estrutura = models.BooleanField(default=False, verbose_name="Tem estrutura segura para gatos")
+    estrutura = models.CharField(max_length=20, verbose_name="Tem estrutura segura para gatos")
     custos = models.CharField(max_length=50, verbose_name="Pode ajudar com os custos do gato")
     duracao_aproximada = models.CharField(max_length=20, verbose_name="Por quanto tempo consegue manter o gato")
     visita = models.CharField(max_length=50, verbose_name="Aceita visita em caso de adoção")
