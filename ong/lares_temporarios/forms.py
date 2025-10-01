@@ -40,7 +40,6 @@ class LarTemporarioForm(forms.ModelForm):
             # ---------------- BOOLEANOS (Sim / Não) ----------------
             'foi_lar_temporario': forms.RadioSelect(choices=SIM_NAO_CHOICES),
             'mora_casa': forms.RadioSelect(choices=SIM_NAO_CHOICES),
-            'restrito': forms.RadioSelect(choices=SIM_NAO_CHOICES),
 
             # ------------- BOOLEANOS (Sim / Não / Parcialmente) ------------
             'estrutura': forms.RadioSelect(choices=SIM_NAO_PARCIALMENTE_CHOICES),
@@ -59,6 +58,7 @@ class LarTemporarioForm(forms.ModelForm):
 
             # -------- Campos de texto --------
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'ocupacao_profissional': forms.TextInput(attrs={'class': 'form-control'}),
             'rua': forms.TextInput(attrs={'class': 'form-control'}),
             'bairro': forms.TextInput(attrs={'class': 'form-control'}),
