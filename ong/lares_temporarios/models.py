@@ -3,26 +3,34 @@ from gatos.models import Gato
 
 
 class LarTemporario(models.Model):
+    # Informações do adotante
     gato = models.ForeignKey(Gato, on_delete=models.CASCADE, verbose_name="Gato", null=True, blank=True)
-    nome = models.CharField(max_length=255, verbose_name="Nome")
+    nome = models.CharField(max_length=255, verbose_name="Nome Completo")
     cpf = models.CharField(max_length=14, verbose_name="CPF")
     ocupacao_profissional = models.CharField(max_length=255, verbose_name="Ocupação profissional")
+    email = models.EmailField(max_length=255, verbose_name="E-mail")
+
+    # Endereço
     rua = models.CharField(max_length=255, verbose_name="Rua")
     bairro = models.CharField(max_length=255, verbose_name="Bairro")
     numero = models.CharField(max_length=15, verbose_name="Número")
     cidade = models.CharField(max_length=255, verbose_name="Cidade")
     cep = models.IntegerField(verbose_name="CEP") 
-    numero_contato = models.CharField(max_length=15, verbose_name="Número de contato")
-    foi_lar_temporario = models.BooleanField(default=False, verbose_name="Já foi lar temporário")
-    disponibilidade_inicio = models.DateField(verbose_name="Disponibilidade início")
-    animal_externo = models.TextField(verbose_name="Possui outros animais (descrição)")
-    mora_casa = models.BooleanField(default=False, verbose_name="Mora em casa")
-    restrito = models.BooleanField(default=False, verbose_name="Gato ficará restrito em alguma parte da casa")
-    estrutura = models.CharField(max_length=20, verbose_name="Tem estrutura segura para gatos")
-    custos = models.CharField(max_length=50, verbose_name="Pode ajudar com os custos do gato")
-    duracao_aproximada = models.CharField(max_length=20, verbose_name="Por quanto tempo consegue manter o gato")
-    visita = models.CharField(max_length=50, verbose_name="Aceita visita em caso de adoção")
-    informacao_adicional = models.TextField(blank=True, null=True, verbose_name="Informação adicional do voluntário")
+
+    # Contato
+    numero_contato = models.CharField(max_length=15, verbose_name="Telefone para contato")
+
+    # Lar Temporário
+    foi_lar_temporario = models.BooleanField(default=False, verbose_name="Você já foi lar temporário antes?")
+    disponibilidade_inicio = models.DateField(verbose_name="Informe uma data em que se inicia a sua disponibilidade para ser lar temporário de um bichinho")
+    animal_externo = models.TextField(verbose_name="Você tem outros animais em casa? Se sim, quantos e quais?  Caso ele tenha alguma condição como FIV, FELV, esporotricose etc, nos informe aqui também!")
+    mora_casa = models.BooleanField(default=False, verbose_name="Mora em casa?")
+    restrito = models.BooleanField(default=False, verbose_name="O animal ficará restrito em alguma parte da casa?")
+    estrutura = models.CharField(max_length=20, verbose_name="Você tem estrutura segura para gatos (telas nas janelas, ambiente fechado etc)?")
+    custos = models.CharField(max_length=50, verbose_name="Você pode ajudar com os custos (ração, areia, etc), ou prefere que a Resgatando vidas 4 patas cubra?")
+    duracao_aproximada = models.CharField(max_length=20, verbose_name="Por quanto tempo, aproximadamente, você conseguiria manter um animalzinho sob seus cuidados?  ")
+    visita = models.CharField(max_length=50, verbose_name="Caso haja um adotante interessado em visitar o animalzinho, você poderá recebê-lo?")
+    informacao_adicional = models.TextField(blank=True, null=True, verbose_name="Alguma observação ou informação que gostaria de adicionar?")
     
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")

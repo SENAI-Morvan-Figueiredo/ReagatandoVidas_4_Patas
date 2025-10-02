@@ -5,30 +5,23 @@
 <!-- <link rel="stylesheet" href="{% static 'css/adocao.css' %}"> -->
 
 <div class="form-container">
-    <h1 class="form-title">FORMULÁRIO - ADOÇÃO</h1>
-    <p>Adotar não é somente um ato de amor temporário, mas de amor e responsabilidade para a vida toda desse animal. Adote com amor e responsabilidade.</p>
+    <h1 class="form-title">FORMULÁRIO - LAR TEMPORÁRIO</h1>
+    <p>Importante: Você não precisa arcar com os custos se não puder — a ONG pode fornecer ração, areia, medicamentos etc.</p>
 
     <form method="post">
         {% csrf_token %}
 
-        <!-- Informações do adotante -->
+        <!-- Informações do voluntario -->
         <div class="form-section">
             <h2 class="section-title">Informações do Adotante</h2>
             <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
             <div class="form-group">{{ form.cpf.label_tag }} {{ form.cpf }}</div>
             <div class="form-row">
-                <div class="form-group">{{ form.idade.label_tag }} {{ form.idade }}</div>
                 <div class="form-group">{{ form.ocupacao_profissional.label_tag }} {{ form.ocupacao_profissional }}</div>
             </div>
             <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
             <div class="form-row">
                 <div class="form-group">{{ form.numero_contato.label_tag }} {{ form.numero_contato }}</div>
-                <div class="form-group">{{ form.instagram.label_tag }} {{ form.instagram }}</div>
-            </div>
-            <!-- Campo de Rádio Corrigido -->
-            <div class="form-group radio-field">
-                {{ form.codicoes_financeiras.label_tag }}
-                <div class="radio-options">{{ form.codicoes_financeiras }}</div>
             </div>
         </div>
 
@@ -44,70 +37,36 @@
             <div class="form-group">{{ form.cidade.label_tag }} {{ form.cidade }}</div>
         </div>
 
+        <!-- Lar Temporario -->
+        <div class="form-section">
+            <h2 class="section-title">Lar Temporário</h2>
+            <div class="form-group radio-field">{{ form.foi_lar_temporario.label_tag }}<div class="radio-options">{{ form.foi_lar_temporario }}</div></div>
+            <div class="form-group">{{ form.disponibilidade_inicio.label_tag }} {{ form.disponibilidade_inicio}}</div>
+        </div>
+
         <!-- Outros animais -->
         <div class="form-section">
             <h2 class="section-title">Outros Animais</h2>
             <div class="form-group radio-field">{{ form.animal_externo.label_tag }}<div class="radio-options">{{ form.animal_externo }}</div></div>
-            <div class="form-group">{{ form.animal_externo_especie_idade.label_tag }} {{ form.animal_externo_especie_idade }}</div>
-            <div class="form-group radio-field">{{ form.animal_externo_voltinhas.label_tag }}<div class="radio-options">{{ form.animal_externo_voltinhas }}</div></div>
-            <div class="form-group radio-field">{{ form.animal_externo_nao_castrado.label_tag }}<div class="radio-options">{{ form.animal_externo_nao_castrado }}</div></div>
-            <div class="form-group radio-field">{{ form.animal_externo_vacinacao.label_tag }}<div class="radio-options">{{ form.animal_externo_vacinacao }}</div></div>
-            <div class="form-group radio-field">{{ form.animal_externo_testado.label_tag }}<div class="radio-options">{{ form.animal_externo_testado }}</div></div>
-            <div class="form-group">{{ form.animal_externo_racao.label_tag }} {{ form.animal_externo_racao }}</div>
-        </div>
-
-        <!-- Adaptação -->
-        <div class="form-section">
-            <h2 class="section-title">Adaptação</h2>
-            <div class="form-group radio-field">{{ form.periodo_adaptacao.label_tag }}<div class="radio-options">{{ form.periodo_adaptacao }}</div></div>
         </div>
 
         <!-- Moradia -->
         <div class="form-section">
             <h2 class="section-title">Moradia</h2>
-            <div class="form-group radio-field">{{ form.mora_sozinho.label_tag }}<div class="radio-options">{{ form.mora_sozinho }}</div></div>
-            <div class="form-group radio-field">{{ form.mora_crianca.label_tag }}<div class="radio-options">{{ form.mora_crianca }}</div></div>
-            <div class="form-group radio-field">{{ form.alguem_nao_concorda.label_tag }}<div class="radio-options">{{ form.alguem_nao_concorda }}</div></div>
-            <div class="form-group radio-field">{{ form.alguem_alergico.label_tag }}<div class="radio-options">{{ form.alguem_alergico }}</div></div>
-            <div class="form-group radio-field">{{ form.imovel_proprio.label_tag }}<div class="radio-options">{{ form.imovel_proprio }}</div></div>
-            <h3 class="section-title">Casa</h3>
             <div class="form-group radio-field">{{ form.mora_casa.label_tag }}<div class="radio-options">{{ form.mora_casa }}</div></div>
-            <div class="form-group radio-field">{{ form.casa_muros_laterais_baixos.label_tag }}<div class="radio-options">{{ form.casa_muros_laterais_baixos }}</div></div>
-            <div class="form-group radio-field">{{ form.casa_quintal.label_tag }}<div class="radio-options">{{ form.casa_quintal }}</div></div>
-            <div class="form-group radio-field">{{ form.casa_quintal_mais_casa.label_tag }}<div class="radio-options">{{ form.casa_quintal_mais_casa }}</div></div>
-            <div class="form-group radio-field">{{ form.casa_garagem.label_tag }}<div class="radio-options">{{ form.casa_garagem }}</div></div>
-            <h3 class="section-title">Apartamento</h3>
-            <div class="form-group radio-field">{{ form.apartamento_telada.label_tag }}<div class="radio-options">{{ form.apartamento_telada }}</div></div>
-            <div class="form-group radio-field">{{ form.apartamento_limitador.label_tag }}<div class="radio-options">{{ form.apartamento_limitador }}</div></div>
-        </div>
-
-        <p id="aviso">Posteriormente solicitaremos o vídeo comprovando a segurança</p>
-
-        <!-- Mudanças -->
-        <div class="form-section">
-            <h2 class="section-title">Mudanças</h2>
-            <div class="form-group radio-field">{{ form.mudanca_trabalho.label_tag }}<div class="radio-options">{{ form.mudanca_trabalho }}</div></div>
-            <div class="form-group radio-field">{{ form.mudanca_imovel.label_tag }}<div class="radio-options">{{ form.mudanca_imovel }}</div></div>
-            <div class="form-group radio-field">{{ form.mudanca_imovel_seguranca.label_tag }}<div class="radio-options">{{ form.mudanca_imovel_seguranca }}</div></div>
-            <div class="form-group radio-field">{{ form.mudanca_imovel_comunicar.label_tag }}<div class="radio-options">{{ form.mudanca_imovel_comunicar }}</div></div>
+            <div class="form-group radio-field">{{ form.restrito.label_tag }}<div class="radio-options">{{ form.restrito }}</div></div>
+            <div class="form-group radio-field">{{ form.estrutura.label_tag }}<div class="radio-options">{{ form.estrutura }}</div></div>
         </div>
 
         <!-- Compromissos -->
         <div class="form-section">
             <h2 class="section-title">Compromissos</h2>
-            <div class="form-group radio-field">{{ form.repassar_animal.label_tag }}<div class="radio-options">{{ form.repassar_animal }}</div></div>
-            <div class="form-group radio-field">{{ form.dessistencia.label_tag }}<div class="radio-options">{{ form.dessistencia }}</div></div>
-            <div class="form-group">{{ form.viagens.label_tag }} {{ form.viagens }}</div>
-            <div class="form-group radio-field">{{ form.restrito.label_tag }}<div class="radio-options">{{ form.restrito }}</div></div>
-            <div class="form-group radio-field">{{ form.devolver_doar.label_tag }}<div class="radio-options">{{ form.devolver_doar }}</div></div>
-            <div class="form-group">{{ form.devolver_doar_explique.label_tag }} {{ form.devolver_doar_explique }}</div>
-            <div class="form-group radio-field">{{ form.responder_doador.label_tag }}<div class="radio-options">{{ form.responder_doador }}</div></div>
+            <div class="form-group radio-field">{{ form.custos.label_tag }}<div class="radio-options">{{ form.custos }}</div></div>
+            <div class="form-group radio-field">{{ form.duracao_aproximada.label_tag }}<div class="radio-options">{{ form.duracao_aproximada }}</div></div>
+            <div class="form-group radio-field">{{ form.visita.label_tag }}<div class="radio-options">{{ form.visita }}</div></div>
+            <div class="form-group">{{ form.informacao_adicional.label_tag }} {{ form.informacao_adicional}}</div></div>
         </div>
 
-        <!-- Botão -->
-        <div class="form-actions">
-            <button type="submit" class="btn-submit">Enviar</button>
-        </div>
     </form>
 </div>
 {% endblock %}

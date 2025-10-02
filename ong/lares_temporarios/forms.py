@@ -59,6 +59,7 @@ class LarTemporarioForm(forms.ModelForm):
 
             # -------- Campos de texto --------
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'ocupacao_profissional': forms.TextInput(attrs={'class': 'form-control'}),
             'rua': forms.TextInput(attrs={'class': 'form-control'}),
             'bairro': forms.TextInput(attrs={'class': 'form-control'}),
