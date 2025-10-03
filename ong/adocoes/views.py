@@ -2,7 +2,7 @@
 import logging
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404 , render, redirect
 from django.contrib import messages
 from django.core.exceptions import FieldError
 from .models import Adocao
@@ -53,35 +53,17 @@ class GatoDetailView(DetailView):
         return ctx
 
 
-class AdocaoCreateView(CreateView):
-    model = Adocao
-    form_class = AdocaoForm
-    template_name = 'adocoes/adocao_form.html'
-
-    def get_initial(self):
-        initial = super().get_initial()
-        gato_id = self.request.GET.get('gato')
-        if gato_id:
-            try:
-                gato = get_object_or_404(Gato, pk=gato_id)
-                initial['gato'] = gato
-            except Exception:
-                pass
-        return initial
-
-    def form_valid(self, form):
-        gato = form.cleaned_data.get('gato')
-        if not gato:
-            gato_id = self.request.GET.get('gato')
-            if gato_id:
-                form.instance.gato = get_object_or_404(Gato, pk=gato_id)
-        response = super().form_valid(form)
-        messages.success(self.request, "Solicitação de adoção enviada com sucesso.")
-        return response
-
-    def get_success_url(self):
-        return reverse_lazy('adocoes:adocao_success')
+def formulario_adocao(request):
+    if request.method == 'POST':
+        form = AdocaoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('formulario_sucesso')  
+    else:
+        form = AdocaoForm()
+    
+    return render(request, 'adocoes/adocao_form.html', {'form': form})
 
 
-class AdocaoSuccessView(TemplateView):
-    template_name = 'adocoes/adocao_success.html'
+def formulario_sucesso(request):
+    return render(request, 'adocoes/adocao_sucess.html')

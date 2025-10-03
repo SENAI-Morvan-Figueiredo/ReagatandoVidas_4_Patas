@@ -7,6 +7,6 @@ app_name = 'adocoes'
 urlpatterns = [
     path('', views.GatoListView.as_view(), name='lista'),
     path('gato/<int:pk>/', views.GatoDetailView.as_view(), name='detail'),
-    path('solicitar/', views.AdocaoCreateView.as_view(), name='solicitar'),
-    path('obrigado/', views.AdocaoSuccessView.as_view(), name='adocao_success'),
+    path('solicitar/', views.formulario_adocao, name='solicitar'),
+    path('obrigado/', views.formulario_sucesso, name='adocao_success'),
 ]
