@@ -1,4 +1,3 @@
-# adocoes/views.py
 import logging
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.urls import reverse_lazy
