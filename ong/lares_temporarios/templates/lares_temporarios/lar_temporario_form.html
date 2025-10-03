@@ -4,6 +4,8 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/adocao.css' %}">
 
+<a href="/" class="back-link">&larr; Voltar</a>
+
 <div class="form-container">
     <h1 class="form-title">FORMULÁRIO - LAR TEMPORÁRIO</h1>
     <p>Importante: Você não precisa arcar com os custos se não puder — a ONG pode fornecer ração, areia, medicamentos etc.</p>
@@ -13,7 +15,7 @@
 
         <!-- Informações do voluntario -->
         <div class="form-section">
-            <h2 class="section-title">Informações do Adotante</h2>
+            <h2 class="section-title">Informações do Voluntário</h2>
             <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
             <div class="form-group">{{ form.cpf.label_tag }} {{ form.cpf }}</div>
             <div class="form-row">
