@@ -1,4 +1,3 @@
-# adocoes/views.py
 import logging
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.urls import reverse_lazy
@@ -53,17 +52,19 @@ class GatoDetailView(DetailView):
         return ctx
 
 
+def adocao_sucess(request):
+    return render(request, 'adocoes/adocao_sucess.html')
+
 def formulario_adocao(request):
     if request.method == 'POST':
         form = AdocaoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('formulario_sucesso')  
+            return redirect('adocoes:adocao_sucess')  
     else:
         form = AdocaoForm()
     
     return render(request, 'adocoes/adocao_form.html', {'form': form})
 
 
-def formulario_sucesso(request):
-    return render(request, 'adocoes/adocao_sucess.html')
+
