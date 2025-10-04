@@ -59,7 +59,7 @@ Página do dashboard de mostra os gatos para adoção -->
                                 <a href="" class="btn btn-light p-1" title="Editar"> 
                                     <img src="{% static 'img/Icone_Editar.svg' %}" alt="Editar" style="width: 35px; height: 35px;"> 
                                 </a> 
-                                <a href="" class="btn btn-light p-1" title="Excluir">
+                                <a href="javascript:void(0);" class="btn btn-light p-1 excluir-gato" data-id="{{ gato.id }}" data-nome="{{ gato.nome }}" title="Excluir">
                                     <img src="{% static 'img/Icone_Excluir.svg' %}" alt="Excluir" style="width: 35px; height: 35px;">
                                 </a> 
                             </div>
@@ -87,10 +87,14 @@ Página do dashboard de mostra os gatos para adoção -->
     </div>
 </div>
 
-<!-- Mini função para o filtro de Nome.
-Para dar um delay antes de pesquisar, para que a pessoa consiga digitar todo o nome -->
+
+<!-- JavaScript -->
 
 <script>
+
+// Mini função para o filtro de Nome.
+// Para dar um delay antes de pesquisar, para que a pessoa consiga digitar todo o nome
+
     let debounceTimer;
 
     function debounceSubmit(form, delay) {
@@ -99,6 +103,46 @@ Para dar um delay antes de pesquisar, para que a pessoa consiga digitar todo o n
             form.submit(); // envia o form só depois do delay
         }, delay);
     }
+
+
+// Função para o Pop-up de confirmar exclusão - Feito em JavaScript e Ajax ( Não sei explicar - Raí )
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const botoesExcluir = document.querySelectorAll(".excluir-gato");
+
+        botoesExcluir.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const gatoId = this.dataset.id;
+                const gatoNome = this.dataset.nome;
+
+                if (confirm(`Tem certeza que deseja excluir o gato ${gatoNome} e todos os registros associados?`)) {
+                    fetch(`/excluir_gato_ajax/${gatoId}/`, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": "{{ csrf_token }}",
+                            "Accept": "application/json",
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "ok") {
+                            // Remove o card da tela
+                            const card = this.closest(".col-lg-3, .col-md-4, .col-sm-6");
+                            if (card) card.remove();
+                            alert(data.mensagem);
+                        } else {
+                            alert(data.mensagem);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert("Ocorreu um erro ao tentar excluir o gato.");
+                    });
+                }
+            });
+        });
+    });
+
 </script>
 
 {% endblock %}
