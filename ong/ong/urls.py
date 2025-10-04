@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
     path("", include("administrador.urls")), 
     path('adocoes/', include('adocoes.urls', namespace='adocoes')),
     path('lares_temporarios/', include('lares_temporarios.urls', namespace='lares_temporarios')),
