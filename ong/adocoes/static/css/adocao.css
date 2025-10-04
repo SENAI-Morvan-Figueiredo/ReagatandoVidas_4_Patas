@@ -170,3 +170,19 @@ body {
         box-shadow: 10px 10px 0 #5371BA;
     }
 }
+
+.back-link:hover {
+  text-decoration: none !important;
+}
+
+.back-link {
+    text-decoration: none;
+    top: 20px;
+    left: 20px;
+    color: #4F76BB;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
