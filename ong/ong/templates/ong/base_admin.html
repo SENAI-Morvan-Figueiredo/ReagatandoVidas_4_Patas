@@ -1,0 +1,74 @@
+<!-- Página base do DashBoard - com as Quantidades, Navegação -->
+<!-- Será usada nas telas: 
+            - dashboard_admin_adocoes,
+            - dashboard_admin_lar_temporario,
+            - dashboard_admin_adotados
+-->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard Administrativo{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base_admin.css' %}">
+</head>
+
+<body> 
+    <!-- Cabeçalho do Dashboard -->
+    <div class="dashboard-header container">
+        <h2>DASHBOARD ADMINISTRATIVO</h2>
+
+        <!-- Parte do dashboard com as quantidades de gatos para adoção e etc -->
+        <div class="row justify-content-center g-4">
+            <div class="col-md-3">
+                <div class="card stat-card p-3">
+                    <p>Gatos para Adoção</p>
+                    <h4>{{ total_para_adocao|default:"0" }}</h4>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card p-3">
+                    <p>Gatos para Lar Temporário</p>
+                    <h4>{{ total_lar_temporario|default:"0" }}</h4>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card p-3">
+                    <p>Gatos Adotados</p>
+                    <h4>{{ total_adotados|default:"0" }}</h4>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+    
+    <!-- Botões para navegar entre as páginas - dashboard_admin_adocoes, dashboard_admin_lar_temporario, dashboard_admin_adotados  -->
+    <div class="container mb-4">
+        <ul class="nav nav-tabs justify-content-center">
+            <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#adocoes">Adoções</a> </li>
+            <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#lares">Lares Temporários</a> </li>
+            <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#adotados">Adotados</a> </li>
+        </ul>
+    </div> 
+    
+    <!-- Conteúdo Dinâmico -->
+    <main class="container"> 
+        {% block content %}
+        {% endblock %} 
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+<!-- Fonte Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+</html>
