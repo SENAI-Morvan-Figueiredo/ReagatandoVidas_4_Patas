@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Gato, Moradia, Temperamento, Sociavel, Cuidado
 
-# Register your models here.
+# Registrando os Models para que SuperAdmin possa adicionar, editar e etc.
 
 admin.site.register(Gato)
 admin.site.register(Moradia)

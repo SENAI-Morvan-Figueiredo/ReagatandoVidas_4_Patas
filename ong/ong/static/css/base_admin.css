@@ -1,7 +1,10 @@
+/* Css da página base_admin
+Página Base do DashBoard*/
+
+
 /* Cabeçalho */
 .dashboard-header {
     background: #f3f5ff;
-    /* lilás bem claro */
     border-radius: 0 0 2rem 2rem;
     padding: 2rem 1rem;
     text-align: center;
@@ -11,12 +14,12 @@
 .dashboard-header h2 {
     font-weight: 700;
     color: #5a6ac9;
-    /* azul mais suave */
     margin-bottom: 2rem;
     letter-spacing: 1px;
 }
 
-/* Cards de estatísticas */
+
+/* Cards de estatísticas - Quantidade */
 .stat-card {
     border-radius: 1rem;
     background: #fff;
@@ -41,7 +44,8 @@
     font-weight: 500;
 }
 
-/* Abas */
+
+/* Botões de navegação entre os conteúdos */
 .nav-tabs {
     border: none;
     gap: 0.5rem;

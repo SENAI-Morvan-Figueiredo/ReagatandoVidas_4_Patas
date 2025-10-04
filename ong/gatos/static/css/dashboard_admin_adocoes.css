@@ -1,8 +1,13 @@
+/* Css da página dashboard_admin_adocoes
+Página do dashboard de mostra os gatos para adoção */
+
+
 /* Fundo da página */
 body {
     background-color: #f5f6fc;
     font-family: "Inter", sans-serif;
 }
+
 
 /* Caixa branca que engloba tudo */
 .bg-white {
@@ -10,6 +15,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
+
 
 /* ====== Título ====== */
 h2 {
@@ -20,6 +26,7 @@ h2 {
 .text-primary {
     color: #4F76BB !important;
 }
+
 
 /* ====== Cards ====== */
 .card {
@@ -47,6 +54,7 @@ h2 {
     color: #4F76BB;
 }
 
+
 /* ====== Botão adicionar ====== */
 .btn-danger {
     background-color: #F58285 !important;
@@ -60,6 +68,7 @@ h2 {
     background-color: #e0676b !important;
     transform: scale(1.05);
 }
+
 
 /* ====== Campos de pesquisa ====== */
 .form-control,
@@ -75,18 +84,6 @@ h2 {
     box-shadow: 0 0 0 0.2rem rgba(79, 118, 187, 0.25);
 }
 
-/* ====== Botão pesquisar ====== */
-.btn-primary {
-    background-color: #4F76BB !important;
-    border: none;
-    border-radius: 10px;
-    font-weight: 500;
-    transition: 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #3a5a99 !important;
-}
 
 /* ====== Botões de ação nos cards (editar/excluir) ====== */
 .card .btn-light {
@@ -104,6 +101,7 @@ h2 {
     font-size: 0.9rem;
 }
 
+
 /* Campos de pesquisa menores */
 .search-input {
     font-size: 0.9rem;
@@ -114,11 +112,13 @@ h2 {
     box-shadow: none;
 }
 
-/* Placeholder menor */
+
+/* Placeholder menor - Filtro_Nome */
 .search-input::placeholder {
     font-size: 0.85rem;
-    color: #888;
+    color: #888; /*  Diz respeito a cor da letra */
 }
+
 
 /* Cards dos gatos – sombra suave e elegante */
 .row.g-4>.col-lg-3>.card,

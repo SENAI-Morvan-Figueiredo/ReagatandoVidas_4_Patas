@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import dashboard_admin_adocoes # Você importou o nome específico
+from .views import dashboard_admin_adocoes
 
 urlpatterns = [
-    # Apenas use o nome que você importou
+    # Função para conseguir acessar a tela de DashBoard do Admin - Com os gatos para adoção
     path("dashboard_admin_adocoes", dashboard_admin_adocoes),
 ]
