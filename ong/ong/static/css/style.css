@@ -296,3 +296,129 @@ p{
         font-size: 1rem;
     }
 }
+
+/* --- FOOTER AJUSTADO --- */
+.footer-container {
+  position: relative;
+  margin-top: 200px;
+  width: 100%;
+  overflow: visible; /* deixa as curvas visíveis */
+}
+
+.footer-container .footer-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* centralização perfeita do texto */
+.footer-text {
+  position: absolute;
+  top: 72%; /* ajusta visualmente para o meio das curvas */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  width: 90%;
+  z-index: 3;
+}
+
+#titulo {
+  letter-spacing: 5px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 auto 8px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.footer-links p.fw-bold {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+/* --- linha inferior --- */
+.footer-bottom {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+.admin-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+.admin-link:hover { text-decoration: underline; }
+
+/* ícones sem círculo branco */
+.footer-bottom-right {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.social-link { display: inline-block; }
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  border: none; /* remove o círculo */
+  border-radius: 0; /* remove arredondamento */
+  padding: 0; /* remove espaço interno */
+  background: none;
+}
+
+/* responsivo */
+@media (max-width: 768px) {
+  .footer-text {
+    top: 50%;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  #titulo {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    bottom: 10px;
+  }
+}
