@@ -116,11 +116,11 @@ class Gato(models.Model):
         ("F", "Fêmea"),
     ]
     
-    nome = models.CharField(max_length=100, verbose_name="Nome")
+    nome = models.CharField(max_length=100, verbose_name="Nome do gao")
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name="Sexo")
     idade = models.CharField(max_length=10, verbose_name="Idade")
-    descricao = models.TextField(max_length=10000, verbose_name="Descrição")
-    imagem = models.ImageField(upload_to="gatos/", verbose_name="Imagem")
+    descricao = models.TextField(max_length=10000, verbose_name="Sobre o gato")
+    imagem = models.ImageField(upload_to="gatos/", verbose_name="Foto do gato")
     lar_temporario = models.BooleanField(default=False, verbose_name="Precisa de lar temporário")
     
     # Relacionamentos
@@ -141,4 +141,3 @@ class Gato(models.Model):
     
     def __str__(self):
         return f"{self.nome} ({self.get_sexo_display()})"
-      
