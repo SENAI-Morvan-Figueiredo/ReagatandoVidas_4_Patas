@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from gatos.models import Gato 
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.contrib import messages
+from .forms import GatoCompletoForm
 
 # Da tela dashboard_admin_adocoes
 # View que vai mandar as informações para os cards e tambem para o filtro
@@ -34,3 +36,36 @@ def excluir_gato_ajax(request, gato_id):
         return JsonResponse({"status": "ok", "mensagem": f"Gato {gato.nome} excluído com sucesso!"})
     except Gato.DoesNotExist:
         return JsonResponse({"status": "erro", "mensagem": "Gato não encontrado."}, status=404)
+    
+def adicionar_gato(request):
+    if request.method == 'POST':
+        form = GatoCompletoForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            gato = form.save()
+            messages.success(request, f'Gato "{gato.nome}" adicionado com sucesso!')
+            return redirect('gatos:lista_gatos')  # Ajuste conforme sua URL
+        else:
+            messages.error(request, 'Erro ao salvar o gato. Verifique os dados.')
+    else:
+        form = GatoCompletoForm()
+    
+    return render(request, 'gatos/adicionar_gato.html', {'form': form})
+
+def editar_gato(request, gato_id):
+    from .models import Gato
+    from django.get_object_or_404 import get_object_or_404
+    
+    gato = get_object_or_404(Gato, id=gato_id)
+    
+    if request.method == 'POST':
+        form = GatoCompletoForm(data=request.POST, files=request.FILES, instance=gato)
+        if form.is_valid():
+            gato = form.save()
+            messages.success(request, f'Gato "{gato.nome}" atualizado com sucesso!')
+            return redirect('gatos:lista_gatos')  # Ajuste conforme sua URL
+        else:
+            messages.error(request, 'Erro ao atualizar o gato. Verifique os dados.')
+    else:
+        form = GatoCompletoForm(instance=gato)
+    
+    return render(request, 'gatos/adicionar_gato.html', {'form': form, 'gato': gato})
