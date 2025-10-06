@@ -9,7 +9,7 @@ urlpatterns = [
     path("", include("administrador.urls")), 
     path('adocoes/', include('adocoes.urls', namespace='adocoes')),
     path('lares_temporarios/', include('lares_temporarios.urls', namespace='lares_temporarios')),
-    path('', include('gatos.urls'))
+    path('gatos/', include('gatos.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
