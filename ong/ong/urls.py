@@ -2,11 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
     path("", include("administrador.urls")), 
     path('adocoes/', include('adocoes.urls', namespace='adocoes')),
+    path('doacoes/', views.doacoes, name = "doacoes"),
     path('lares_temporarios/', include('lares_temporarios.urls', namespace='lares_temporarios')),
     path('', include('gatos.urls'))
 ]

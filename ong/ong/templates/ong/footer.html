@@ -1,5 +1,17 @@
-<!-- templates/includes/footer.html -->
-<footer class="bg-light text-center py-3 mt-4">
-  <p class="mb-0">© 2025 ONG Resgatando Vidas 4 Patas</p>
-  <small class="text-muted">Feito com Django ❤️</small>
-</footer>
+{% load static %}
+<div class="footer-container position-relative">
+  <img src="{% static 'img/footer.png' %}" alt="Patinhas Decorativas" class="footer-image img-fluid w-100">
+  <div class="footer-text container text-center">
+    <p id="titulo">RESGATANDO VIDAS 4 PATAS</p>
+    <div class="footer-links mt-3">
+      <p class="fw-bold">LINKS ÚTEIS</p>
+      <div class="footer-nav d-flex flex-wrap justify-content-center gap-3">
+        <span>Adoção</span>
+        <span>Nossa História</span>
+        <span>Lar Temporário</span>
+        <span>Adotados</span>
+        <span>Doações</span>
+      </div>
+    </div>
+  </div>
+</div>
