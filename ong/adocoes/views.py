@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404 , render, redirect
 from django.contrib import messages
 from django.core.exceptions import FieldError
-from .models import Adocao
+from .models import Adocao , Adotados
 from gatos.models import Gato
 from .forms import AdocaoForm
 
@@ -55,16 +55,34 @@ class GatoDetailView(DetailView):
 def adocao_sucess(request):
     return render(request, 'adocoes/adocao_sucess.html')
 
+from django.shortcuts import render, redirect
+from django.utils.timezone import now
+from .forms import AdocaoForm
+from .models import Adotados
+
 def formulario_adocao(request):
     if request.method == 'POST':
         form = AdocaoForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('adocoes:adocao_sucess')  
+            adocao = form.save()
+
+            gato = adocao.gato
+
+            gato.adotado = True
+            gato.save()
+
+            Adotados.objects.create(
+                imagem=gato.imagem,
+                gato=gato,
+                adocao=adocao,
+                data_inicio=now().date(),
+            )
+
+            # Redireciona para a tela de sucesso
+            return redirect('adocoes:adocao_sucess')
     else:
         form = AdocaoForm()
-    
-    return render(request, 'adocoes/adocao_form.html', {'form': form})
 
+    return render(request, 'adocoes/adocao_form.html', {'form': form})
 
 

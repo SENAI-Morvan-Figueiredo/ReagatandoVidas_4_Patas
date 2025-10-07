@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block content %}
-<!-- <link rel="stylesheet" href="{% static 'css/adocao.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/adocao.css' %}">
+
+<a href="/" class="back-link">&larr; Voltar</a>
 
 <div class="form-container">
     <h1 class="form-title">FORMULÁRIO - LAR TEMPORÁRIO</h1>
@@ -13,7 +15,7 @@
 
         <!-- Informações do voluntario -->
         <div class="form-section">
-            <h2 class="section-title">Informações do Adotante</h2>
+            <h2 class="section-title">Informações do Voluntário</h2>
             <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
             <div class="form-group">{{ form.cpf.label_tag }} {{ form.cpf }}</div>
             <div class="form-row">
@@ -65,8 +67,12 @@
             <div class="form-group radio-field">{{ form.duracao_aproximada.label_tag }}<div class="radio-options">{{ form.duracao_aproximada }}</div></div>
             <div class="form-group radio-field">{{ form.visita.label_tag }}<div class="radio-options">{{ form.visita }}</div></div>
             <div class="form-group">{{ form.informacao_adicional.label_tag }} {{ form.informacao_adicional}}</div></div>
-        </div>
 
+                <!-- Botão -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Enviar</button>
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}

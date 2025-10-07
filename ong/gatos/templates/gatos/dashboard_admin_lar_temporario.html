@@ -1,0 +1,156 @@
+<!-- Html da página dashboard_admin_lar_temporario
+Página do dashboard que mostra os gatos para Lar Temporário -->
+
+
+{% extends "ong/base_admin.html" %} <!-- Vai puxar o DashBoard - parte com as informações de quantidade -->
+{% load static %}
+
+{% block title %}Gerenciar Gatos para Lar Temporário{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard_admin_adocoes.css' %}">
+
+<div class="container py-4">
+    <!-- Caixa branca englobando tudo -->
+    <div class="p-4 bg-white shadow-sm rounded-4">
+        
+        <!-- Título e botão -->
+        <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+            <div>
+                <h2 class="fw-bold text-primary">Gerenciar Gatos para Lar Temporário</h2>
+                <p class="subtitle-custom mb-0">Adicione, edite ou remova gatos para Lar Temporário</p>
+            </div>
+            <a href="" class="btn btn-danger fw-bold shadow-sm rounded-3"> + Registrar Lar Temporário </a>
+        </div> 
+
+        <!-- Barra de pesquisa e filtros -->
+        <form method="GET" action="">
+            <div class="row justify-content-center mb-4">
+                <!-- Filtro_Nome -->
+                <div class="col-md-2 col-sm-4 mb-2"> 
+                    <input type="text" name="nome" class="form-control form-control-sm search-input" placeholder="Nome do Gato" onkeyup="debounceSubmit(this.form, 600)" value="{{ request.GET.nome|default:'' }}">
+                </div>
+                <!-- Filtro_Sexo -->
+                <div class="col-md-2 col-sm-4 mb-2">
+                    <select name="sexo" class="form-select form-select-sm search-input" onchange="this.form.submit()">
+                        <option value="">Todos os sexos</option>
+                        <option value="M" {% if request.GET.sexo == "M" %}selected{% endif %}>Macho</option>
+                        <option value="F" {% if request.GET.sexo == "F" %}selected{% endif %}>Fêmea</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <!-- Cards dos Gatos - Lar Temporário -->
+        <div class="row g-4">
+            {% for gato in gatos %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 h-100 rounded-4 overflow-hidden position-relative shadow-sm">
+
+                    <!-- Status - Se está ou não em um Lar Temporário -->
+                    {% if gato.em_lar %}
+                        <div class="position-absolute top-0 end-0 m-2 px-3 py-1 fw-bold rounded-3 text-dark" style="background-color: #B0EEB2; border: 2px solid #227B0C; font-size: 0.9rem;">
+                            Em Lar Temporário
+                        </div>
+                    {% else %}
+                        <div class="position-absolute top-0 end-0 m-2 px-3 py-1 fw-bold rounded-3 text-dark" style="background-color: #EEB0B0; border: 2px solid #7B0C0C; font-size: 0.9rem;">
+                            Sem Lar Temporário
+                        </div>
+                    {% endif %}
+
+                    <!-- Imagem -->
+                    {% if gato.imagem %}
+                        <img src="{{ gato.imagem.url }}" class="card-img-top" alt="{{ gato.nome }}" style="object-fit: cover; height: 200px;">
+                    {% else %}
+                        <img src="https://placehold.co/300x200?text=Sem+Foto" class="card-img-top" alt="Sem imagem">
+                    {% endif %}
+
+                    <!-- Corpo do Card - "Parte de baixo" do card -->
+                    <div class="card-body d-flex flex-column">
+                        <!-- Nome  -->
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0 fw-bold text-primary">{{ gato.nome }}</h5>
+                        </div>
+
+                        <!-- Sexo e idade -->
+                        <p class="card-text mb-2 text-muted small"> {{ gato.idade }} |
+                            {% if gato.sexo == 'M' %}
+                            Macho
+                            {% else %}
+                            Fêmea
+                            {% endif %}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Caso não tenha nenhum gato de Lar Temporário -->
+            {% empty %}
+            <p class="text-muted text-center">Nenhum gato cadastrado para lar temporário.</p>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+
+<script>
+
+// Mini função para o filtro de Nome.
+// Para dar um delay antes de pesquisar, para que a pessoa consiga digitar todo o nome
+
+    let debounceTimer;
+
+    function debounceSubmit(form, delay) {
+        clearTimeout(debounceTimer); // reseta o timer se ainda estiver contando
+        debounceTimer = setTimeout(() => {
+            form.submit(); // envia o form só depois do delay
+        }, delay);
+    }
+
+
+// Função para o Pop-up de confirmar exclusão - Feito em JavaScript e Ajax ( Não sei explicar - Raí )
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const botoesExcluir = document.querySelectorAll(".excluir-gato");
+
+        botoesExcluir.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const gatoId = this.dataset.id;
+                const gatoNome = this.dataset.nome;
+
+                if (confirm(`Tem certeza que deseja excluir o gato ${gatoNome} e todos os registros associados?`)) {
+                    fetch(`/excluir_gato_ajax/${gatoId}/`, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": "{{ csrf_token }}",
+                            "Accept": "application/json",
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "ok") {
+                            // Remove o card da tela
+                            const card = this.closest(".col-lg-3, .col-md-4, .col-sm-6");
+                            if (card) card.remove();
+                            alert(data.mensagem);
+                        } else {
+                            alert(data.mensagem);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert("Ocorreu um erro ao tentar excluir o gato.");
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+
+{% endblock %}

@@ -1,15 +1,38 @@
-<!-- templates/includes/header.html -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-  <div class="container">
-    <a class="navbar-brand primary-color" href="/">ONG - Adoção</a>
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<div class="header-container">
+    <img src="{% static 'img/header.png' %}" alt="Header da ONG" class="header-image">
 
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
-        <li class="nav-item"><a class="nav-link" href="/adocoes/">Adoções</a></li>
-        <li class="nav-item"><a class="nav-link" href="/sobre/">Sobre</a></li>
-        <li class="nav-item"><a class="nav-link" href="/contato/">Contato</a></li>
-      </ul>
+    <div class="nav-bar">
+        <div class="nav-left">
+            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        </div>
+
+        <!-- Botão de menu hamburguer -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Menu de navegação -->
+        <div class="nav-center" id="navMenu">
+            <span>Adoção</span>
+            <span>Nossa História</span>
+            <span>Lar Temporário</span>
+            <span>Adotados</span>
+            <span><a href="doacao.html">Doações</a></span>
+        </div>
+
+        <div class="nav-right">
+            <!-- <div class="user-circle"></div> -->
+        </div>
     </div>
-  </div>
-</nav>
+</div>
+
+<script>
+    function toggleMenu() {
+        const navMenu = document.getElementById('navMenu');
+        navMenu.classList.toggle('active');
+    }
+</script>
