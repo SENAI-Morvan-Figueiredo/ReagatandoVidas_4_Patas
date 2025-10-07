@@ -7,6 +7,7 @@ from django.core.exceptions import FieldError
 from .models import Adocao , Adotados
 from gatos.models import Gato
 from .forms import AdocaoForm
+from django.utils.timezone import now
 
 logger = logging.getLogger(__name__)
 
@@ -55,12 +56,13 @@ class GatoDetailView(DetailView):
 def adocao_sucess(request):
     return render(request, 'adocoes/adocao_sucess.html')
 
-from django.shortcuts import render, redirect
-from django.utils.timezone import now
-from .forms import AdocaoForm
-from .models import Adotados
-
 def formulario_adocao(request):
+    gato_id = request.GET.get('gato')
+    gato = None
+
+    if gato_id:
+        gato = get_object_or_404(Gato, id=gato_id)
+
     if request.method == 'POST':
         form = AdocaoForm(request.POST)
         if form.is_valid():
@@ -84,5 +86,4 @@ def formulario_adocao(request):
         form = AdocaoForm()
 
     return render(request, 'adocoes/adocao_form.html', {'form': form})
-
 
