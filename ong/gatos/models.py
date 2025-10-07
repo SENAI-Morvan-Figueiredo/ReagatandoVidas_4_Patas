@@ -111,13 +111,9 @@ class Moradia(models.Model):
         return ", ".join(tipos) if tipos else f"Moradia {self.id}"
 
 class Gato(models.Model):
-    SEXO_CHOICES = [
-        ("M", "Macho"),
-        ("F", "Fêmea"),
-    ]
     
-    nome = models.CharField(max_length=100, verbose_name="Nome do gao")
-    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name="Sexo")
+    nome = models.CharField(max_length=100, verbose_name="Nome do gato")
+    sexo = models.BooleanField(default=False, verbose_name="Sexo")
     idade = models.CharField(max_length=10, verbose_name="Idade")
     descricao = models.TextField(max_length=10000, verbose_name="Sobre o gato")
     imagem = models.ImageField(upload_to="gatos/", verbose_name="Foto do gato")

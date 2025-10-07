@@ -1,414 +1,48 @@
 {% extends "ong/base.html" %}
 {% load static %}
 
-{% block title %}Adicionar Gato - Resgatando Vidas 4 Patas{% endblock %}
-
-{% block extra_css %}
-<style>
-    .form-container {
-        background: linear-gradient(135deg, #e8e5ff 0%, #f0f0ff 100%);
-        min-height: 100vh;
-        padding: 2rem 0;
-    }
-    
-    .form-card {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 3rem;
-        position: relative;
-    }
-    
-    .form-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 8px;
-        height: 100%;
-        background: linear-gradient(180deg, #6c7ae0 0%, #ff9999 100%);
-        border-radius: 0 20px 20px 0;
-    }
-    
-    .form-title {
-        color: #6c7ae0;
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-    
-    .form-subtitle {
-        color: #999;
-        text-align: center;
-        margin-bottom: 2rem;
-        font-size: 0.9rem;
-    }
-    
-    .form-section {
-        margin-bottom: 2rem;
-    }
-    
-    .section-title {
-        color: #6c7ae0;
-        font-size: 1rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
-    
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-    
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .form-row-3 {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .form-label {
-        color: #333;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        font-size: 0.9rem;
-        display: block;
-    }
-    
-    .form-control {
-        width: 100%;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 0.75rem;
-        font-size: 0.9rem;
-        transition: border-color 0.3s ease;
-    }
-    
-    .form-control:focus {
-        border-color: #6c7ae0;
-        box-shadow: 0 0 0 0.2rem rgba(108, 122, 224, 0.25);
-        outline: none;
-    }
-    
-    .form-control-file {
-        width: 100%;
-        padding: 0.5rem;
-        border: 2px dashed #ddd;
-        border-radius: 8px;
-        background: #f9f9f9;
-        text-align: center;
-        cursor: pointer;
-        transition: border-color 0.3s ease;
-    }
-    
-    .form-control-file:hover {
-        border-color: #6c7ae0;
-    }
-    
-    .radio-group {
-        display: flex;
-        gap: 1rem;
-        margin-top: 0.5rem;
-    }
-    
-    .radio-group input[type="radio"] {
-        margin-right: 0.5rem;
-    }
-    
-    .radio-group label {
-        font-size: 0.9rem;
-        color: #333;
-        cursor: pointer;
-    }
-    
-    .checkbox-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-    }
-    
-    .checkbox-item {
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
-        border-radius: 6px;
-        transition: background-color 0.3s ease;
-    }
-    
-    .checkbox-item:hover {
-        background-color: #f0f0ff;
-    }
-    
-    .checkbox-item input[type="checkbox"] {
-        margin-right: 0.5rem;
-    }
-    
-    .checkbox-item label {
-        font-size: 0.85rem;
-        color: #333;
-        cursor: pointer;
-        margin: 0;
-    }
-    
-    .btn-submit {
-        background: linear-gradient(135deg, #6c7ae0 0%, #ff9999 100%);
-        border: none;
-        border-radius: 25px;
-        color: white;
-        padding: 1rem 3rem;
-        font-weight: bold;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-        display: block;
-        margin: 2rem auto 0;
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    .btn-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(108, 122, 224, 0.3);
-    }
-    
-    .back-link {
-        color: #6c7ae0;
-        text-decoration: none;
-        font-size: 0.9rem;
-        margin-bottom: 2rem;
-        display: inline-block;
-    }
-    
-    .back-link:hover {
-        color: #ff9999;
-    }
-    
-    @media (max-width: 768px) {
-        .form-row, .form-row-3 {
-            grid-template-columns: 1fr;
-        }
-        
-        .checkbox-group {
-            grid-template-columns: 1fr;
-        }
-        
-        .form-card {
-            padding: 2rem 1.5rem;
-            margin: 0 1rem;
-        }
-        
-        .radio-group {
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-    }
-</style>
-{% endblock %}
-
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/adocao.css' %}">
+
+<a href="/" class="back-link">&larr; Voltar</a>
+
 <div class="form-container">
-    <div class="container">
-        <a href="{% url 'gatos:lista_gatos' %}" class="back-link">← Voltar</a>
-        
-        <div class="form-card">
-            <h1 class="form-title">ADICIONE UM GATO PARA ADOÇÃO</h1>
-            <p class="form-subtitle">Identificação</p>
-            
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <!-- Seção: Identificação -->
-                <div class="form-section">
-                    <div class="form-row-3">
-                        <div class="form-group">
-                            <label class="form-label">{{ form.gato_form.nome.label }}</label>
-                            {{ form.gato_form.nome }}
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">{{ form.gato_form.sexo.label }}</label>
-                            <div class="radio-group">
-                                {% for choice in form.gato_form.sexo %}
-                                    {{ choice.tag }} {{ choice.choice_label }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">{{ form.gato_form.idade.label }}</label>
-                            {{ form.gato_form.idade }}
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">{{ form.gato_form.lar_temporario.label }}</label>
-                        <div class="radio-group">
-                            {% for choice in form.gato_form.lar_temporario %}
-                                {{ choice.tag }} {{ choice.choice_label }}
-                            {% endfor %}
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">{{ form.gato_form.descricao.label }}</label>
-                        {{ form.gato_form.descricao }}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">{{ form.gato_form.imagem.label }}</label>
-                        {{ form.gato_form.imagem }}
-                    </div>
-                </div>
-                
-                <!-- Seção: Outras Informações -->
-                <div class="form-section">
-                    <h2 class="section-title">Outras Informações</h2>
-                    
-                    <!-- Cuidados Veterinários -->
-                    <div class="form-group">
-                        <label class="form-label">Cuidados Veterinários</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.castrado }}
-                                <label for="{{ form.cuidado_form.castrado.id_for_label }}">{{ form.cuidado_form.castrado.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.vacinado }}
-                                <label for="{{ form.cuidado_form.vacinado.id_for_label }}">{{ form.cuidado_form.vacinado.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.vermifugado }}
-                                <label for="{{ form.cuidado_form.vermifugado.id_for_label }}">{{ form.cuidado_form.vermifugado.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.cuidado_especial }}
-                                <label for="{{ form.cuidado_form.cuidado_especial.id_for_label }}">{{ form.cuidado_form.cuidado_especial.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.fiv_negativo }}
-                                <label for="{{ form.cuidado_form.fiv_negativo.id_for_label }}">{{ form.cuidado_form.fiv_negativo.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.fiv_positivo }}
-                                <label for="{{ form.cuidado_form.fiv_positivo.id_for_label }}">{{ form.cuidado_form.fiv_positivo.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.felv_negativo }}
-                                <label for="{{ form.cuidado_form.felv_negativo.id_for_label }}">{{ form.cuidado_form.felv_negativo.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.cuidado_form.felv_positivo }}
-                                <label for="{{ form.cuidado_form.felv_positivo.id_for_label }}">{{ form.cuidado_form.felv_positivo.label }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Temperamento -->
-                    <div class="form-group">
-                        <label class="form-label">Temperamento</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.docil }}
-                                <label for="{{ form.temperamento_form.docil.id_for_label }}">{{ form.temperamento_form.docil.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.agressivo }}
-                                <label for="{{ form.temperamento_form.agressivo.id_for_label }}">{{ form.temperamento_form.agressivo.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.calmo }}
-                                <label for="{{ form.temperamento_form.calmo.id_for_label }}">{{ form.temperamento_form.calmo.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.brincalhao }}
-                                <label for="{{ form.temperamento_form.brincalhao.id_for_label }}">{{ form.temperamento_form.brincalhao.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.arisco }}
-                                <label for="{{ form.temperamento_form.arisco.id_for_label }}">{{ form.temperamento_form.arisco.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.independente }}
-                                <label for="{{ form.temperamento_form.independente.id_for_label }}">{{ form.temperamento_form.independente.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.temperamento_form.carente }}
-                                <label for="{{ form.temperamento_form.carente.id_for_label }}">{{ form.temperamento_form.carente.label }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Vive bem com -->
-                    <div class="form-group">
-                        <label class="form-label">Vive bem com</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                {{ form.moradia_form.casa_com_quintal }}
-                                <label for="{{ form.moradia_form.casa_com_quintal.id_for_label }}">{{ form.moradia_form.casa_com_quintal.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.moradia_form.apartamento }}
-                                <label for="{{ form.moradia_form.apartamento.id_for_label }}">{{ form.moradia_form.apartamento.label }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Sociável com -->
-                    <div class="form-group">
-                        <label class="form-label">Sociável com</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                {{ form.sociavel_form.gatos }}
-                                <label for="{{ form.sociavel_form.gatos.id_for_label }}">{{ form.sociavel_form.gatos.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.sociavel_form.desconhecidos }}
-                                <label for="{{ form.sociavel_form.desconhecidos.id_for_label }}">{{ form.sociavel_form.desconhecidos.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.sociavel_form.cachorros }}
-                                <label for="{{ form.sociavel_form.cachorros.id_for_label }}">{{ form.sociavel_form.cachorros.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.sociavel_form.criancas }}
-                                <label for="{{ form.sociavel_form.criancas.id_for_label }}">{{ form.sociavel_form.criancas.label }}</label>
-                            </div>
-                            <div class="checkbox-item">
-                                {{ form.sociavel_form.nao_sociavel }}
-                                <label for="{{ form.sociavel_form.nao_sociavel.id_for_label }}">{{ form.sociavel_form.nao_sociavel.label }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Status -->
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <div class="radio-group">
-                            <div>
-                                <input type="radio" name="status" value="para_adocao" id="status_para_adocao" checked>
-                                <label for="status_para_adocao">Para Adoção</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="status" value="adotado" id="status_adotado">
-                                <label for="status_adotado">Adotado</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn-submit">Salvar</button>
-            </form>
+    <h1 class="form-title">ADICIONE UM GATO PARA ADOÇÃO</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Identificação -->
+        <div class="form-section">
+            <h2 class="section-title">Indentificação</h2>
+            <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
+            <div class="form-row">
+                <div class="form-group">{{ form.idade.label_tag }} {{ form.idade }}</div>
+                 <div class="form-group radio-field">{{ form.sexo.label_tag }}<div class="radio-options">{{ form.sexo }}</div></div>
+            </div>
+             <div class="form-group radio-field">{{ form.lar_temporario.label_tag }}<div class="radio-options">{{ form.lar_temporario }}</div></div>
+            <div class="form-group">{{ form.descricao.label_tag }} {{ form.descricao }}</div>
+            <div class="form-row">
+                <div class="form-group">{{ form.imagem.label_tag }} {{ form.imagem }}</div>
+            </div>
         </div>
-    </div>
+                        
+        <!-- Cuidados Veterinários -->
+        <div class="form-section">
+            <h2 class="section-title">Cuidados Veterinários</h2>
+            <div class="checkbox-group">
+                <div class="checkbox-item">{{ form.castrado }} {{ form.castrado.label_tag }}</div>
+                <div class="checkbox-item">{{ form.vacinado.label_tag }} {{ form.vacinado.label_tag.label }}</div>
+                <div class="checkbox-item">{{ form.vermifugado.label_tag }} {{ form.vermifugado.label_tag.label }}</div>
+                <div class="checkbox-item">{{ form.cuidado_especial.label_tag }} {{ form.cuidado_especial.label_tag.label }}</div>
+                <div class="checkbox-item">{{ form.fiv_negativo.label_tag }} {{ form.fiv_negativo.label_tag.label }}</div>  
+                <div class="checkbox-item">{{ form.felv_negativo.label_tag }} {{ form.felv_negativo.label_tag.label }}</div>
+                <div class="checkbox-item">{{ form.fiv_positivo.label_tag }} {{ form.fiv_negativo.label_tag.label }}</div>  
+                <div class="checkbox-item">{{ form.felv_positivo.label_tag }} {{ form.felv_negativo.label_tag.label }}</div>
+            </div>
+        </div>
+
+    </form>
 </div>
 {% endblock %}
 

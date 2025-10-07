@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+import logging
+from django.views.generic import CreateView
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 from gatos.models import Gato 
 from lares_temporarios.models import LarTemporarioAtual
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from .forms import GatoCompletoForm
-
+from .forms import GatoForm
 
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adocoes
 
@@ -41,38 +43,6 @@ def excluir_gato_ajax(request, gato_id):
     except Gato.DoesNotExist:
         return JsonResponse({"status": "erro", "mensagem": "Gato não encontrado."}, status=404)
     
-def adicionar_gato(request):
-    if request.method == 'POST':
-        form = GatoCompletoForm(data=request.POST, files=request.FILES)
-        if form.is_valid():
-            gato = form.save()
-            messages.success(request, f'Gato "{gato.nome}" adicionado com sucesso!')
-            return redirect('gatos:lista_gatos')  # Ajuste conforme sua URL
-        else:
-            messages.error(request, 'Erro ao salvar o gato. Verifique os dados.')
-    else:
-        form = GatoCompletoForm()
-    
-    return render(request, 'gatos/adicionar_gato.html', {'form': form})
-
-def editar_gato(request, gato_id):
-    from .models import Gato
-    from django.get_object_or_404 import get_object_or_404
-    
-    gato = get_object_or_404(Gato, id=gato_id)
-    
-    if request.method == 'POST':
-        form = GatoCompletoForm(data=request.POST, files=request.FILES, instance=gato)
-        if form.is_valid():
-            gato = form.save()
-            messages.success(request, f'Gato "{gato.nome}" atualizado com sucesso!')
-            return redirect('gatos:lista_gatos')  # Ajuste conforme sua URL
-        else:
-            messages.error(request, 'Erro ao atualizar o gato. Verifique os dados.')
-    else:
-        form = GatoCompletoForm(instance=gato)
-    
-    return render(request, 'gatos/adicionar_gato.html', {'form': form, 'gato': gato})
     
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_lar_temporario
 
@@ -108,3 +78,31 @@ def dashboard_admin_lar_temporario(request):
 
     return render(request, "gatos/dashboard_admin_lar_temporario.html", context)
 
+
+logger = logging.getLogger(__name__)
+
+class GatoCreateView(CreateView):
+    model = Gato
+    form_class = GatoForm
+    template_name = 'gatos/adicionar_gato_form.html'
+
+    def get_initial(self):
+        initial = super().get_initial()
+        gato_id = self.request.GET.get('gato')
+        if gato_id:
+            try:
+                gato = get_object_or_404(Gato, pk=gato_id)
+                initial['gato'] = gato
+            except Exception:
+                pass
+        return initial
+
+    def form_valid(self, form):
+        gato = form.cleaned_data.get('gato')
+        if not gato:
+            gato_id = self.request.GET.get('gato')
+            if gato_id:
+                form.instance.gato = get_object_or_404(Gato, pk=gato_id)
+        response = super().form_valid(form)
+        messages.success(self.request, "Solicitação de adoção enviada com sucesso.")
+        return response
