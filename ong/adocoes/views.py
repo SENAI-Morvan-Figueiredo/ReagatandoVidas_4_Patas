@@ -55,16 +55,29 @@ class GatoDetailView(DetailView):
 def adocao_sucess(request):
     return render(request, 'adocoes/adocao_sucess.html')
 
+
 def formulario_adocao(request):
+    gato_id = request.GET.get('gato')
+    gato = None
+
+    if gato_id:
+        gato = get_object_or_404(Gato, id=gato_id)
+
     if request.method == 'POST':
         form = AdocaoForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('adocoes:adocao_sucess')  
+            adocao = form.save(commit=False)
+            if gato:
+                adocao.gato = gato  
+            adocao.save()
+
+
+            return redirect('adocao_sucess')
     else:
-        form = AdocaoForm()
-    
-    return render(request, 'adocoes/adocao_form.html', {'form': form})
+        form = AdocaoForm(initial={'gato': gato})
+
+    return render(request, 'adocoes/adocao_form.html', {'form': form, 'gato': gato})
+
 
 
 
