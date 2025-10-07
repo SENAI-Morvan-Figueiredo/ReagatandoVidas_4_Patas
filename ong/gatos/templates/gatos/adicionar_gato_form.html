@@ -109,6 +109,47 @@
             </div>
         </div>
 
+        <!-- Temperamento -->
+        <div class="form-section">
+            <h2 class="section-title">Temperamento</h2>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    {{ cuidado_form.docil }} {{ cuidado_form.docil.label_tag }}
+                    {{ cuidado_form.docil.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.agressivo }} {{ cuidado_form.agressivo.label_tag }}
+                    {{ cuidado_form.agressivo.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.calmo }} {{ cuidado_form.calmo.label_tag }}
+                    {{ cuidado_form.calmo.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.brincalhao }} {{ cuidado_form.brincalhao.label_tag }}
+                    {{ cuidado_form.brincalhao.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.arisco }} {{ cuidado_form.arisco.label_tag }}
+                    {{ cuidado_form.arisco.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.independente }} {{ cuidado_form.independente.label_tag }}
+                    {{ cuidado_form.independente.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.carente }} {{ cuidado_form.carente.label_tag }}
+                    {{ cuidado_form.carente.errors }}
+                </div>
+            </div>
+        </div>
+
         <div class="form-actions" style="margin-top:1rem;">
             <button type="submit" class="btn btn-primary">Salvar gato</button>
         </div>
