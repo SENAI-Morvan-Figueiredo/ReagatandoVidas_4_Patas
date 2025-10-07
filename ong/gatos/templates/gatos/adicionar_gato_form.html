@@ -9,21 +9,57 @@
 <div class="form-container">
     <h1 class="form-title">ADICIONE UM GATO PARA ADOÇÃO</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+        {% if gato_form.non_field_errors %}
+            <div class="alert alert-danger">{{ gato_form.non_field_errors }}</div>
+        {% endif %}
+        {% if cuidado_form.non_field_errors %}
+            <div class="alert alert-danger">{{ cuidado_form.non_field_errors }}</div>
+        {% endif %}
 
         <!-- Identificação -->
         <div class="form-section">
-            <h2 class="section-title">Indentificação</h2>
-            <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
-            <div class="form-row">
-                <div class="form-group">{{ form.idade.label_tag }} {{ form.idade }}</div>
-                 <div class="form-group radio-field">{{ form.sexo.label_tag }}<div class="radio-options">{{ form.sexo }}</div></div>
+            <h2 class="section-title">Identificação</h2>
+            <div class="form-group">
+                {{ gato_form.nome.label_tag }} {{ gato_form.nome }}
+                {{ gato_form.nome.errors }}
             </div>
-             <div class="form-group radio-field">{{ form.lar_temporario.label_tag }}<div class="radio-options">{{ form.lar_temporario }}</div></div>
-            <div class="form-group">{{ form.descricao.label_tag }} {{ form.descricao }}</div>
+
             <div class="form-row">
-                <div class="form-group">{{ form.imagem.label_tag }} {{ form.imagem }}</div>
+                <div class="form-group">
+                    {{ gato_form.idade.label_tag }} {{ gato_form.idade }}
+                    {{ gato_form.idade.errors }}
+                </div>
+
+                <div class="form-group radio-field">
+                    {{ gato_form.sexo.label_tag }}
+                    <div class="radio-options">
+                        {{ gato_form.sexo }}
+                        {{ gato_form.sexo.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group radio-field">
+                {{ gato_form.lar_temporario.label_tag }}
+                <div class="radio-options">
+                    {{ gato_form.lar_temporario }}
+                    {{ gato_form.lar_temporario.errors }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ gato_form.descricao.label_tag }} {{ gato_form.descricao }}
+                {{ gato_form.descricao.errors }}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ gato_form.imagem.label_tag }} {{ gato_form.imagem }}
+                    {{ gato_form.imagem.errors }}
+                </div>
             </div>
         </div>
                         
@@ -31,18 +67,51 @@
         <div class="form-section">
             <h2 class="section-title">Cuidados Veterinários</h2>
             <div class="checkbox-group">
-                <div class="checkbox-item">{{ form.castrado }} {{ form.castrado.label_tag }}</div>
-                <div class="checkbox-item">{{ form.vacinado.label_tag }} {{ form.vacinado.label_tag.label }}</div>
-                <div class="checkbox-item">{{ form.vermifugado.label_tag }} {{ form.vermifugado.label_tag.label }}</div>
-                <div class="checkbox-item">{{ form.cuidado_especial.label_tag }} {{ form.cuidado_especial.label_tag.label }}</div>
-                <div class="checkbox-item">{{ form.fiv_negativo.label_tag }} {{ form.fiv_negativo.label_tag.label }}</div>  
-                <div class="checkbox-item">{{ form.felv_negativo.label_tag }} {{ form.felv_negativo.label_tag.label }}</div>
-                <div class="checkbox-item">{{ form.fiv_positivo.label_tag }} {{ form.fiv_negativo.label_tag.label }}</div>  
-                <div class="checkbox-item">{{ form.felv_positivo.label_tag }} {{ form.felv_negativo.label_tag.label }}</div>
+                <div class="checkbox-item">
+                    {{ cuidado_form.castrado }} {{ cuidado_form.castrado.label_tag }}
+                    {{ cuidado_form.castrado.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.vacinado }} {{ cuidado_form.vacinado.label_tag }}
+                    {{ cuidado_form.vacinado.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.vermifugado }} {{ cuidado_form.vermifugado.label_tag }}
+                    {{ cuidado_form.vermifugado.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.cuidado_especial }} {{ cuidado_form.cuidado_especial.label_tag }}
+                    {{ cuidado_form.cuidado_especial.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.fiv_negativo }} {{ cuidado_form.fiv_negativo.label_tag }}
+                    {{ cuidado_form.fiv_negativo.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.fiv_positivo }} {{ cuidado_form.fiv_positivo.label_tag }}
+                    {{ cuidado_form.fiv_positivo.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.felv_negativo }} {{ cuidado_form.felv_negativo.label_tag }}
+                    {{ cuidado_form.felv_negativo.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ cuidado_form.felv_positivo }} {{ cuidado_form.felv_positivo.label_tag }}
+                    {{ cuidado_form.felv_positivo.errors }}
+                </div>
             </div>
         </div>
 
+        <div class="form-actions" style="margin-top:1rem;">
+            <button type="submit" class="btn btn-primary">Salvar gato</button>
+        </div>
     </form>
 </div>
 {% endblock %}
-

@@ -2,12 +2,12 @@ import logging
 from django.views.generic import CreateView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from gatos.models import Gato 
+from gatos.models import Gato, Cuidado
 from lares_temporarios.models import LarTemporarioAtual
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from .forms import GatoForm
+from .forms import GatoForm, CuidadoForm
 
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adocoes
 
@@ -86,23 +86,65 @@ class GatoCreateView(CreateView):
     form_class = GatoForm
     template_name = 'gatos/adicionar_gato_form.html'
 
-    def get_initial(self):
-        initial = super().get_initial()
-        gato_id = self.request.GET.get('gato')
-        if gato_id:
-            try:
-                gato = get_object_or_404(Gato, pk=gato_id)
-                initial['gato'] = gato
-            except Exception:
-                pass
-        return initial
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # se vier em GET com dados, preserve-os
+        if self.request.POST:
+            context['gato_form'] = GatoForm(self.request.POST, self.request.FILES)
+            context['cuidado_form'] = CuidadoForm(self.request.POST)
+        else:
+            context['gato_form'] = GatoForm()
+            context['cuidado_form'] = CuidadoForm()
+        return context
 
-    def form_valid(self, form):
-        gato = form.cleaned_data.get('gato')
-        if not gato:
-            gato_id = self.request.GET.get('gato')
-            if gato_id:
-                form.instance.gato = get_object_or_404(Gato, pk=gato_id)
-        response = super().form_valid(form)
-        messages.success(self.request, "Solicitação de adoção enviada com sucesso.")
-        return response
+    def post(self, request, *args, **kwargs):
+        gato_form = GatoForm(request.POST, request.FILES)
+        cuidado_form = CuidadoForm(request.POST)
+
+        if gato_form.is_valid() and cuidado_form.is_valid():
+            # Salva o gato primeiro
+            gato = gato_form.save()
+
+            # Salva o cuidado sem commitar ainda, pra ligar ao gato se necessário
+            cuidado = cuidado_form.save(commit=False)
+
+            # --- Tenta achar relacionamento automaticamente ---
+            # 1) Se Cuidado tem campo 'gato', atribui
+            cuidado_fields = [f.name for f in Cuidado._meta.get_fields()]
+            if 'gato' in cuidado_fields:
+                try:
+                    cuidado.gato = gato
+                    cuidado.save()
+                except Exception as e:
+                    logger.exception("Erro ao salvar Cuidado com FK 'gato': %s", e)
+                    # tenta salvar sem ligação
+                    cuidado.save()
+            else:
+                # 2) verifica se Gato tem algum campo que referencia Cuidado (OneToOneField / FK)
+                campo_relacionado = None
+                for f in Gato._meta.get_fields():
+                    remote = getattr(f, 'remote_field', None)
+                    if remote and getattr(remote, 'model', None) == Cuidado:
+                        campo_relacionado = f.name
+                        break
+
+                if campo_relacionado:
+                    # salva cuidado, depois associa no gato
+                    cuidado.save()
+                    try:
+                        setattr(gato, campo_relacionado, cuidado)
+                        gato.save()
+                    except Exception as e:
+                        logger.exception("Erro ao associar Cuidado ao Gato via campo '%s': %s", campo_relacionado, e)
+                else:
+                    # Caso nenhum relacionamento direto, apenas salva o cuidado normalmente
+                    cuidado.save()
+
+            messages.success(request, "Gato e cuidados veterinários salvos com sucesso.")
+            return redirect(self.get_success_url())
+        else:
+            # se inválidos, renderiza o template com os forms e erros
+            context = self.get_context_data()
+            context['gato_form'] = gato_form
+            context['cuidado_form'] = cuidado_form
+            return render(request, self.template_name, context)

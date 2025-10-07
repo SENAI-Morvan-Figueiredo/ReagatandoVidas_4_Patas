@@ -59,7 +59,7 @@ class Sociavel(models.Model):
         return f"Sociável com: {', '.join(caracteristicas)}" if caracteristicas else f"Socialização {self.id}"
 
 class Cuidado(models.Model):
-    castrado = models.BooleanField(default=False, verbose_name="Castrado")
+    castrado = models.BooleanField(default=False, verbose_name='Castrado')
     vacinado = models.BooleanField(default=False, verbose_name="Vacinado")
     vermifugado = models.BooleanField(default=False, verbose_name="Vermifugado")
     cuidado_especial = models.BooleanField(default=False, verbose_name="Cuidado especial")
