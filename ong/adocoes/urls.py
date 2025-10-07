@@ -1,7 +1,11 @@
 from django.urls import path
-from .views import nova_adocao , lista_adocoes
+from . import views
+
+app_name = 'adocoes'
 
 urlpatterns = [
-    path('nova/', nova_adocao, name='nova_adocao'),
-    path('lista/', lista_adocoes, name='lista_adocoes'),
+    path('', views.GatoListView.as_view(), name='lista'),
+    path('gato/<int:pk>/', views.GatoDetailView.as_view(), name='detail'),
+    path('obrigado/', views.adocao_sucess, name='adocao_sucess'),
+    path('solicitar/', views.formulario_adocao, name='formulario_adocao'),
 ]

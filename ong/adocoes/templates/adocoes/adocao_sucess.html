@@ -1,0 +1,8 @@
+{% extends 'ong/base.html' %}
+{% block content %}
+<div class="card p-4 text-center">
+  <h3>Obrigado pela sua solicitação!</h3>
+  <p>Recebemos sua solicitação de adoção. A equipe entrará em contato pelo email ou telefone informado.</p>
+  <a href="{% url 'adocoes:lista' %}" class="btn btn-primary">Voltar para a lista</a>
+</div>
+{% endblock %}

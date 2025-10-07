@@ -1,0 +1,78 @@
+{% extends "ong/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/adocao.css' %}">
+
+<a href="/" class="back-link">&larr; Voltar</a>
+
+<div class="form-container">
+    <h1 class="form-title">FORMULÁRIO - LAR TEMPORÁRIO</h1>
+    <p>Importante: Você não precisa arcar com os custos se não puder — a ONG pode fornecer ração, areia, medicamentos etc.</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Informações do voluntario -->
+        <div class="form-section">
+            <h2 class="section-title">Informações do Voluntário</h2>
+            <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
+            <div class="form-group">{{ form.cpf.label_tag }} {{ form.cpf }}</div>
+            <div class="form-row">
+                <div class="form-group">{{ form.ocupacao_profissional.label_tag }} {{ form.ocupacao_profissional }}</div>
+            </div>
+            <div class="form-group">{{ form.email.label_tag }} {{ form.email }}</div>
+            <div class="form-row">
+                <div class="form-group">{{ form.numero_contato.label_tag }} {{ form.numero_contato }}</div>
+            </div>
+        </div>
+
+        <!-- Endereço -->
+        <div class="form-section">
+            <h2 class="section-title">Endereço</h2>
+            <div class="form-group">{{ form.cep.label_tag }} {{ form.cep }}</div>
+            <div class="form-group">{{ form.rua.label_tag }} {{ form.rua }}</div>
+            <div class="form-row">
+                <div class="form-group">{{ form.numero.label_tag }} {{ form.numero }}</div>
+                <div class="form-group">{{ form.bairro.label_tag }} {{ form.bairro }}</div>
+            </div>
+            <div class="form-group">{{ form.cidade.label_tag }} {{ form.cidade }}</div>
+        </div>
+
+        <!-- Lar Temporario -->
+        <div class="form-section">
+            <h2 class="section-title">Lar Temporário</h2>
+            <div class="form-group radio-field">{{ form.foi_lar_temporario.label_tag }}<div class="radio-options">{{ form.foi_lar_temporario }}</div></div>
+            <div class="form-group">{{ form.disponibilidade_inicio.label_tag }} {{ form.disponibilidade_inicio}}</div>
+        </div>
+
+        <!-- Outros animais -->
+        <div class="form-section">
+            <h2 class="section-title">Outros Animais</h2>
+            <div class="form-group radio-field">{{ form.animal_externo.label_tag }}<div class="radio-options">{{ form.animal_externo }}</div></div>
+        </div>
+
+        <!-- Moradia -->
+        <div class="form-section">
+            <h2 class="section-title">Moradia</h2>
+            <div class="form-group radio-field">{{ form.mora_casa.label_tag }}<div class="radio-options">{{ form.mora_casa }}</div></div>
+            <div class="form-group radio-field">{{ form.restrito.label_tag }}<div class="radio-options">{{ form.restrito }}</div></div>
+            <div class="form-group radio-field">{{ form.estrutura.label_tag }}<div class="radio-options">{{ form.estrutura }}</div></div>
+        </div>
+
+        <!-- Compromissos -->
+        <div class="form-section">
+            <h2 class="section-title">Compromissos</h2>
+            <div class="form-group radio-field">{{ form.custos.label_tag }}<div class="radio-options">{{ form.custos }}</div></div>
+            <div class="form-group radio-field">{{ form.duracao_aproximada.label_tag }}<div class="radio-options">{{ form.duracao_aproximada }}</div></div>
+            <div class="form-group radio-field">{{ form.visita.label_tag }}<div class="radio-options">{{ form.visita }}</div></div>
+            <div class="form-group">{{ form.informacao_adicional.label_tag }} {{ form.informacao_adicional}}</div></div>
+
+                <!-- Botão -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Enviar</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

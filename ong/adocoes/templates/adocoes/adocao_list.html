@@ -1,0 +1,62 @@
+{% extends 'ong/base.html' %}
+{% block title %}Gatos para Adoção{% endblock %}
+{% block content %}
+<div class="hero mb-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="mb-0"> Adote Um Gatinho <small class="text-muted">({{ page_obj.paginator.count }})</small></h2>
+    <a href="{% url 'adocoes:formulario_adocao' %}" class="btn btn-primary">Quero Adotar</a>
+  </div>
+
+  <form method="get" class="row g-2 mt-3">
+    <div class="col-md-4">
+      <input name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Nome do Gato">
+    </div>
+    <div class="col-md-3">
+      <select name="sexo" class="form-select">
+        <option value="">Todos os sexos</option>
+        <option value="fêmea" {% if request.GET.sexo == 'fêmea' %}selected{% endif %}>Fêmea</option>
+        <option value="macho" {% if request.GET.sexo == 'macho' %}selected{% endif %}>Macho</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-outline-secondary w-100">Filtrar</button>
+    </div>
+  </form>
+</div>
+
+<div class="row g-3">
+  {% for gato in gatos %}
+  <div class="col-lg-4 col-md-6">
+    <div class="card card-cat h-100">
+      {% if gato.imagem %}
+      <img src="{{ gato.imagem.url }}" class="card-img-top" style="height:220px;object-fit:cover;border-top-left-radius:12px;border-top-right-radius:12px;">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ gato.nome }}</h5>
+        <p class="card-text small text-muted">{{ gato.descricao|truncatechars:80 }}</p>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div>
+            <a href="{% url 'adocoes:detail' gato.pk %}" class="btn btn-sm btn-outline-secondary">Ver</a>
+            <a href="{% url 'adocoes:formulario_adocao' %}?gato={{ gato.pk }}" class="btn btn-sm btn-primary">Solicitar Adoção</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>Nenhum gato encontrado.</p>
+  {% endfor %}
+</div>
+
+<nav class="mt-4">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Anterior</a></li>
+    {% endif %}
+    <li class="page-item disabled"><span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}

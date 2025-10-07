@@ -1,0 +1,28 @@
+{% extends "ong/base.html" %}
+{% load static %}
+
+{% block title %}Doações - ONG{% endblock %}
+
+{% block content %}
+<div class="center-content doacao-page">
+    <div class="left-text-container">
+        <h1 class="main-title">AJUDE COM AS DOAÇÕES</h1>
+        <p class="support-text">
+            A transformação acontece quando cada gesto, pequeno ou grande, carrega a crença de que juntos somos capazes.
+        </p>
+        <p class="donation-info">
+            PIX: resgatandovidas4patas@gmail.com
+        </p>
+    </div>
+
+    <div class="side-image-container-right">
+        <img
+            src="{% static 'img/pix.png' %}"
+            alt="PIX - Resgatando Vidas"
+            class="side-image-right"
+            loading="lazy"
+        >
+    </div>
+
+</div>
+{% endblock %}
