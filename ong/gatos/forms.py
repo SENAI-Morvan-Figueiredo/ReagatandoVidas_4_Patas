@@ -1,5 +1,5 @@
 from django import forms
-from .models import Gato, Cuidado
+from .models import Gato, Cuidado, Temperamento, Sociavel, Moradia
 
 SIM_NAO_CHOICES = [
     (True, "Sim"),
@@ -48,3 +48,36 @@ class CuidadoForm(forms.ModelForm):
             'felv_negativo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'felv_positivo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+class TemperamentoForm(forms.ModelForm):
+    class Meta:
+        model = Temperamento
+        fields = '__all__'
+
+        widgets = {
+        'docil': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'agressivo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'calmo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'brincalhao': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'arisco': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'independente': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'carente': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    }
+
+class SociavelForm(forms.ModelForm):
+    class Meta:
+        model = Sociavel
+        fields = '__all__'
+
+        widgets = {
+        'gatos': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'desconhecidos': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'cachorros': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'criancas': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'nao_sociavel': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    }
+
+class MoradiaForm(forms.ModelForm):
+    class Meta:
+        model = Moradia
+        fields = '__all__'

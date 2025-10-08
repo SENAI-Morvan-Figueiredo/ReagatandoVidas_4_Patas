@@ -1,13 +1,14 @@
 import logging
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, ListView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from gatos.models import Gato, Cuidado
+from gatos.models import Gato, Cuidado, Temperamento, Sociavel, Moradia
 from lares_temporarios.models import LarTemporarioAtual
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from .forms import GatoForm, CuidadoForm
+from .forms import GatoForm, CuidadoForm, TemperamentoForm, SociavelForm, MoradiaForm
+from django.urls import reverse_lazy
 
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adocoes
 
@@ -88,63 +89,52 @@ class GatoCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # se vier em GET com dados, preserve-os
-        if self.request.POST:
-            context['gato_form'] = GatoForm(self.request.POST, self.request.FILES)
-            context['cuidado_form'] = CuidadoForm(self.request.POST)
-        else:
-            context['gato_form'] = GatoForm()
-            context['cuidado_form'] = CuidadoForm()
+        data = self.request.POST or None
+        context['gato_form'] = GatoForm(data, self.request.FILES or None)
+        context['cuidado_form'] = CuidadoForm(data)
+        context['temperamento_form'] = TemperamentoForm(data)
+        context['sociavel_form'] = SociavelForm(data)
         return context
+
+    def _save_related(self, form, gato):
+        """
+        Salva um formulário relacionado (Cuidado, Temperamento, etc.)
+        tentando associar ao gato se existir campo 'gato' ou relação inversa.
+        """
+        instance = form.save(commit=False)
+        if 'gato' in [f.name for f in form._meta.model._meta.get_fields()]:
+            instance.gato = gato
+        instance.save()
+
+        # Checa se Gato possui campo que referencia o model
+        for f in Gato._meta.get_fields():
+            remote = getattr(f, 'remote_field', None)
+            if remote and getattr(remote, 'model', None) == form._meta.model:
+                setattr(gato, f.name, instance)
+                gato.save()
+                break
+
+        return instance
 
     def post(self, request, *args, **kwargs):
         gato_form = GatoForm(request.POST, request.FILES)
         cuidado_form = CuidadoForm(request.POST)
+        temperamento_form = TemperamentoForm(request.POST)
+        sociavel_form = SociavelForm(request.POST)
 
-        if gato_form.is_valid() and cuidado_form.is_valid():
-            # Salva o gato primeiro
+        if all(f.is_valid() for f in [gato_form, cuidado_form, temperamento_form, sociavel_form]):
             gato = gato_form.save()
+            self._save_related(cuidado_form, gato)
+            self._save_related(temperamento_form, gato)
+            self._save_related(sociavel_form, gato)
 
-            # Salva o cuidado sem commitar ainda, pra ligar ao gato se necessário
-            cuidado = cuidado_form.save(commit=False)
-
-            # --- Tenta achar relacionamento automaticamente ---
-            # 1) Se Cuidado tem campo 'gato', atribui
-            cuidado_fields = [f.name for f in Cuidado._meta.get_fields()]
-            if 'gato' in cuidado_fields:
-                try:
-                    cuidado.gato = gato
-                    cuidado.save()
-                except Exception as e:
-                    logger.exception("Erro ao salvar Cuidado com FK 'gato': %s", e)
-                    # tenta salvar sem ligação
-                    cuidado.save()
-            else:
-                # 2) verifica se Gato tem algum campo que referencia Cuidado (OneToOneField / FK)
-                campo_relacionado = None
-                for f in Gato._meta.get_fields():
-                    remote = getattr(f, 'remote_field', None)
-                    if remote and getattr(remote, 'model', None) == Cuidado:
-                        campo_relacionado = f.name
-                        break
-
-                if campo_relacionado:
-                    # salva cuidado, depois associa no gato
-                    cuidado.save()
-                    try:
-                        setattr(gato, campo_relacionado, cuidado)
-                        gato.save()
-                    except Exception as e:
-                        logger.exception("Erro ao associar Cuidado ao Gato via campo '%s': %s", campo_relacionado, e)
-                else:
-                    # Caso nenhum relacionamento direto, apenas salva o cuidado normalmente
-                    cuidado.save()
-
-            messages.success(request, "Gato e cuidados veterinários salvos com sucesso.")
+            messages.success(request, "Gato e formulários relacionados salvos com sucesso.")
             return redirect(self.get_success_url())
-        else:
-            # se inválidos, renderiza o template com os forms e erros
-            context = self.get_context_data()
-            context['gato_form'] = gato_form
-            context['cuidado_form'] = cuidado_form
-            return render(request, self.template_name, context)
+        
+        # Renderiza com erros
+        context = self.get_context_data()
+        context['gato_form'] = gato_form
+        context['cuidado_form'] = cuidado_form
+        context['temperamento_form'] = temperamento_form
+        context['sociavel_form'] = sociavel_form
+        return render(request, self.template_name, context)
