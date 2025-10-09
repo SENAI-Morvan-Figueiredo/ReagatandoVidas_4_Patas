@@ -300,7 +300,7 @@ p{
 /* --- FOOTER AJUSTADO --- */
 .footer-container {
   position: relative;
-  margin-top: 200px;
+  margin-top: 100px;
   width: 100%;
   overflow: visible; /* deixa as curvas visíveis */
 }
