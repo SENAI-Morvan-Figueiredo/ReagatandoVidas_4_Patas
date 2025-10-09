@@ -1,4 +1,4 @@
-/* Css da página dashboard_admin_adocoes
+/* Css da página dashboard_admin_adocoes - dashboard_admin_adotados - dashboard_admin_lar_temporario
 Página do dashboard de mostra os gatos para adoção */
 
 
@@ -40,7 +40,6 @@ h2 {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    /* sombra maior ao passar o mouse */
 }
 
 .card-title {
@@ -97,7 +96,6 @@ h2 {
 
 .subtitle-custom {
     color: #4F76BB;
-    /* cor que você quiser */
     font-size: 0.9rem;
 }
 
@@ -137,4 +135,9 @@ h2 {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     /* leve aumento no hover */
+}
+
+.container.py-4 {
+    padding-bottom: 0 !important; /* remove o padding interno extra */
+    margin-bottom: 0 !important;  /* remove a margem externa */
 }

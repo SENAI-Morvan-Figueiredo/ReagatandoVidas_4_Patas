@@ -4,7 +4,7 @@
 <div class="hero mb-4">
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="mb-0"> Adote Um Gatinho <small class="text-muted">({{ page_obj.paginator.count }})</small></h2>
-    <a href="{% url 'adocoes:solicitar' %}" class="btn btn-primary">Quero Adotar</a>
+    <a href="{% url 'adocoes:formulario_adocao' %}" class="btn btn-primary">Quero Adotar</a>
   </div>
 
   <form method="get" class="row g-2 mt-3">
@@ -37,7 +37,7 @@
         <div class="d-flex justify-content-between align-items-center mt-3">
           <div>
             <a href="{% url 'adocoes:detail' gato.pk %}" class="btn btn-sm btn-outline-secondary">Ver</a>
-            <a href="{% url 'adocoes:solicitar' %}?gato={{ gato.pk }}" class="btn btn-sm btn-primary">Solicitar Adoção</a>
+            <a href="{% url 'adocoes:formulario_adocao' %}?gato={{ gato.pk }}" class="btn btn-sm btn-primary">Solicitar Adoção</a>
           </div>
         </div>
       </div>

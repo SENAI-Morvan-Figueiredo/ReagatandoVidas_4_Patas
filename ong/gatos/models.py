@@ -129,6 +129,9 @@ class Gato(models.Model):
     sociavel = models.ForeignKey(Sociavel, on_delete=models.CASCADE, verbose_name="Socialização")
     moradia = models.ForeignKey(Moradia, on_delete=models.CASCADE, verbose_name="Moradia adequada")
     
+    #Status de adocao
+    adotado = models.BooleanField(default=False, verbose_name="Adotado")
+
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
