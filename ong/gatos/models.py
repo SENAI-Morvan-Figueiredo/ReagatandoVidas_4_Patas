@@ -33,10 +33,10 @@ class Temperamento(models.Model):
         return ", ".join(caracteristicas) if caracteristicas else f"Temperamento {self.id}"
 
 class Sociavel(models.Model):
-    gatos = models.BooleanField(default=False, verbose_name="Sociável com gatos")
-    desconhecidos = models.BooleanField(default=False, verbose_name="Sociável com desconhecidos")
-    cachorros = models.BooleanField(default=False, verbose_name="Sociável com cachorros")
-    criancas = models.BooleanField(default=False, verbose_name="Sociável com crianças")
+    gatos = models.BooleanField(default=False, verbose_name="gatos")
+    desconhecidos = models.BooleanField(default=False, verbose_name="desconhecidos")
+    cachorros = models.BooleanField(default=False, verbose_name="cachorros")
+    criancas = models.BooleanField(default=False, verbose_name="crianças")
     nao_sociavel = models.BooleanField(default=False, verbose_name="Não sociável")
     
     class Meta:

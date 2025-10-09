@@ -150,6 +150,53 @@
             </div>
         </div>
 
+         <!-- Vive bem com -->
+        <div class="form-section">
+            <h2 class="section-title">Vive bem com</h2>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    {{ moradia_form.casa_com_quintal }} {{ moradia_form.casa_com_quintal.label_tag }}
+                    {{ moradia_form.casa_com_quintal.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ moradia_form.apartamento }} {{ moradia_form.apartamento.label_tag }}
+                    {{ moradia_form.apartamento.errors }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sociavel com -->
+        <div class="form-section">
+            <h2 class="section-title">Sociável com</h2>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    {{ sociavel_form.gatos }} {{ sociavel_form.gatos.label_tag }}
+                    {{ sociavel_form.gatos.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ sociavel_form.desconhecidos }} {{ sociavel_form.desconhecidos.label_tag }}
+                    {{ sociavel_form.desconhecidos.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ sociavel_form.cachorros }} {{ sociavel_form.cachorros.label_tag }}
+                    {{ sociavel_form.cachorros.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ sociavel_form.criancas }} {{ sociavel_form.criancas.label_tag }}
+                    {{ sociavel_form.criancas.errors }}
+                </div>
+
+                <div class="checkbox-item">
+                    {{ sociavel_form.nao_sociavel }} {{ sociavel_form.nao_sociavel.label_tag }}
+                    {{ sociavel_form.nao_sociavel.errors }}
+                </div>
+            </div>
+        </div>
+
         <div class="form-actions" style="margin-top:1rem;">
             <button type="submit" class="btn btn-primary">Salvar gato</button>
         </div>

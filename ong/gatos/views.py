@@ -1,8 +1,8 @@
 import logging
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from gatos.models import Gato, Cuidado, Temperamento, Sociavel, Moradia
+from gatos.models import Gato
 from lares_temporarios.models import LarTemporarioAtual
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -93,6 +93,7 @@ class GatoCreateView(CreateView):
         context['gato_form'] = GatoForm(data, self.request.FILES or None)
         context['cuidado_form'] = CuidadoForm(data)
         context['temperamento_form'] = TemperamentoForm(data)
+        context['moradia_form'] = MoradiaForm(data)
         context['sociavel_form'] = SociavelForm(data)
         return context
 
@@ -120,12 +121,14 @@ class GatoCreateView(CreateView):
         gato_form = GatoForm(request.POST, request.FILES)
         cuidado_form = CuidadoForm(request.POST)
         temperamento_form = TemperamentoForm(request.POST)
+        moradia_form = MoradiaForm(request.POST)
         sociavel_form = SociavelForm(request.POST)
 
-        if all(f.is_valid() for f in [gato_form, cuidado_form, temperamento_form, sociavel_form]):
+        if all(f.is_valid() for f in [gato_form, cuidado_form, temperamento_form, moradia_form, sociavel_form]):
             gato = gato_form.save()
             self._save_related(cuidado_form, gato)
             self._save_related(temperamento_form, gato)
+            self._save_related(moradia_form, gato)
             self._save_related(sociavel_form, gato)
 
             messages.success(request, "Gato e formulários relacionados salvos com sucesso.")
@@ -136,5 +139,6 @@ class GatoCreateView(CreateView):
         context['gato_form'] = gato_form
         context['cuidado_form'] = cuidado_form
         context['temperamento_form'] = temperamento_form
+        context['moradia_form'] = moradia_form
         context['sociavel_form'] = sociavel_form
         return render(request, self.template_name, context)

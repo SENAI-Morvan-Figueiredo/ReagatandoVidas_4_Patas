@@ -64,6 +64,15 @@ class TemperamentoForm(forms.ModelForm):
         'carente': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     }
 
+class MoradiaForm(forms.ModelForm):
+    class Meta:
+        model = Moradia
+        fields = '__all__'
+        widgets = {
+        'casa_com_quintal': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        'apartamento': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    }
+
 class SociavelForm(forms.ModelForm):
     class Meta:
         model = Sociavel
@@ -76,8 +85,3 @@ class SociavelForm(forms.ModelForm):
         'criancas': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         'nao_sociavel': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     }
-
-class MoradiaForm(forms.ModelForm):
-    class Meta:
-        model = Moradia
-        fields = '__all__'
