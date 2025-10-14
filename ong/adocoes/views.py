@@ -1,12 +1,13 @@
 import logging
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404 , render, redirect
 from django.contrib import messages
 from django.core.exceptions import FieldError
-from .models import Adocao
+from .models import Adocao , Adotados
 from gatos.models import Gato
 from .forms import AdocaoForm
+from django.utils.timezone import now
 
 logger = logging.getLogger(__name__)
 
@@ -52,35 +53,37 @@ class GatoDetailView(DetailView):
         return ctx
 
 
-class AdocaoCreateView(CreateView):
-    model = Adocao
-    form_class = AdocaoForm
-    template_name = 'adocoes/adocao_form.html'
+def adocao_sucess(request):
+    return render(request, 'adocoes/adocao_sucess.html')
 
-    def get_initial(self):
-        initial = super().get_initial()
-        gato_id = self.request.GET.get('gato')
-        if gato_id:
-            try:
-                gato = get_object_or_404(Gato, pk=gato_id)
-                initial['gato'] = gato
-            except Exception:
-                pass
-        return initial
+def formulario_adocao(request):
+    gato_id = request.GET.get('gato')
+    gato = None
 
-    def form_valid(self, form):
-        gato = form.cleaned_data.get('gato')
-        if not gato:
-            gato_id = self.request.GET.get('gato')
-            if gato_id:
-                form.instance.gato = get_object_or_404(Gato, pk=gato_id)
-        response = super().form_valid(form)
-        messages.success(self.request, "Solicitação de adoção enviada com sucesso.")
-        return response
+    if gato_id:
+        gato = get_object_or_404(Gato, id=gato_id)
 
-    def get_success_url(self):
-        return reverse_lazy('adocoes:adocao_success')
+    if request.method == 'POST':
+        form = AdocaoForm(request.POST)
+        if form.is_valid():
+            adocao = form.save()
 
+            gato = adocao.gato
 
-class AdocaoSuccessView(TemplateView):
-    template_name = 'adocoes/adocao_success.html'
+            gato.adotado = True
+            gato.save()
+
+            Adotados.objects.create(
+                imagem=gato.imagem,
+                gato=gato,
+                adocao=adocao,
+                data_inicio=now().date(),
+            )
+
+            # Redireciona para a tela de sucesso
+            return redirect('adocoes:adocao_sucess')
+    else:
+        form = AdocaoForm()
+
+    return render(request, 'adocoes/adocao_form.html', {'form': form})
+

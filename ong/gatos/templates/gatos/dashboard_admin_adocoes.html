@@ -21,7 +21,7 @@ Página do dashboard de mostra os gatos para adoção -->
                 <h2 class="fw-bold text-primary">Gerenciar Adoções</h2>
                 <p class="subtitle-custom mb-0">Adicione, edite ou remova gatos para Adoção</p>
             </div>
-            <a href="" class="btn btn-danger fw-bold shadow-sm rounded-3"> + Adicionar Gato </a>
+            <a href="{% url 'gatos:solicitar' %}" class="btn btn-danger fw-bold shadow-sm rounded-3"> + Adicionar Gato </a>
         </div> 
 
         <!-- Barra de pesquisa e filtros -->
@@ -80,7 +80,7 @@ Página do dashboard de mostra os gatos para adoção -->
 
             <!-- Caso não tenha nenhum gato -->
             {% empty %}
-            <p class="text-muted">Nenhum gato cadastrado para adoção.</p>
+            <p class="text-muted text-center">Nenhum gato cadastrado para adoção.</p>
 
             {% endfor %}
 
@@ -117,7 +117,7 @@ Página do dashboard de mostra os gatos para adoção -->
                 const gatoNome = this.dataset.nome;
 
                 if (confirm(`Tem certeza que deseja excluir o gato ${gatoNome} e todos os registros associados?`)) {
-                    fetch(`/excluir_gato_ajax/${gatoId}/`, {
+                    fetch(`/gatos/excluir_gato_ajax/${gatoId}/`, {
                         method: "POST",
                         headers: {
                             "X-CSRFToken": "{{ csrf_token }}",

@@ -33,10 +33,10 @@ class Temperamento(models.Model):
         return ", ".join(caracteristicas) if caracteristicas else f"Temperamento {self.id}"
 
 class Sociavel(models.Model):
-    gatos = models.BooleanField(default=False, verbose_name="Sociável com gatos")
-    desconhecidos = models.BooleanField(default=False, verbose_name="Sociável com desconhecidos")
-    cachorros = models.BooleanField(default=False, verbose_name="Sociável com cachorros")
-    criancas = models.BooleanField(default=False, verbose_name="Sociável com crianças")
+    gatos = models.BooleanField(default=False, verbose_name="gatos")
+    desconhecidos = models.BooleanField(default=False, verbose_name="desconhecidos")
+    cachorros = models.BooleanField(default=False, verbose_name="cachorros")
+    criancas = models.BooleanField(default=False, verbose_name="crianças")
     nao_sociavel = models.BooleanField(default=False, verbose_name="Não sociável")
     
     class Meta:
@@ -59,7 +59,7 @@ class Sociavel(models.Model):
         return f"Sociável com: {', '.join(caracteristicas)}" if caracteristicas else f"Socialização {self.id}"
 
 class Cuidado(models.Model):
-    castrado = models.BooleanField(default=False, verbose_name="Castrado")
+    castrado = models.BooleanField(default=False, verbose_name='Castrado')
     vacinado = models.BooleanField(default=False, verbose_name="Vacinado")
     vermifugado = models.BooleanField(default=False, verbose_name="Vermifugado")
     cuidado_especial = models.BooleanField(default=False, verbose_name="Cuidado especial")
@@ -111,16 +111,12 @@ class Moradia(models.Model):
         return ", ".join(tipos) if tipos else f"Moradia {self.id}"
 
 class Gato(models.Model):
-    SEXO_CHOICES = [
-        ("M", "Macho"),
-        ("F", "Fêmea"),
-    ]
     
-    nome = models.CharField(max_length=100, verbose_name="Nome")
-    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name="Sexo")
+    nome = models.CharField(max_length=100, verbose_name="Nome do gato")
+    sexo = models.BooleanField(default=False, verbose_name="Sexo")
     idade = models.CharField(max_length=10, verbose_name="Idade")
-    descricao = models.TextField(max_length=10000, verbose_name="Descrição")
-    imagem = models.ImageField(upload_to="gatos/", verbose_name="Imagem")
+    descricao = models.TextField(max_length=10000, verbose_name="Sobre o gato")
+    imagem = models.ImageField(upload_to="gatos/", verbose_name="Foto do gato")
     lar_temporario = models.BooleanField(default=False, verbose_name="Precisa de lar temporário")
     
     # Relacionamentos
@@ -129,6 +125,9 @@ class Gato(models.Model):
     sociavel = models.ForeignKey(Sociavel, on_delete=models.CASCADE, verbose_name="Socialização")
     moradia = models.ForeignKey(Moradia, on_delete=models.CASCADE, verbose_name="Moradia adequada")
     
+    #Status de adocao
+    adotado = models.BooleanField(default=False, verbose_name="Adotado")
+
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
@@ -141,4 +140,3 @@ class Gato(models.Model):
     
     def __str__(self):
         return f"{self.nome} ({self.get_sexo_display()})"
-      

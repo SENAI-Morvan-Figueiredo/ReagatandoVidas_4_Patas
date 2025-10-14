@@ -186,3 +186,74 @@ body {
     align-items: center;
     gap: 5px;
 }
+
+.checkbox-item {
+  display: inline-block;
+  position: relative; /* necessário para posicionar o input por cima do chip */
+  margin: 0.35rem;
+}
+
+/* esconder checkbox nativo, mas manter no DOM para acessibilidade */
+.checkbox-item input[type="checkbox"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;            /* invisível */
+  cursor: pointer;       /* clique visível ao passar o mouse */
+  z-index: 3;            /* fica acima do chip, para capturar o clique */
+  pointer-events: auto;  /* garante que receba eventos de clique */
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+}
+
+/* chip visual (texto e fundo) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;       /* ajuda quando usuário passa o mouse */
+  user-select: none;
+  border: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  background-color: #eef4ff; /* não selecionado: azul claro */
+  color: #899abd;
+  position: relative;
+  z-index: 1;            /* fica abaixo do input invisível */
+}
+
+/* o texto dentro do chip não deve bloquear o clique */
+.chip .chip-text {
+  display: inline-block;
+  padding: 0 0.1rem;
+  pointer-events: none;
+}
+
+/* estado selecionado: rosa */
+.chip.selected {
+  background-color: #FFE6E7; 
+  color: #F58285;
+  box-shadow: 0 6px 16px rgba(200,80,90,0.12);
+  transform: translateY(-1px);
+}
+
+/* hover visual (opcional) */
+.chip:hover {
+  transform: translateY(-2px);
+}
+
+/* layout do grupo */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0rem;
+}

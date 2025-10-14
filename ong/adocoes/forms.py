@@ -1,5 +1,5 @@
 from django import forms
-from .models import Adocao
+from .models import Adocao , Gato
 
 SIM_NAO_CHOICES = [
     (True, "Sim"),
@@ -7,6 +7,10 @@ SIM_NAO_CHOICES = [
 ]
 
 class AdocaoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['gato'].queryset = Gato.objects.filter(adotado=False)
+
     class Meta:
         model = Adocao
         fields = "__all__"  # inclui todos os campos do model
@@ -62,6 +66,8 @@ class AdocaoForm(forms.ModelForm):
             'viagens': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
             'devolver_doar_explique': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
         }
+
+        
 
     def clean_numero_contato(self):
         num = self.cleaned_data.get('numero_contato', '')
