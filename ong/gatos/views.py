@@ -4,11 +4,14 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from gatos.models import Gato
 from lares_temporarios.models import LarTemporarioAtual
+from adocoes.models import Adotados
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from .forms import GatoForm, CuidadoForm, TemperamentoForm, SociavelForm, MoradiaForm
 from django.urls import reverse_lazy
+from django.db.models import Q
+
 
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adocoes
 
@@ -16,6 +19,9 @@ from django.urls import reverse_lazy
 def dashboard_admin_adocoes(request):
     # Pega todos os gatos
     gatos = Gato.objects.all()
+
+    # Excluir gatos que já foram adotados
+    gatos = gatos.exclude(id__in=Adotados.objects.values_list('gato_id', flat=True))
 
     # Filtro por nome
     nome = request.GET.get("nome")
@@ -49,12 +55,12 @@ def excluir_gato_ajax(request, gato_id):
 
 # View que vai mandar as informações para os cards e tambem para o filtro
 def dashboard_admin_lar_temporario(request):
-    """
-    View para o dashboard de gatos que precisam ou estão em lar temporário.
-    """
 
     # Filtra apenas os gatos que precisam de lar temporário
     gatos = Gato.objects.filter(lar_temporario=True)
+
+    # Excluir gatos que já foram adotados
+    gatos = gatos.exclude(id__in=Adotados.objects.values_list('gato_id', flat=True))
 
     # Filtro por nome
     nome = request.GET.get("nome")
@@ -142,3 +148,37 @@ class GatoCreateView(CreateView):
         context['moradia_form'] = moradia_form
         context['sociavel_form'] = sociavel_form
         return render(request, self.template_name, context)
+# ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adotados
+
+# View que vai mandar as informações para os cards e tambem para o filtro
+def dashboard_admin_adotados(request):
+    # Pega todos os registros de adoção
+    adotados = Adotados.objects.all()
+
+    # Filtro por nome - nome do gato ou da pessoa
+    nome = request.GET.get("nome")
+    if nome:
+        adotados = adotados.filter(
+            Q(gato__nome__icontains=nome) |
+            Q(adocao__nome__icontains=nome)
+        )
+
+    # Pega só o primeiro nome do adotante
+    for adotado in adotados:
+        adotado.adotante_primeiro_nome = adotado.adocao.nome.split()[0] if adotado.adocao.nome else ''
+
+    context = {
+        "adotados": adotados,
+    }
+    return render(request, "gatos/dashboard_admin_adotados.html", context)
+
+# Função para excluir um registro de adoção - na tela dashboard_admin_adotaos
+# Juntamente com a Pop-up de confirmação de exclusão
+@require_POST
+def excluir_adotado_ajax(request, adotado_id):
+    try:
+        adotado = Adotados.objects.get(id=adotado_id)
+        adotado.delete()  
+        return JsonResponse({"status": "ok", "mensagem": f"Gato {adotado.gato.nome} excluído com sucesso!"})
+    except Adotados.DoesNotExist:
+        return JsonResponse({"status": "erro", "mensagem": "Registro não encontrado."}, status=404)

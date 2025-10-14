@@ -4,7 +4,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/adocao.css' %}">
 
-<a href="/" class="back-link">&larr; Voltar</a>
+<a href="{% url 'adocoes:lista' %}" class="back-link">&larr; Voltar</a>
 
 <div class="form-container">
     <h1 class="form-title">FORMULÁRIO - ADOÇÃO</h1>
@@ -16,6 +16,7 @@
         <!-- Informações do adotante -->
         <div class="form-section">
             <h2 class="section-title">Informações do Adotante</h2>
+            <div class="form-group">{{ form.gato.label_tag }} {{ form.gato }}</div>
             <div class="form-group">{{ form.nome.label_tag }} {{ form.nome }}</div>
             <div class="form-group">{{ form.cpf.label_tag }} {{ form.cpf }}</div>
             <div class="form-row">
