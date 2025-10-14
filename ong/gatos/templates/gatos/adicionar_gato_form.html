@@ -59,6 +59,9 @@
                 <div class="form-group">
                     {{ gato_form.imagem.label_tag }} {{ gato_form.imagem }}
                     {{ gato_form.imagem.errors }}
+                    <div class="image-preview" style="margin-top:10px;">
+                        <img id="preview-img" src="#" alt="Pré-visualização" style="max-width:200px; display:none; border-radius:8px;"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -272,6 +275,7 @@
 </div>
 
 <script>
+// CHECKBOX 
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona todos os labels com a classe chip
     const chips = document.querySelectorAll('.chip');
@@ -296,6 +300,30 @@ document.addEventListener('DOMContentLoaded', () => {
             chip.classList.toggle('selected');
         });
     });
+});
+
+
+// FOTO 
+document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.querySelector('input[type="file"][name="imagem"]');
+    const preview = document.getElementById('preview-img');
+
+    if(fileInput) {
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "#";
+                preview.style.display = 'none';
+            }
+        });
+    }
 });
 </script>
 {% endblock %}
