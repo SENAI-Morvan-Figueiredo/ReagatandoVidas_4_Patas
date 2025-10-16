@@ -13,6 +13,13 @@ SEXO_CHOICES = [
 
 
 class GatoForm(forms.ModelForm):
+    sexo = forms.TypedChoiceField(
+        choices=Gato.SEXO_CHOICES,
+        widget=forms.RadioSelect,
+        coerce=str,  # garante que o valor seja string
+        empty_value=None  # remove o "-----"
+    )
+     
     class Meta:
         model = Gato
         fields = "__all__" 
@@ -20,7 +27,7 @@ class GatoForm(forms.ModelForm):
         widgets = {
             # ---------------- BOOLEANOS----------------
             'lar_temporario': forms.RadioSelect(choices=SIM_NAO_CHOICES),
-            'sexo': forms.RadioSelect(choices=SEXO_CHOICES),
+            # 'sexo': forms.RadioSelect(),
 
             # -------- Campos de texto --------
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
@@ -32,6 +39,10 @@ class GatoForm(forms.ModelForm):
             # -------- TextArea --------
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['sexo'].empty_label = None  
 
 class CuidadoForm(forms.ModelForm):
     class Meta:
