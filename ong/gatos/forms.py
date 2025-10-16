@@ -27,7 +27,6 @@ class GatoForm(forms.ModelForm):
         widgets = {
             # ---------------- BOOLEANOS----------------
             'lar_temporario': forms.RadioSelect(choices=SIM_NAO_CHOICES),
-            # 'sexo': forms.RadioSelect(),
 
             # -------- Campos de texto --------
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
