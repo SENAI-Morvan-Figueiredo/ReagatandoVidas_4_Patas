@@ -73,6 +73,9 @@ Página do dashboard de mostra os gatos para adoção -->
                             {% else %}
                             Fêmea
                             {% endif %}
+                            {% if gato.lar_temporario == True %}
+                            | Lar Temporário
+                            {% endif %} 
                         </p>
                     </div>
                 </div>
