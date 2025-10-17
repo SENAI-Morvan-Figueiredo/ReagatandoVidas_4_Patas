@@ -8,8 +8,9 @@ SIM_NAO_CHOICES = [
 
 class AdocaoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['gato'].queryset = Gato.objects.filter(adotado=False)
+        super().__init__(*args, **kwargs)
+        self.fields['gato'].queryset = Gato.objects.filter(adotado=False)
+        self.fields['gato'].widget = forms.HiddenInput()
 
     class Meta:
         model = Adocao

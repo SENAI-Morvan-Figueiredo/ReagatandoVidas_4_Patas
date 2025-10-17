@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 class Temperamento(models.Model):
     docil = models.BooleanField(default=False, verbose_name="Dócil")
@@ -144,3 +145,9 @@ class Gato(models.Model):
     
     def __str__(self):
         return f"{self.nome} ({self.get_sexo_display()})"
+    
+    @cached_property
+    def em_lar_temporario(self):
+        from django.apps import apps
+        LarTemporarioAtual = apps.get_model('lares_temporarios', 'LarTemporarioAtual')
+        return LarTemporarioAtual.objects.filter(gato=self).exists()
