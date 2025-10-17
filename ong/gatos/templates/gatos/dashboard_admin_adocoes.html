@@ -69,10 +69,13 @@ Página do dashboard de mostra os gatos para adoção -->
                         <!-- Idade e sexo -->
                         <p class="card-text mb-2"> {{ gato.idade }} |
                             {% if gato.sexo == 'M' %}
-                            Macho
+                            Macho 
                             {% else %}
-                            Fêmea
-                            {% endif %}
+                            Fêmea 
+                            {% endif %} 
+                            {% if gato.lar_temporario == True %}
+                            | Lar Temporário
+                            {% endif %} 
                         </p>
                     </div>
                 </div>
