@@ -95,3 +95,13 @@ class SociavelForm(forms.ModelForm):
         'criancas': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         'nao_sociavel': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     }
+        
+class LarTemporarioForm(forms.ModelForm):
+    class Meta:
+        model = LarTemporario
+        fields = '__all__'
+
+        widgets = {
+        'nome': forms.TextInput(attrs={'class': 'form-control'}),
+        'disponibilidade_inicio': forms.DateField(attrs={'class': 'form-control'}),
+    }

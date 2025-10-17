@@ -4,7 +4,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/adocao.css' %}">
 
-<a href="/" class="back-link">&larr; Voltar</a>
+<a href="{% url 'gatos:dashboard_admin_adocoes' %}" class="back-link">&larr; Voltar</a>
 
 <div class="form-container">
     <h1 class="form-title">ADICIONE UM GATO PARA ADOÇÃO</h1>
