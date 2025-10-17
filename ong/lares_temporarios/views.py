@@ -1,12 +1,13 @@
 import logging
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404 , render , redirect
 from django.contrib import messages
 from django.core.exceptions import FieldError
-from .models import LarTemporario
+from .models import LarTemporario , HistoricoLarTemporario , LarTemporarioAtual
 from gatos.models import Gato
 from .forms import LarTemporarioForm
+from django.utils.timezone import now
 
 logger = logging.getLogger(__name__)
 
@@ -52,35 +53,53 @@ class GatoDetailView(DetailView):
         return ctx
 
 
-class LarTemporarioCreateView(CreateView):
-    model = LarTemporario
-    form_class = LarTemporarioForm
-    template_name = 'lares_temporarios/lar_temporario_form.html'
 
-    def get_initial(self):
-        initial = super().get_initial()
-        gato_id = self.request.GET.get('gato')
-        if gato_id:
-            try:
-                gato = get_object_or_404(Gato, pk=gato_id)
-                initial['gato'] = gato
-            except Exception:
-                pass
-        return initial
+def formulario_lar_temporario(request):
+    gato_id = request.GET.get('gato')
+    gato = None
 
-    def form_valid(self, form):
-        gato = form.cleaned_data.get('gato')
-        if not gato:
-            gato_id = self.request.GET.get('gato')
-            if gato_id:
-                form.instance.gato = get_object_or_404(Gato, pk=gato_id)
-        response = super().form_valid(form)
-        messages.success(self.request, "Solicitação de adoção enviada com sucesso.")
-        return response
+    if gato_id:
+        gato = get_object_or_404(Gato, pk=gato_id)
 
-    def get_success_url(self):
-        return reverse_lazy('lares_temporarios:lar_temporario_success')
+    if request.method == 'POST':
+        form = LarTemporarioForm(request.POST)
+        if form.is_valid():
+            lar = form.save(commit=False)
+            if gato:
+                lar.gato = gato
+            lar.save()
+            print(" LarTemporario salvo:", lar.pk)
 
+            historico = HistoricoLarTemporario(
+                gato=lar.gato,
+                lar_temporario=lar,
+                data_inicio=lar.disponibilidade_inicio
+            )
+            historico.save()
+            print(" HistoricoLarTemporario salvo:", historico.pk)
+
+            lar_atual = LarTemporarioAtual(
+                gato=lar.gato,
+                lar_temporario=lar,
+                data_inicio=lar.disponibilidade_inicio
+            )
+            lar_atual.save()
+            print(" LarTemporarioAtual salvo:", lar_atual.pk)
+
+            messages.success(request, "Solicitação de lar temporário enviada com sucesso.")
+            return redirect('lares_temporarios:lar_temporario_sucess')
+
+        else:
+            print("❌ Erros no formulário:", form.errors)
+            messages.error(request, "Há campos incorretos ou faltando. Confira as informações.")
+    
+    else:
+        initial = {}
+        if gato:
+            initial['gato'] = gato
+        form = LarTemporarioForm(initial=initial)
+
+    return render(request, 'lares_temporarios/lar_temporario_form.html', {'form': form, 'gato': gato})
 
 class LarTemporarioSuccessView(TemplateView):
-    template_name = 'lares_temporarios/lar_temporario_success.html'
+    template_name = 'lares_temporarios/lar_temporario_sucess.html'
