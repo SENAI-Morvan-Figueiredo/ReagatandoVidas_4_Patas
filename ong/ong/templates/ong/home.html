@@ -17,11 +17,11 @@
   <!-- Menu centralizado -->
   <nav class="menu-centralizado">
     <ul>
-      <li><a href="adocao.html">Adoção</a></li>
+      <li><a href="{% url 'adocoes:lista' %}">Adoção</a></li>
       <li><a href="index.html">Nossa História</a></li>
-      <li><a href="lar.html">Lar Temporário</a></li>
+      <li><a href="{% url 'lares_temporarios:lista' %}">Lar Temporário</a></li>
       <li><a href="adotados.html">Adotados</a></li>
-      <li><a href="doacoes.html">Doações</a></li>
+      <li><a href="{% url 'doacoes' %}">Doações</a></li>
     </ul>
   </nav>
 </div>
@@ -52,18 +52,21 @@
 
 {% block content %}
   <!-- SEÇÃO "RESGATANDO VIDAS" -->
-  <!-- <section class="intro container-lg">
+  <section class="intro container-lg">
     <div class="intro-content">
       <h2>RESGATANDO VIDAS 4 PATAS</h2>
       <p class="intro-text">
-        A RESGATANDO VIDAS 4PATAS atua desde 2014, como protetora independente em ações de resgate, tratamento e adoção de gatos abandonados ou vítimas de maus-tratos. Desde que mais ativos desde 2019. Já resgatamos, acolhemos, tratamos e castramos mais de 500 gatos.
+        A RESGATANDO VIDAS 4PATAS atua desde 2014, como protetora independente em ações de resgate, tratamento e adoção de gatos abandonados ou vítimas de maus-tratos. Sendo que mais ativos desde 2019. Já resgatamos, acolhemos, tratamos e castramos mais de 500 gatos.
+        Todo esse trabalho sempre dependeu de doações de pessoas sensibilizadas pelos casos. Os animais sempre foram acolhidos na minha própria casa, e nos últimos anos, pelo aumento da demanda, em “Lares Temporários” até que possam ser adotados de forma responsável por uma família. Atualmente cuidamos de aproximadamente 50 gatos (entre adultos e filhotes).
+        Nossas adoções sempre foram feitas de forma responsável, para pessoas que possam dar continuidade ao nosso trabalho, proporcionando para esses gatinhos, saúde física e emocional, além da segurança que também é primordial para que nossos resgatados não voltem a ter acesso às ruas, voltando a ficarem expostos a todo tipo de perigo do qual foram retirados e salvos. Também realizamos um trabalho constante de acompanhamento dos nossos adotados.
+        “Nunca foi um trabalho fácil! E por diversas vezes já tentei parar, pois muito me sobrecarrega na minha vida pessoal e profissional, porém, infelizmente devido à falta de conscientização da maioria das pessoas em relação à castração e a segurança dos animais, isso nunca foi possível.” Cláudia Lopes (Fundadora e única responsável pela Resgatando Vidas 4Patas)
       </p>
     </div>
 
     <div class="intro-image">
-      <img src="{% static 'img/cat-circle.png' %}" alt="Gato" class="circle-img">
+      <img src="{% static 'img/gato_fundo_rosa.png' %}" alt="Gato" class="circle-img">
     </div>
-  </section> -->
+  </section>
 
   <!-- DOAÇÕES (seção rosa) -->
   <!-- <section class="doe-section">

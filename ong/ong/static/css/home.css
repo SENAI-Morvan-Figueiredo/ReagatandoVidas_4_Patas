@@ -150,10 +150,7 @@ header h1 em {
 .patac { left: 20%; }
 .patad { left: 35%; }
 
-
-/* =======================
-   RESPONSIVIDADE
-======================= */
+/* RESPONSIVIDADE */
 @media (max-width: 1024px) {
   .pataa, .patab, .patac, .patad { max-width: 100px; }
   header h1 { font-size: 28px; }
@@ -175,4 +172,97 @@ header h1 em {
   header h1 { font-size: 20px; }
   .btadote { font-size: 14px; padding: 8px 25px; }
   .desca { font-size: 12px; max-width: 200px; }
+}
+
+
+/* =======================
+   SEÇÃO RESGATANDO VIDAS
+======================= */
+.intro {
+  position: relative; /* importante para a imagem absoluta */
+  display: flex;
+  align-items: center;
+  padding: 80px 50px;
+  background-color: #f8f9ff;
+  flex-wrap: wrap;
+}
+
+/* Conteúdo do texto */
+.intro-content {
+  max-width: 600px;
+  text-align: left;
+  z-index: 2; /* acima da imagem */
+}
+
+.intro-content h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #4f76bb;
+  margin-bottom: 20px;
+}
+
+.intro-content p.intro-text {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #4f76bb;
+}
+
+.intro-image {
+  /* flex: 1; */
+  display: flex;
+  justify-content: flex-end; /* força a imagem à direita */
+}
+
+.intro-image .circle-img {
+    margin-left: auto; /* empurra a imagem totalmente para direita */
+    display: block; 
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .intro {
+    gap: 30px;
+    padding: 60px 20px;
+  }
+
+  .intro-image .circle-img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .intro-content h2 {
+    font-size: 28px;
+  }
+
+  .intro-content p.intro-text {
+    font-size: 16px;
+  }
+
+  .intro-image .circle-img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-content h2 {
+    font-size: 24px;
+  }
+
+  .intro-content p.intro-text {
+    font-size: 14px;
+  }
+
+  .intro-image .circle-img {
+    width: 180px;
+    height: 180px;
+  }
 }
