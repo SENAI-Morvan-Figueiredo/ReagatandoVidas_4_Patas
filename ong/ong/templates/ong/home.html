@@ -1,0 +1,139 @@
+{% extends "ong/base.html" %}
+{% load static %}
+
+{% block title %}Home - Resgatando Vidas 4 Patas{% endblock %}
+
+{% block header %}
+<header class="home-header">
+  <!-- Top bar: logo + menu -->
+  <div class="top-bar">
+  <!-- Logo à esquerda -->
+  <div class="logo-wrap">
+    <a href="{% url 'home' %}">
+      <img src="{% static 'img/logo.png' %}" alt="Logotipo 4 Patas" class="logo">
+    </a>
+  </div>
+
+  <!-- Menu centralizado -->
+  <nav class="menu-centralizado">
+    <ul>
+      <li><a href="adocao.html">Adoção</a></li>
+      <li><a href="index.html">Nossa História</a></li>
+      <li><a href="lar.html">Lar Temporário</a></li>
+      <li><a href="adotados.html">Adotados</a></li>
+      <li><a href="doacoes.html">Doações</a></li>
+    </ul>
+  </nav>
+</div>
+
+
+  <!-- Hero centralizado -->
+  <div class="hero-content">
+    <h1>Resgatando Vidas <em>4 patas</em></h1>
+    <p class="desca">
+      Nosso trabalho é salvar, cuidar e encontrar lares para gatinhos que precisam de amor.
+    </p>
+    <button class="btadote">ADOTE</button>
+  </div>
+
+  <!-- Patinhas -->
+  <img src="{% static 'img/pataa.png' %}" alt="pata1" class="pataa">
+  <img src="{% static 'img/patab.png' %}" alt="pata2" class="patab">
+  <img src="{% static 'img/patac.png' %}" alt="pata3" class="patac">
+  <img src="{% static 'img/patad.png' %}" alt="pata4" class="patad">
+</header>
+{% endblock header %}
+
+
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+  <!-- SEÇÃO "RESGATANDO VIDAS" -->
+  <!-- <section class="intro container-lg">
+    <div class="intro-content">
+      <h2>RESGATANDO VIDAS 4 PATAS</h2>
+      <p class="intro-text">
+        A RESGATANDO VIDAS 4PATAS atua desde 2014, como protetora independente em ações de resgate, tratamento e adoção de gatos abandonados ou vítimas de maus-tratos. Desde que mais ativos desde 2019. Já resgatamos, acolhemos, tratamos e castramos mais de 500 gatos.
+      </p>
+    </div>
+
+    <div class="intro-image">
+      <img src="{% static 'img/cat-circle.png' %}" alt="Gato" class="circle-img">
+    </div>
+  </section> -->
+
+  <!-- DOAÇÕES (seção rosa) -->
+  <!-- <section class="doe-section">
+    <div class="doe-inner container-lg">
+      <div class="doe-media">
+        <img src="{% static 'img/food-circle.png' %}" alt="Ração" class="circle-img small">
+      </div>
+
+      <div class="doe-text">
+        <h3>DOE</h3>
+        <p>
+          Sua doação via PIX nos ajuda a oferecer tudo o que os gatinhos precisam: ração, medicamentos, exames e tratamentos. Cada contribuição transforma vidas!
+        </p>
+        <a href="" class="btn-primary">Doe amor, Doe comida</a>
+      </div>
+    </div> -->
+
+    <!-- onda separadora (SVG) -->
+    <!-- <div class="wave wave-up">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C150,100 350,100 600,50 C850,0 1050,100 1200,50 L1200,0 L0,0 Z"></path></svg>
+    </div>
+  </section> -->
+
+  <!-- LAR TEMPORÁRIO -->
+  <!-- <section class="lar container-lg" id="lar">
+    <h3 class="section-title">LAR TEMPORÁRIO</h3>
+    <p class="section-sub">Hospede um animalzinho por um tempo e ajude a mudar seu destino.</p>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon">🐾</div>
+        <h4>Salvando Vidas</h4>
+        <p>Você oferece um lar temporário seguro para gatos que precisam de cuidados especiais.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🏠</div>
+        <h4>Sem Compromisso Permanente</h4>
+        <p>O período de acolhimento é temporário, até encontrarmos uma família definitiva.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">⏰</div>
+        <h4>Flexibilidade</h4>
+        <p>Você escolhe por quanto tempo pode acolher, respeitando sua disponibilidade.</p>
+      </article>
+    </div>
+
+    <div class="cta-center">
+      <a href="" class="btn-ghost">Quero Ser Lar Temporário</a>
+    </div>
+  </section> -->
+
+  <!-- BANNER IMAGEM GRANDE -->
+  <!-- <section class="banner-image">
+    <img src="{% static 'img/banner-cat.jpg' %}" alt="Gato brincando" class="cover">
+  </section> -->
+
+  <!-- CONSIDERE ADOTAR UM GATO ADULTO -->
+  <!-- <section class="adulto container-lg">
+    <div class="adulto-content">
+      <h3>CONSIDERE ADOTAR <span>UM GATO ADULTO</span></h3>
+      <p>Conheça todos os nossos gatinhos disponíveis para adoção. Cada um tem uma história única e está esperando por uma família amorosa.</p>
+      <a href="" class="btn-secondary">Quero Adotar</a>
+    </div>
+  </section> -->
+
+  <!-- FOOTER vem do base.html (já incluído) -->
+{% endblock content %}
+
+{% block extra_js %}
+  <script src="{% static 'js/script.js' %}"></script>
+{% endblock extra_js %}

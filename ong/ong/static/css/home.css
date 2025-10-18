@@ -1,0 +1,167 @@
+/* =======================
+   VARIÁVEIS GERAIS
+======================= */
+:root {
+  --primary: #4f76bb;
+  --secondary: #ffd166;
+  --text-dark: #333;
+  --text-light: #fff;
+  --container-max: 1280px;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9ff;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* =======================
+   HEADER / HERO
+======================= */
+header.home-header {
+  position: relative;
+  height: 600px;
+  padding: 0;
+  background: linear-gradient(to bottom, #dee0fc, #CFD2FF);
+}
+
+/* Top bar: logo + menu */
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: relative;
+}
+
+.logo-wrap img.logo {
+    width: 130px;
+    height: auto;
+    margin: 40%;
+}
+
+/* Menu centralizado */
+.menu-centralizado {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu-centralizado ul {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+
+.menu-centralizado ul li a {
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.menu-centralizado ul li a:hover {
+  color: #4566a0;
+  transform: scale(1.1);
+}
+
+/* Hero centralizado */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 3%;
+}
+
+header h1 {
+  font-size: 27px;
+  font-weight: 700;
+  color: #fff;
+  margin: 15px 0;
+}
+
+header h1 em {
+  color: var(--primary);
+  font-style: normal;
+}
+
+.desca {
+  color: #fff;
+  max-width: 450px;
+  margin: 15px auto 0 auto;
+  font-size: 23px;
+}
+
+.desca:hover{
+    transform: translateY(-3px);
+}
+
+/* Botão Adote */
+.btadote {
+  background-color: var(--text-light);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 15px 150px;
+  font-size: 23px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.btadote:hover {
+    transform: translateY(-3px);
+}
+
+/* Patinhas */
+.pataa, .patab, .patac, .patad {
+  width: auto;
+  max-width: 2000px; 
+  height: auto;
+  position: absolute;
+  top: 68%; 
+  transform: translateY(-50%);
+}
+
+.pataa { left: -35%; }
+.patab { left: -20%; }
+.patac { left: 20%; }
+.patad { left: 35%; }
+
+/* =======================
+   RESPONSIVIDADE
+======================= */
+@media (max-width: 1024px) {
+  .pataa, .patab, .patac, .patad { max-width: 100px; }
+  header h1 { font-size: 28px; }
+  .btadote { font-size: 18px; padding: 12px 40px; }
+  .desca { font-size: 16px; max-width: 300px; }
+}
+
+@media (max-width: 768px) {
+  .top-bar { flex-direction: column; gap: 10px; padding: 15px; }
+  header nav ul { flex-direction: column; gap: 10px; align-items: center; }
+  .pataa, .patab, .patac, .patad { max-width: 80px; }
+  header h1 { font-size: 24px; }
+  .btadote { font-size: 16px; padding: 10px 30px; }
+  .desca { font-size: 14px; max-width: 250px; }
+}
+
+@media (max-width: 480px) {
+  .pataa, .patab, .patac, .patad { max-width: 50px; }
+  header h1 { font-size: 20px; }
+  .btadote { font-size: 14px; padding: 8px 25px; }
+  .desca { font-size: 12px; max-width: 200px; }
+}
