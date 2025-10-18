@@ -39,13 +39,16 @@ header.home-header {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: relative;
+  justify-content: space-between; /* logo à esquerda, menu à direita */
+  padding: 15px 30px;
+  position: relative;
+  z-index: 10;
 }
 
 .logo-wrap img.logo {
     width: 130px;
     height: auto;
-    margin: 40%;
+    margin: 0; /* remover margin 40% */
 }
 
 /* Menu centralizado */
@@ -53,6 +56,7 @@ header.home-header {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .menu-centralizado ul {
@@ -66,12 +70,11 @@ header.home-header {
   font-weight: 700;
   color: var(--primary);
   text-decoration: none;
-  transition: transform 0.3s, color 0.3s;
 }
 
 .menu-centralizado ul li a:hover {
-  color: #4566a0;
-  transform: scale(1.1);
+  transform: scale(1.05);
+  text-decoration: underline; 
 }
 
 /* Hero centralizado */
@@ -81,7 +84,8 @@ header.home-header {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 3%;
+  padding-top: 5%;
+  z-index: 5;
 }
 
 header h1 {
@@ -96,18 +100,17 @@ header h1 em {
   font-style: normal;
 }
 
+/* Descrição com hover de crescimento */
 .desca {
   color: #fff;
   max-width: 450px;
   margin: 15px auto 0 auto;
   font-size: 23px;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
-.desca:hover{
-    transform: translateY(-3px);
-}
-
-/* Botão Adote */
+/* Botão Adote com hover de crescimento */
 .btadote {
   background-color: var(--text-light);
   color: var(--primary);
@@ -118,27 +121,35 @@ header h1 em {
   font-weight: 600;
   margin-top: 20px;
   cursor: pointer;
-  transition: transform 0.3s;
+  display: inline-block;
+  position: relative;   /* importante para z-index funcionar */
+  z-index: 20;          /* maior que o das patinhas */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 6px 6px 10px #4f76bb;
 }
 
 .btadote:hover {
-    transform: translateY(-3px);
+  transform: scale(1.05);
+  box-shadow: #4f76bb;
 }
+
 
 /* Patinhas */
 .pataa, .patab, .patac, .patad {
   width: auto;
-  max-width: 2000px; 
+  max-width: 2000px;
   height: auto;
   position: absolute;
   top: 68%; 
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .pataa { left: -35%; }
 .patab { left: -20%; }
 .patac { left: 20%; }
 .patad { left: 35%; }
+
 
 /* =======================
    RESPONSIVIDADE
