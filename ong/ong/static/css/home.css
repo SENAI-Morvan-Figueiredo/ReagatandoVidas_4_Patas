@@ -1,0 +1,551 @@
+/* =======================
+   VARIÁVEIS GERAIS
+======================= */
+:root {
+  --primary: #4f76bb;
+  --secondary: #ffd166;
+  --text-dark: #333;
+  --text-light: #fff;
+  --container-max: 1280px;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9ff;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* =======================
+   HEADER / HERO
+======================= */
+header.home-header {
+  position: relative;
+  height: 600px;
+  padding: 0;
+  background: linear-gradient(to bottom, #dee0fc, #CFD2FF);
+}
+
+/* Top bar: logo + menu */
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo à esquerda, menu à direita */
+  padding: 15px 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-wrap img.logo {
+    width: 130px;
+    height: auto;
+    margin: 0; /* remover margin 40% */
+}
+
+/* Menu centralizado */
+.menu-centralizado {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.menu-centralizado ul {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+
+.menu-centralizado ul li a {
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.menu-centralizado ul li a:hover {
+  transform: scale(1.05);
+  text-decoration: underline; 
+}
+
+/* Hero centralizado */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 5%;
+  z-index: 5;
+}
+
+header h1 {
+  font-size: 27px;
+  font-weight: 700;
+  color: #fff;
+  margin: 15px 0;
+}
+
+header h1 em {
+  color: var(--primary);
+  font-style: normal;
+}
+
+/* Descrição com hover de crescimento */
+.desca {
+  color: #fff;
+  max-width: 450px;
+  margin: 15px auto 0 auto;
+  font-size: 23px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Botão Adote com hover de crescimento */
+.btadote {
+  background-color: var(--text-light);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 15px 150px;
+  font-size: 23px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;   /* importante para z-index funcionar */
+  z-index: 20;          /* maior que o das patinhas */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 6px 6px 10px #4f76bb;
+}
+
+.btadote:hover {
+  transform: scale(1.05);
+  box-shadow: #4f76bb;
+}
+
+
+/* Patinhas */
+.pataa, .patab, .patac, .patad {
+  width: auto;
+  max-width: 2000px;
+  height: auto;
+  position: absolute;
+  top: 68%; 
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.pataa { left: -35%; }
+.patab { left: -20%; }
+.patac { left: 20%; }
+.patad { left: 35%; }
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .pataa, .patab, .patac, .patad { max-width: 100px; }
+  header h1 { font-size: 28px; }
+  .btadote { font-size: 18px; padding: 12px 40px; }
+  .desca { font-size: 16px; max-width: 300px; }
+}
+
+@media (max-width: 768px) {
+  .top-bar { flex-direction: column; gap: 10px; padding: 15px; }
+  header nav ul { flex-direction: column; gap: 10px; align-items: center; }
+  .pataa, .patab, .patac, .patad { max-width: 80px; }
+  header h1 { font-size: 24px; }
+  .btadote { font-size: 16px; padding: 10px 30px; }
+  .desca { font-size: 14px; max-width: 250px; }
+}
+
+@media (max-width: 480px) {
+  .pataa, .patab, .patac, .patad { max-width: 50px; }
+  header h1 { font-size: 20px; }
+  .btadote { font-size: 14px; padding: 8px 25px; }
+  .desca { font-size: 12px; max-width: 200px; }
+}
+
+
+/* =======================
+   SEÇÃO RESGATANDO VIDAS
+======================= */
+.intro {
+  position: relative; /* importante para a imagem absoluta */
+  display: flex;
+  align-items: center;
+  padding: 80px 50px;
+  background-color: #f8f9ff;
+  flex-wrap: wrap;
+}
+
+/* Conteúdo do texto */
+.intro-content {
+  max-width: 600px;
+  text-align: left;
+  z-index: 2; /* acima da imagem */
+}
+
+.intro-content h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #4f76bb;
+  margin-bottom: 20px;
+}
+
+.intro-content p.intro-text {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #4f76bb;
+}
+
+.intro-image {
+  /* flex: 1; */
+  display: flex;
+  justify-content: flex-end; /* força a imagem à direita */
+}
+
+.intro-image .circle-img {
+    margin-left: auto; /* empurra a imagem totalmente para direita */
+    display: block; 
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .intro {
+    gap: 30px;
+    padding: 60px 20px;
+  }
+
+  .intro-image .circle-img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .intro-content h2 {
+    font-size: 28px;
+  }
+
+  .intro-content p.intro-text {
+    font-size: 16px;
+  }
+
+  .intro-image .circle-img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-content h2 {
+    font-size: 24px;
+  }
+
+  .intro-content p.intro-text {
+    font-size: 14px;
+  }
+
+  .intro-image .circle-img {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* =======================
+   SEÇÃO DOE - FULL BLEED
+======================= */
+.doe-section {
+  position: relative;
+  width: 100vw;                 /* ocupa toda a largura da viewport */
+  height: 100vh;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;           /* remove possíveis margens do container pai */
+  margin-right: -50vw;
+  background-image: url("../img/fundo_doe.png"); /* caminho relativo do css -> ../img/ */
+  background-repeat: no-repeat;
+  background-position: right center; /* começa pela direita */
+  background-size: cover;             /* cobre toda a área */
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;    /* texto à direita */
+  padding: 80px 100px;
+  box-sizing: border-box;
+  color: #e66565;
+  overflow: hidden;             /* evita overflow das ondas/imagens */
+  z-index: 2;
+}
+
+/* conteúdo por cima do fundo */
+.doe-section .doe-content {
+  max-width: 450px;
+  text-align: right;
+  z-index: 2;                   /* garante que texto fique acima do background */
+  margin-top: -10%;
+}
+
+/* Título e texto (mantive os estilos) */
+.doe-content h2 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #f17777;
+  margin-bottom: 20px;
+}
+.doe-content p { font-size: 16px; line-height: 1.7; color: #e66565; margin-bottom: 10px; }
+.doe-content .destaque { font-weight: 600; margin-bottom: 30px; }
+
+.btn-doe {
+  display: inline-block; background-color: #f17777; color: white; font-weight: 600;
+  padding: 12px 35px; border-radius: 8px; text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.25s ease;
+}
+.btn-doe:hover { transform: translateY(-3px); background-color: #ff8f8f; }
+
+/* Ajustes responsivos: em telas menores centraliza e altera background-position */
+@media (max-width: 1024px) {
+  .doe-section {
+    padding: 60px 40px;
+    justify-content: center;
+    background-position: center center;
+  }
+  .doe-content { text-align: center; }
+  .doe-content h2 { font-size: 40px; }
+}
+@media (max-width: 768px) {
+  .doe-section { padding: 50px 20px; background-position: center; min-height: 360px; }
+  .doe-content h2 { font-size: 32px; }
+  .doe-content p { font-size: 15px; }
+}
+@media (max-width: 480px) {
+  .doe-content h2 { font-size: 26px; }
+  .btn-doe { padding: 10px 25px; font-size: 14px; }
+}
+
+/* =======================
+   ONDA SEPARADORA (FULL-BLEED)
+======================= */
+.wave-separator {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  right: 50%;
+  margin-right: -50vw;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 0;
+  background: transparent;
+  margin-top: -20%;
+}
+
+.wave-separator .wave-svg {
+  display: block;
+  width: 100%;
+  height: 120px; /* altura da onda - ajuste se quiser */
+}
+
+.wave-separator .wave-svg path {
+  fill: #DCC9FF; /* cor da seção LAR (ajuste conforme necessário) */
+}
+
+/* =======================
+   SEÇÃO LAR TEMPORÁRIO - FULLSCREEN
+======================= */
+.lar {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  right: 50%;
+  margin-right: -50vw;
+  min-height: 100vh;               /* ocupa a altura total da tela */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;         /* centraliza verticalmente */
+  align-items: center;
+  background-color: #DCC9FF;       /* fundo lilás */
+  padding: 100px 40px;             /* ajuste espaçamento interno */
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+/* Conteúdo limitado (mantém o section full-bleed, mas centraliza o conteúdo) */
+.lar .container-lg {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+/* =======================
+   TÍTULOS E TEXTOS
+======================= */
+.lar .section-title {
+  font-size: 36px;
+  letter-spacing: 6px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.lar .section-sub {
+  color: rgba(255,255,255,0.95);
+  max-width: 820px;
+  margin: 0 auto 30px auto;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.lar .cards-title {
+  color: rgba(255,255,255,0.95);
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* =======================
+   CARDS
+======================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.card {
+  background: rgba(255,255,255,0.98);
+  color: #7a4fa8;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 160px;
+}
+
+/* Ícone circular no topo do card */
+.card .icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(216,197,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.card .icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+/* Título e parágrafo do card */
+.card h4 {
+  font-size: 15px;
+  margin-top: 4px;
+  color: #7a4fa8;
+  font-weight: 700;
+}
+
+.card p {
+  font-size: 13px;
+  color: #9a6fcf;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* =======================
+   CTA
+======================= */
+.cta-center {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-ghost {
+  background: linear-gradient(180deg, #b889d9, #a56fcf);
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(120,80,160,0.18);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(120,80,160,0.28);
+}
+
+/* =======================
+   VARIANTES / OPCIONAL
+   (se quiser imagem de fundo ao invés de cor)
+======================= */
+/* Exemplo para usar imagem (descomente e ajuste caminho):
+.lar {
+  background: url("../img/fundo-lar.png") center/cover no-repeat;
+}
+*/
+
+/* =======================
+   RESPONSIVIDADE
+======================= */
+@media (max-width: 1024px) {
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .lar { padding: 80px 30px; min-height: 80vh; }
+  .wave-separator .wave-svg { height: 100px; }
+}
+
+@media (max-width: 768px) {
+  .cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .lar { padding: 60px 20px; min-height: auto; }
+  .card { min-height: auto; padding: 20px; }
+  .card .icon { margin-bottom: 6px; }
+  .lar .section-title { font-size: 26px; letter-spacing: 4px; }
+  .lar .section-sub { font-size: 14px; padding: 0 8px; }
+}
+
+@media (max-width: 480px) {
+  .lar { padding: 50px 12px; }
+  .lar .section-title { font-size: 22px; }
+  .btn-ghost { width: 90%; padding: 12px 20px; }
+}

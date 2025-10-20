@@ -1,3 +1,8 @@
+# Virtual environment
+venv/
+*.pyc
+__pycache__/
+
 # Ignorar caches e arquivos compilados do Python
 __pycache__/
 *.pyc
