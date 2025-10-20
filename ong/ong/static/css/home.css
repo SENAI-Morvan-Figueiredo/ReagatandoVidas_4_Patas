@@ -290,7 +290,7 @@ header h1 em {
   box-sizing: border-box;
   color: #e66565;
   overflow: hidden;             /* evita overflow das ondas/imagens */
-  z-index: 0;
+  z-index: 2;
 }
 
 /* conteúdo por cima do fundo */
@@ -340,30 +340,30 @@ header h1 em {
 }
 
 /* =======================
-   ONDA SEPARADORA - FULL-BLEED
-   (substitua qualquer código anterior)
+   ONDA SEPARADORA (FULL-BLEED)
 ======================= */
 .wave-separator {
   position: relative;
-  width: 100vw;               /* largura total da viewport */
+  width: 100vw;
   left: 50%;
-  margin-left: -50vw;         /* "escapa" do container pai */
+  margin-left: -50vw;
   right: 50%;
   margin-right: -50vw;
   overflow: hidden;
   line-height: 0;
+  z-index: 0;
   background: transparent;
-  z-index: 1;
+  margin-top: -20%;
 }
 
 .wave-separator .wave-svg {
   display: block;
   width: 100%;
-  height: 120px; /* ajuste a altura conforme necessário */
+  height: 120px; /* altura da onda - ajuste se quiser */
 }
 
 .wave-separator .wave-svg path {
-  fill: #DCC9FF; /* cor da seção lar - ajuste se quiser */
+  fill: #DCC9FF; /* cor da seção LAR (ajuste conforme necessário) */
 }
 
 /* =======================
@@ -371,51 +371,181 @@ header h1 em {
 ======================= */
 .lar {
   position: relative;
-  width: 100vw;               /* largura total da viewport */
+  width: 100vw;
   left: 50%;
-  margin-left: -50vw;         /* "escapa" do container pai (mesma técnica) */
+  margin-left: -50vw;
   right: 50%;
   margin-right: -50vw;
-  min-height: 100vh;          /* ocupa altura total da tela */
+  min-height: 100vh;               /* ocupa a altura total da tela */
   display: flex;
   flex-direction: column;
-  justify-content: center;    /* centraliza verticalmente */
+  justify-content: center;         /* centraliza verticalmente */
   align-items: center;
-  background-color: #DCC9FF;  /* fundo lilás */
-  padding: 100px 40px;        /* padding interno (ajuste se necessário) */
+  background-color: #DCC9FF;       /* fundo lilás */
+  padding: 100px 40px;             /* ajuste espaçamento interno */
   box-sizing: border-box;
   z-index: 0;
 }
 
-/* se houver .container-lg interno, mantém conteúdo centralizado mas sem limitar o fundo */
+/* Conteúdo limitado (mantém o section full-bleed, mas centraliza o conteúdo) */
 .lar .container-lg {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
   padding: 0 18px;
   box-sizing: border-box;
-  background: transparent; /* garantir sem fundo extra */
+  background: transparent;
 }
 
-/* títulos e cards (mantive suas regras, só adaptei caso precise) */
-.lar .section-title { font-size: 36px; letter-spacing: 6px; font-weight: 800; color: #fff; margin-bottom: 8px; text-transform: uppercase; }
-.lar .section-sub { color: rgba(255,255,255,0.95); max-width: 820px; margin: 0 auto 30px; font-size: 15px; line-height: 1.6; }
-.lar .cards-title { color: rgba(255,255,255,0.95); margin-top: 20px; font-size: 18px; font-weight: 600; margin-bottom: 30px; }
+/* =======================
+   TÍTULOS E TEXTOS
+======================= */
+.lar .section-title {
+  font-size: 36px;
+  letter-spacing: 6px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-.cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.card { background: rgba(255,255,255,0.95); color: #7a4fa8; padding: 24px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: center; }
+.lar .section-sub {
+  color: rgba(255,255,255,0.95);
+  max-width: 820px;
+  margin: 0 auto 30px auto;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+}
 
-/* CTA */
-.cta-center { margin-top: 20px; display: flex; justify-content: center; width: 100%; }
-.btn-ghost { background: linear-gradient(180deg,#b889d9,#a56fcf); color:#fff; padding:14px 36px; border-radius:10px; font-weight:700; }
+.lar .cards-title {
+  color: rgba(255,255,255,0.95);
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
 
-/* RESPONSIVIDADE */
+/* =======================
+   CARDS
+======================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.card {
+  background: rgba(255,255,255,0.98);
+  color: #7a4fa8;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 160px;
+}
+
+/* Ícone circular no topo do card */
+.card .icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(216,197,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.card .icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+/* Título e parágrafo do card */
+.card h4 {
+  font-size: 15px;
+  margin-top: 4px;
+  color: #7a4fa8;
+  font-weight: 700;
+}
+
+.card p {
+  font-size: 13px;
+  color: #9a6fcf;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* =======================
+   CTA
+======================= */
+.cta-center {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-ghost {
+  background: linear-gradient(180deg, #b889d9, #a56fcf);
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(120,80,160,0.18);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(120,80,160,0.28);
+}
+
+/* =======================
+   VARIANTES / OPCIONAL
+   (se quiser imagem de fundo ao invés de cor)
+======================= */
+/* Exemplo para usar imagem (descomente e ajuste caminho):
+.lar {
+  background: url("../img/fundo-lar.png") center/cover no-repeat;
+}
+*/
+
+/* =======================
+   RESPONSIVIDADE
+======================= */
 @media (max-width: 1024px) {
-  .cards { grid-template-columns: repeat(2,1fr); }
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .lar { padding: 80px 30px; min-height: 80vh; }
-}
-@media (max-width: 768px) {
-  .cards { grid-template-columns: 1fr; max-width: 520px; }
-  .lar { padding: 60px 20px; min-height: auto; }
+  .wave-separator .wave-svg { height: 100px; }
 }
 
+@media (max-width: 768px) {
+  .cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .lar { padding: 60px 20px; min-height: auto; }
+  .card { min-height: auto; padding: 20px; }
+  .card .icon { margin-bottom: 6px; }
+  .lar .section-title { font-size: 26px; letter-spacing: 4px; }
+  .lar .section-sub { font-size: 14px; padding: 0 8px; }
+}
+
+@media (max-width: 480px) {
+  .lar { padding: 50px 12px; }
+  .lar .section-title { font-size: 22px; }
+  .btn-ghost { width: 90%; padding: 12px 20px; }
+}
