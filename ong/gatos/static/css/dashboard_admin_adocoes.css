@@ -152,6 +152,7 @@ h2 {
 .modal-content {
     border-radius: 5px !important;
     overflow: hidden;
+    padding-top: 0;
 }
 
 /* Imagem do Model */
@@ -209,4 +210,18 @@ h2 {
 /* Coloração da história/descrição do gato */
 #modalHistoria {
     color: #4F76BB !important;
+}
+
+/* Faz o X flutuar no canto superior direito */
+.btn-fechar-modal {
+    position: absolute;
+    top: 30px;    /* distância do topo */
+    right: 30px;  /* distância da direita */
+    z-index: 10;  /* garante que fique acima de tudo */
+}
+
+.modal-header {
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
 }

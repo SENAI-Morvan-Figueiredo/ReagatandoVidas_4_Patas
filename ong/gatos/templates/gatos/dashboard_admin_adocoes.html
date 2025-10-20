@@ -83,6 +83,9 @@ Página do dashboard de mostra os gatos para adoção -->
                             {% else %}
                             Fêmea
                             {% endif %}
+                            {% if gato.lar_temporario == True %}
+                            | Lar Temporário
+                            {% endif %} 
                         </p>
                     </div>
                 </div>
@@ -103,6 +106,12 @@ Página do dashboard de mostra os gatos para adoção -->
 <div id="modalGato" class="modal fade" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content border-0 shadow-lg rounded-4" style="border: 2px solid #d7caff;">
+
+    <!-- Botão de fechar o model -->
+    <div class="modal-header border-0">
+        <button type="button" class="btn-close btn-fechar-modal" data-bs-dismiss="modal" aria-label="Fechar"></button>
+    </div>
+
       <div class="modal-body p-4">
         <div class="row align-items-center g-4">
           
