@@ -68,57 +68,66 @@
     </div>
   </section>
 
-  <!-- DOAÇÕES (seção rosa) -->
-  <!-- <section class="doe-section">
-    <div class="doe-inner container-lg">
-      <div class="doe-media">
-        <img src="{% static 'img/food-circle.png' %}" alt="Ração" class="circle-img small">
+  <!-- SEÇÃO DOE -->
+  <section class="doe-section">
+    <div class="doe-content">
+      <h2>DOE</h2>
+      <p>
+        Sua doação via PIX nos ajuda a oferecer tudo o que os gatinhos precisam:
+        ração, medicamentos, exames e tratamentos. Assim, garantimos não só
+        alimentação adequada, mas também saúde e muito carinho.
+      </p>
+      <p class="destaque">Cada contribuição transforma vidas!</p>
+      <a href="#" class="btn-doe">Doe amor, Doe comida</a>
+    </div>
+  </section>
+
+ <!-- ONDA SEPARADORA (full-bleed) -->
+  <div class="wave-separator">
+    <svg viewBox="0 0 1440 130" preserveAspectRatio="none" class="wave-svg">
+      <path d="M0,40 C150,140 350,0 540,40 C730,80 930,40 1110,60 C1290,80 1440,40 1440,40 L1440,140 L0,140 Z"></path>
+    </svg>
+  </div>
+
+  <!-- SEÇÃO LAR TEMPORÁRIO (section sem container-lg; conteúdo dentro do container) -->
+  <section class="lar" id="lar">
+    <div class="container-lg">
+      <h3 class="section-title">LAR TEMPORÁRIO</h3>
+      <p class="section-sub">Hospede um animalzinho por um tempo e ajude a mudar seu destino. O lar temporário é fundamental para salvar vidas.</p>
+
+      <h4 class="cards-title">Por que ser um Lar Temporário?</h4>
+
+      <div class="cards">
+        <article class="card">
+          <div class="icon">
+            <img src="{% static 'img/icon-paw.png' %}" alt="Salvando Vidas">
+          </div>
+          <h4>Salvando Vidas</h4>
+          <p>Você oferece um lar temporário seguro para gatos que precisam de cuidados especiais.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">
+            <img src="{% static 'img/icon-home.png' %}" alt="Sem Compromisso">
+          </div>
+          <h4>Sem Compromisso Permanente</h4>
+          <p>O período de acolhimento é temporário, até encontrarmos uma família definitiva.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">
+            <img src="{% static 'img/icon-clock.png' %}" alt="Flexibilidade">
+          </div>
+          <h4>Flexibilidade</h4>
+          <p>Você escolhe por quanto tempo pode acolher, respeitando sua disponibilidade.</p>
+        </article>
       </div>
 
-      <div class="doe-text">
-        <h3>DOE</h3>
-        <p>
-          Sua doação via PIX nos ajuda a oferecer tudo o que os gatinhos precisam: ração, medicamentos, exames e tratamentos. Cada contribuição transforma vidas!
-        </p>
-        <a href="" class="btn-primary">Doe amor, Doe comida</a>
+      <div class="cta-center">
+        <a href="{% url 'lares_temporarios:lista' %}" class="btn-ghost">Quero Ser Lar Temporário</a>
       </div>
-    </div> -->
-
-    <!-- onda separadora (SVG) -->
-    <!-- <div class="wave wave-up">
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C150,100 350,100 600,50 C850,0 1050,100 1200,50 L1200,0 L0,0 Z"></path></svg>
-    </div>
-  </section> -->
-
-  <!-- LAR TEMPORÁRIO -->
-  <!-- <section class="lar container-lg" id="lar">
-    <h3 class="section-title">LAR TEMPORÁRIO</h3>
-    <p class="section-sub">Hospede um animalzinho por um tempo e ajude a mudar seu destino.</p>
-
-    <div class="cards">
-      <article class="card">
-        <div class="icon">🐾</div>
-        <h4>Salvando Vidas</h4>
-        <p>Você oferece um lar temporário seguro para gatos que precisam de cuidados especiais.</p>
-      </article>
-
-      <article class="card">
-        <div class="icon">🏠</div>
-        <h4>Sem Compromisso Permanente</h4>
-        <p>O período de acolhimento é temporário, até encontrarmos uma família definitiva.</p>
-      </article>
-
-      <article class="card">
-        <div class="icon">⏰</div>
-        <h4>Flexibilidade</h4>
-        <p>Você escolhe por quanto tempo pode acolher, respeitando sua disponibilidade.</p>
-      </article>
-    </div>
-
-    <div class="cta-center">
-      <a href="" class="btn-ghost">Quero Ser Lar Temporário</a>
-    </div>
-  </section> -->
+    </div> <!-- fim container-lg -->
+  </section>
 
   <!-- BANNER IMAGEM GRANDE -->
   <!-- <section class="banner-image">

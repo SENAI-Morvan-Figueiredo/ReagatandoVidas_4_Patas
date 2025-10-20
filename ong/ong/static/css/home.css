@@ -266,3 +266,156 @@ header h1 em {
     height: 180px;
   }
 }
+
+/* =======================
+   SEÇÃO DOE - FULL BLEED
+======================= */
+.doe-section {
+  position: relative;
+  width: 100vw;                 /* ocupa toda a largura da viewport */
+  height: 100vh;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;           /* remove possíveis margens do container pai */
+  margin-right: -50vw;
+  background-image: url("../img/fundo_doe.png"); /* caminho relativo do css -> ../img/ */
+  background-repeat: no-repeat;
+  background-position: right center; /* começa pela direita */
+  background-size: cover;             /* cobre toda a área */
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;    /* texto à direita */
+  padding: 80px 100px;
+  box-sizing: border-box;
+  color: #e66565;
+  overflow: hidden;             /* evita overflow das ondas/imagens */
+  z-index: 0;
+}
+
+/* conteúdo por cima do fundo */
+.doe-section .doe-content {
+  max-width: 450px;
+  text-align: right;
+  z-index: 2;                   /* garante que texto fique acima do background */
+  margin-top: -10%;
+}
+
+/* Título e texto (mantive os estilos) */
+.doe-content h2 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #f17777;
+  margin-bottom: 20px;
+}
+.doe-content p { font-size: 16px; line-height: 1.7; color: #e66565; margin-bottom: 10px; }
+.doe-content .destaque { font-weight: 600; margin-bottom: 30px; }
+
+.btn-doe {
+  display: inline-block; background-color: #f17777; color: white; font-weight: 600;
+  padding: 12px 35px; border-radius: 8px; text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.25s ease;
+}
+.btn-doe:hover { transform: translateY(-3px); background-color: #ff8f8f; }
+
+/* Ajustes responsivos: em telas menores centraliza e altera background-position */
+@media (max-width: 1024px) {
+  .doe-section {
+    padding: 60px 40px;
+    justify-content: center;
+    background-position: center center;
+  }
+  .doe-content { text-align: center; }
+  .doe-content h2 { font-size: 40px; }
+}
+@media (max-width: 768px) {
+  .doe-section { padding: 50px 20px; background-position: center; min-height: 360px; }
+  .doe-content h2 { font-size: 32px; }
+  .doe-content p { font-size: 15px; }
+}
+@media (max-width: 480px) {
+  .doe-content h2 { font-size: 26px; }
+  .btn-doe { padding: 10px 25px; font-size: 14px; }
+}
+
+/* =======================
+   ONDA SEPARADORA - FULL-BLEED
+   (substitua qualquer código anterior)
+======================= */
+.wave-separator {
+  position: relative;
+  width: 100vw;               /* largura total da viewport */
+  left: 50%;
+  margin-left: -50vw;         /* "escapa" do container pai */
+  right: 50%;
+  margin-right: -50vw;
+  overflow: hidden;
+  line-height: 0;
+  background: transparent;
+  z-index: 1;
+}
+
+.wave-separator .wave-svg {
+  display: block;
+  width: 100%;
+  height: 120px; /* ajuste a altura conforme necessário */
+}
+
+.wave-separator .wave-svg path {
+  fill: #DCC9FF; /* cor da seção lar - ajuste se quiser */
+}
+
+/* =======================
+   SEÇÃO LAR TEMPORÁRIO - FULLSCREEN
+======================= */
+.lar {
+  position: relative;
+  width: 100vw;               /* largura total da viewport */
+  left: 50%;
+  margin-left: -50vw;         /* "escapa" do container pai (mesma técnica) */
+  right: 50%;
+  margin-right: -50vw;
+  min-height: 100vh;          /* ocupa altura total da tela */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* centraliza verticalmente */
+  align-items: center;
+  background-color: #DCC9FF;  /* fundo lilás */
+  padding: 100px 40px;        /* padding interno (ajuste se necessário) */
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+/* se houver .container-lg interno, mantém conteúdo centralizado mas sem limitar o fundo */
+.lar .container-lg {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+  background: transparent; /* garantir sem fundo extra */
+}
+
+/* títulos e cards (mantive suas regras, só adaptei caso precise) */
+.lar .section-title { font-size: 36px; letter-spacing: 6px; font-weight: 800; color: #fff; margin-bottom: 8px; text-transform: uppercase; }
+.lar .section-sub { color: rgba(255,255,255,0.95); max-width: 820px; margin: 0 auto 30px; font-size: 15px; line-height: 1.6; }
+.lar .cards-title { color: rgba(255,255,255,0.95); margin-top: 20px; font-size: 18px; font-weight: 600; margin-bottom: 30px; }
+
+.cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.card { background: rgba(255,255,255,0.95); color: #7a4fa8; padding: 24px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: center; }
+
+/* CTA */
+.cta-center { margin-top: 20px; display: flex; justify-content: center; width: 100%; }
+.btn-ghost { background: linear-gradient(180deg,#b889d9,#a56fcf); color:#fff; padding:14px 36px; border-radius:10px; font-weight:700; }
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .cards { grid-template-columns: repeat(2,1fr); }
+  .lar { padding: 80px 30px; min-height: 80vh; }
+}
+@media (max-width: 768px) {
+  .cards { grid-template-columns: 1fr; max-width: 520px; }
+  .lar { padding: 60px 20px; min-height: auto; }
+}
+
