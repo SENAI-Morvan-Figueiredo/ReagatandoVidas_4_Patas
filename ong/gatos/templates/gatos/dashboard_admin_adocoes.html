@@ -46,7 +46,17 @@ Página do dashboard de mostra os gatos para adoção -->
         <div class="row g-4">
             {% for gato in gatos %}
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card border-0 h-100 rounded-4 overflow-hidden">
+
+                <!-- Div que vai puxar todas as informações do gato, para que seja usado no pop-up - usando Javascript -->
+                <div class="card abrir-modal-gato shadow-sm"
+                    data-nome="{{ gato.nome }}"
+                    data-idade="{{ gato.idade }}"
+                    data-sexo="{{ gato.get_sexo_display }}"
+                    data-historia="{{ gato.descricao }}"
+                    data-detalhes="{{ gato.temperamento }}, {{ gato.cuidado }}, {{ gato.sociavel }}, {{ gato.moradia }}"
+                    data-imagem="{{ gato.imagem.url }}"
+                    data-adotar="#">
+
                     {% if gato.imagem %}
                         <img src="{{ gato.imagem.url }}" class="card-img-top" alt="{{ gato.nome }}" style="object-fit: cover; height: 200px;"> 
                     {% else %} 
@@ -69,13 +79,10 @@ Página do dashboard de mostra os gatos para adoção -->
                         <!-- Idade e sexo -->
                         <p class="card-text mb-2"> {{ gato.idade }} |
                             {% if gato.sexo == 'M' %}
-                            Macho 
+                            Macho
                             {% else %}
-                            Fêmea 
-                            {% endif %} 
-                            {% if gato.lar_temporario == True %}
-                            | Lar Temporário
-                            {% endif %} 
+                            Fêmea
+                            {% endif %}
                         </p>
                     </div>
                 </div>
@@ -90,6 +97,43 @@ Página do dashboard de mostra os gatos para adoção -->
         </div>
     </div>
 </div>
+
+
+<!-- Pop-up/Modal de Detalhes do Gato -->
+<div id="modalGato" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow-lg rounded-4" style="border: 2px solid #d7caff;">
+      <div class="modal-body p-4">
+        <div class="row align-items-center g-4">
+          
+        <!-- Imagem do gato -->
+        <div class="col-md-5 d-flex justify-content-center">
+            <img id="modalImagem" src="" alt="Gato" class="rounded-3 shadow-sm">
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="col-md-7">
+            <!-- Nome do Gato -->
+            <h2 id="modalNome" class="fw-bold mb-1"></h2>
+            <!-- Sexo e idade do Gato -->
+            <p id="modalInfo" class="text-muted mb-4" style="font-size: 15px; color:#96B3E5;"></p>
+
+            <!-- Título "História de ..." -->
+            <h6 class="fw-bold mb-1" style="color:#F58285;">História de <span id="modalNomeHistoria"></span></h6>
+            <!-- Descrição do gato - História do Gato -->
+            <p id="modalHistoria" class="text-secondary mb-4 small" style="color:#4F76BB;"></p>
+
+            <!-- Título "Mais detalhes sobre ..." - Tabelas Auxiliares -->
+            <h6 class="fw-bold mb-2" style="color:#F58285;">Mais detalhes sobre <span id="modalNomeDetalhes"></span></h6>
+            <!-- Todos que estão marcados com True nas tabelas auxiliares -->
+            <div id="modalDetalhes" class="d-flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <!-- JavaScript -->
@@ -146,6 +190,66 @@ Página do dashboard de mostra os gatos para adoção -->
             });
         });
     });
+
+
+// Parte em Javascript do Model - Pop-up de informações do gato
+document.addEventListener('DOMContentLoaded', function() {
+  const modalElement = document.getElementById('modalGato');
+  const modal = new bootstrap.Modal(modalElement);
+  const modalNome = document.getElementById('modalNome');
+  const modalInfo = document.getElementById('modalInfo');
+  const modalNomeHistoria = document.getElementById('modalNomeHistoria');
+  const modalNomeDetalhes = document.getElementById('modalNomeDetalhes');
+  const modalHistoria = document.getElementById('modalHistoria');
+  const modalDetalhes = document.getElementById('modalDetalhes');
+  const modalImagem = document.getElementById('modalImagem');
+
+  // Seleciona todos os cards clicáveis
+  document.querySelectorAll('.abrir-modal-gato').forEach(card => {
+    card.addEventListener('click', e => {
+      // Impede que o clique no botão "excluir" ou "editar" dentro do card também abra o modal
+      if (e.target.closest('.btn')) return;
+
+      // Garante que apenas o modal principal será aberto (não mexe nas imagens dos cards)
+      modalElement.querySelectorAll('img').forEach(img => {
+        if (img.id !== 'modalImagem') img.removeAttribute('src');
+      });
+
+      // Pega os dados
+      const nome = card.dataset.nome;
+      const idade = card.dataset.idade;
+      const sexo = card.dataset.sexo;
+      const historia = card.dataset.historia;
+      const detalhes = card.dataset.detalhes;
+      const imagem = card.dataset.imagem;
+
+      // Preenche o conteúdo do modal
+      modalNome.textContent = nome || "Sem nome";
+      modalInfo.textContent = `${idade} | ${sexo}`;
+      modalNomeHistoria.textContent = nome;
+      modalNomeDetalhes.textContent = nome;
+      modalHistoria.textContent = historia || "Sem descrição cadastrada.";
+      modalImagem.src = imagem || "https://placehold.co/300x200?text=Sem+Imagem";
+
+      // Limpa e recria os detalhes
+      modalDetalhes.innerHTML = "";
+      if (detalhes) {
+        detalhes.split(',').forEach(item => {
+          const texto = item.trim();
+          if (texto) {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.textContent = texto;
+            modalDetalhes.appendChild(span);
+          }
+        });
+      }
+
+      // Mostra o modal
+      modal.show();
+    });
+  });
+});
 
 </script>
 
