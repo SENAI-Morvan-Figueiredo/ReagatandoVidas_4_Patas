@@ -10,5 +10,5 @@ urlpatterns = [
     path("excluir_adotado_ajax/<int:adotado_id>/", excluir_adotado_ajax, name="excluir_adotado_ajax"),    # Pop-up de confirmar exclusão
     path("dashboard_admin_lar_temporario", dashboard_admin_lar_temporario, name="dashboard_admin_lar_temporario"),    # Função para conseguir acessar a tela de DashBoard do Admin - Com os gatos para Lar_Temporario
     path("dashboard_admin_adotados", dashboard_admin_adotados, name="dashboard_admin_adotados"),    # Função para conseguir acessar a tela de DashBoard do Admin - Com os gatos Adotados
-    path('solicitar/', views.GatoCreateView.as_view(), name='solicitar'),
+    path('adicionar_gato/', views.GatoCreateView.as_view(), name='adicionar_gato'),
 ]
