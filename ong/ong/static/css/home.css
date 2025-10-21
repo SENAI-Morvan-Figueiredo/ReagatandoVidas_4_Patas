@@ -386,7 +386,9 @@ header h1 em {
   }
 
   .intro-image .circle-img {
-  margin-top: -120%;
+    width: 55%;
+    margin-left: 60vw;
+    margin-top: -100%;
 }
 }
 
@@ -539,6 +541,7 @@ header h1 em {
   .doe-section {
     min-height: auto;
     padding: 50px 20px;
+    margin-left: -5%;
   }
 
   .doe-wrapper {
@@ -546,8 +549,11 @@ header h1 em {
     gap: 30px;
   }
 
-  .doe-content {
-    text-align: center;
+  .doe-image img {
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    margin-left: -7%;
   }
 
   .doe-content h2 {
@@ -557,25 +563,21 @@ header h1 em {
 
 @media (max-width: 768px) {
   .doe-section {
-    min-height: auto;
-    padding: 40px 20px;
-  }
-
-  .doe-wrapper {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .doe-image {
-    min-width: auto;
+    height: 80vh;
   }
 
   .doe-image img {
-    max-width: 250px;
+    width: 50%;
+    margin-left: -50%;
+    margin-top: 10%;
   }
 
   .doe-content {
+    margin-top: -40%;
     text-align: center;
+    min-width: 250px;
+    max-width: 300px;
+    margin-left: 50%;
   }
 
   .doe-content h2 {
@@ -591,10 +593,25 @@ header h1 em {
   .doe-section {
     min-height: auto;
     padding: 30px 15px;
+    height: 100vh;
+  }
+
+  .doe-image img {
+    width: 55%;
+    margin-left: -5%;
+    margin-top: 0;
+  }
+
+  .doe-content {
+    margin-top: 0;
+    text-align: center;
+    min-width: 150px;
+    max-width: 300px;
+    margin-left: 0;
   }
 
   .doe-wrapper {
-    gap: 15px;
+    gap: 35px;
   }
 
   .doe-content h2 {
@@ -653,7 +670,7 @@ header h1 em {
   box-sizing: border-box;
   z-index: 0;
   margin-left: -10%;
-  margin-top: -55%;
+  margin-top: -56%;
 }
 
 /* Conteúdo limitado */
@@ -953,7 +970,7 @@ header h1 em {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -16%;
+  margin-top: -10%;
 }
 
 .gato-adulto-image img {
