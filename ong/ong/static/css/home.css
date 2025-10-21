@@ -453,16 +453,15 @@ header h1 em {
 ======================= */
 .doe-section {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   background-color: #FFE6E7; 
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: -10%;
-  margin-top: 1%;
   box-sizing: border-box;
   overflow: hidden;
   color: #e66565;
+  margin-left: -24%;
 }
 
 .doe-wrapper {
@@ -482,7 +481,7 @@ header h1 em {
   justify-content: center;
   align-items: center;
   min-width: 250px;
-  margin-left: -10%;
+  margin-left: -30%;
 }
 
 .doe-image img {
@@ -537,11 +536,24 @@ header h1 em {
 }
 
 /* RESPONSIVO */
+@media (max-width: 1400px){
+.doe-section {
+  margin: -10%;
+  margin-top: 1%;
+}
+
+.doe-image {
+  margin-left: -10%;
+}
+
+}
+
 @media (max-width: 1024px) {
   .doe-section {
     min-height: auto;
     padding: 50px 20px;
     margin-left: -5%;
+    height: 60vh;
   }
 
   .doe-wrapper {
@@ -561,14 +573,15 @@ header h1 em {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px){
   .doe-section {
-    height: 80vh;
+    height: 50vh;
+    margin-left: -22%;
   }
 
   .doe-image img {
-    width: 50%;
-    margin-left: -50%;
+    width: 60%;
+    margin-left: -70%;
     margin-top: 10%;
   }
 
@@ -578,6 +591,28 @@ header h1 em {
     min-width: 250px;
     max-width: 300px;
     margin-left: 50%;
+  }
+
+  .doe-content h2 {
+    font-size: 32px;
+    margin-top: 30%;
+  }
+
+  .doe-content p {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .doe-section {
+    height: 50vh;
+    margin-left: -5%;
+  }
+
+  .doe-image img {
+    margin-left: -50%;
+    width: 50%;
   }
 
   .doe-content h2 {
@@ -593,7 +628,7 @@ header h1 em {
   .doe-section {
     min-height: auto;
     padding: 30px 15px;
-    height: 100vh;
+    height: 70vh;
   }
 
   .doe-image img {
@@ -634,24 +669,62 @@ header h1 em {
 .wave-separator {
   position: relative;
   width: 100vw;
-  height: 100vh;
   overflow: hidden;
   line-height: 0;
   z-index: 0;
   background: transparent;
-  margin: 5%;
-  margin-left: -10%;
+  margin-top: 40%;
+  margin-left: -24%;
 }
 
 .wave-separator .wave-svg {
   display: block;
   width: 100%;
-  height: 80px;
+  height: 200px;
   min-height: 60px;
 }
 
 .wave-separator .wave-svg path {
   fill: #D4D4FD;
+}
+
+/* Responsividade */
+@media (max-width: 1400px){
+.wave-separator {
+  margin-left: -10%;
+  margin-top: 60%;
+}
+}
+
+@media (max-width: 1024px){
+.wave-separator {
+  margin-left: -5%;
+  margin-top: 75%;
+}
+}
+
+@media (max-width: 991px){
+.wave-separator {
+  margin-left: -22%;
+  margin-top: 120%;
+}
+
+.wave-separator .wave-svg {
+  height: 100px;
+}
+}
+
+@media (max-width: 768px){
+.wave-separator {
+  margin-left: -5%;
+  margin-top: 160%;
+}
+}
+
+@media (max-width: 480px){
+.wave-separator {
+  margin-top: 0;
+}
 }
 
 /* =======================
@@ -669,8 +742,8 @@ header h1 em {
   padding: 80px 30px;
   box-sizing: border-box;
   z-index: 0;
-  margin-left: -10%;
-  margin-top: -56%;
+  margin-left: -24%;
+  margin-top: -60%;
 }
 
 /* Conteúdo limitado */
@@ -816,31 +889,32 @@ header h1 em {
 /* =======================
    RESPONSIVIDADE LAR
 ======================= */
+@media (max-width: 1400px){
+  .lar {
+    margin-left: -10%;
+    margin-top: -76%;
+}
+}
+
 @media (max-width: 1024px) {
   .lar {
-    min-height: auto;
-    padding: 60px 25px;
-  }
+    margin-left: -5%;
+    margin-top: -90%;
+}
+}
 
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-
-  .lar .section-title {
-    font-size: 28px;
-    letter-spacing: 3px;
-  }
-
-  .wave-separator .wave-svg {
-    height: 70px;
-  }
+@media (max-width: 991px) {
+  .lar {
+    margin-left: -22%;
+    margin-top: -128%;
+}
 }
 
 @media (max-width: 768px) {
   .lar {
-    min-height: auto;
-    padding: 50px 20px;
+    margin-left: -5%;
+    margin-top: -133%;
+    height: 110vh;
   }
 
   .cards {
@@ -892,6 +966,7 @@ header h1 em {
   .lar {
     min-height: auto;
     padding: 40px 15px;
+    margin-top: -215%;
   }
 
   .lar .container-lg {
@@ -937,14 +1012,20 @@ header h1 em {
     margin-top: 30px;
   }
 
-  .btn-ghost {
-    width: 90%;
-    padding: 12px 20px;
-    font-size: 13px;
-  }
-
   .wave-separator .wave-svg {
     height: 50px;
+  }
+}
+
+@media (max-width: 350px) {
+  .lar {
+    margin-top: -285%;
+  }
+}
+
+@media (max-width: 300px) {
+  .lar {
+    margin-top: -350%;
   }
 }
 
@@ -954,14 +1035,14 @@ header h1 em {
 .gato-adulto-section {
   position: relative;
   width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f8f9ff;
   padding: 0;
   overflow: hidden;
-  margin-left: -10%;
+  margin-left: -24%;
+  padding-bottom: 100px;
 }
 
 .gato-adulto-image {
@@ -970,7 +1051,7 @@ header h1 em {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -10%;
+  margin-top: -5%;
 }
 
 .gato-adulto-image img {
@@ -980,15 +1061,33 @@ header h1 em {
 }
 
 /* RESPONSIVIDADE */
+@media (max-width: 1400px){
+  .gato-adulto-section {
+  margin-left: -10%;
+}
+}
+
+@media (max-width: 1024px){
+  .gato-adulto-section {
+  margin-left: -5%;
+}
+}
+
+@media (max-width: 991px){
+  .gato-adulto-section {
+  margin-left: -22%;
+}
+}
+
 @media (max-width: 768px) {
   .gato-adulto-section {
-    min-height: 60vh;
+    margin-left: -5%;
   }
 }
 
 @media (max-width: 480px) {
   .gato-adulto-section {
-    min-height: 50vh;
+    margin-left: -3%;
   }
 }
 
@@ -996,55 +1095,62 @@ header h1 em {
    SEÇÃO CONSIDERE ADOTAR
 ======================= */
 .considere-adotar {
-  position: relative;
   width: 100%;
   background-color: #f8f9ff;
-  padding: 80px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
-.considere-content {
-  max-width: 800px;
-  text-align: center;
+.considere-container {
+  max-width: 1800px;
   width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.considere-container .texto {
+  flex: 1;
+  min-width: 200px;
 }
 
 .considere-adotar h2 {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
   color: #4f76bb;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   line-height: 1.2;
+  letter-spacing: 1px;
 }
 
 .considere-adotar .subtitle {
-  font-size: 28px;
   font-weight: 700;
   color: #f17777;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .considere-adotar .description {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.7;
   color: #4f76bb;
-  margin-bottom: 30px;
+  max-width: 600px;
 }
 
+/* Botão */
 .btn-adotar {
   display: inline-block;
   background-color: #f17777;
   color: #fff;
   font-weight: 600;
-  padding: 14px 40px;
+  padding: 14px 100px;
   border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.15);
   transition: all 0.25s ease;
-  white-space: nowrap;
+  margin-top: 70%;
 }
 
 .btn-adotar:hover {
@@ -1052,48 +1158,40 @@ header h1 em {
   background-color: #ff8f8f;
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-  .considere-adotar {
-    padding: 50px 20px;
+/* Responsividade */
+
+@media (max-width: 900px) {
+  .considere-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
+  .botao {
+    margin-top: 25px;
+  }
+
+  .btn-adotar {
+    padding: 12px 32px;
+  }
+}
+
+@media (max-width: 480px) {
   .considere-adotar h2 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .considere-adotar .subtitle {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .considere-adotar .description {
     font-size: 14px;
   }
-}
-
-@media (max-width: 480px) {
-  .considere-adotar {
-    padding: 40px 15px;
-  }
-
-  .considere-adotar h2 {
-    font-size: 22px;
-  }
-
-  .considere-adotar .subtitle {
-    font-size: 18px;
-  }
-
-  .considere-adotar .description {
-    font-size: 13px;
-  }
 
   .btn-adotar {
-    padding: 12px 30px;
     font-size: 13px;
   }
 }
-
 
 /* =======================
    CONTAINER GERAL
