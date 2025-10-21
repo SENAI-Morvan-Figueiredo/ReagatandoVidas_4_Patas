@@ -1,7 +1,6 @@
 import logging
 from django.views.generic import CreateView
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
+from django.shortcuts import render , redirect , get_list_or_404
 from gatos.models import Gato
 from lares_temporarios.models import LarTemporarioAtual
 from adocoes.models import Adotados
@@ -92,62 +91,77 @@ class GatoCreateView(CreateView):
     model = Gato
     form_class = GatoForm
     template_name = 'gatos/adicionar_gato_form.html'
+    success_url = reverse_lazy('dashboard_admin_adocoes')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         data = self.request.POST or None
-        context['gato_form'] = GatoForm(data, self.request.FILES or None)
-        context['cuidado_form'] = CuidadoForm(data)
-        context['temperamento_form'] = TemperamentoForm(data)
-        context['moradia_form'] = MoradiaForm(data)
-        context['sociavel_form'] = SociavelForm(data)
+
+        context['gato_form'] = context.get('form')  # Form principal
+        context['cuidado_form'] = kwargs.get('cuidado_form') or CuidadoForm(data)
+        context['temperamento_form'] = kwargs.get('temperamento_form') or TemperamentoForm(data)
+        context['moradia_form'] = kwargs.get('moradia_form') or MoradiaForm(data)
+        context['sociavel_form'] = kwargs.get('sociavel_form') or SociavelForm(data)
         return context
 
-    def _save_related(self, form, gato):
-        """
-        Salva um formulário relacionado (Cuidado, Temperamento, etc.)
-        tentando associar ao gato se existir campo 'gato' ou relação inversa.
-        """
-        instance = form.save(commit=False)
-        if 'gato' in [f.name for f in form._meta.model._meta.get_fields()]:
-            instance.gato = gato
-        instance.save()
+    def form_valid(self, form):
+        """Salva o gato junto com todos os formulários relacionados."""
+        cuidado_form = CuidadoForm(self.request.POST)
+        temperamento_form = TemperamentoForm(self.request.POST)
+        moradia_form = MoradiaForm(self.request.POST)
+        sociavel_form = SociavelForm(self.request.POST)
 
-        # Checa se Gato possui campo que referencia o model
-        for f in Gato._meta.get_fields():
-            remote = getattr(f, 'remote_field', None)
-            if remote and getattr(remote, 'model', None) == form._meta.model:
-                setattr(gato, f.name, instance)
-                gato.save()
-                break
+        # Verifica se todos são válidos
+        if all(f.is_valid() for f in [cuidado_form, temperamento_form, moradia_form, sociavel_form, form]):
+            # Salva os formulários relacionados primeiro
+            cuidado = cuidado_form.save()
+            temperamento = temperamento_form.save()
+            moradia = moradia_form.save()
+            sociavel = sociavel_form.save()
 
-        return instance
+            # Agora salva o gato apontando para os objetos criados
+            gato = form.save(commit=False)
+            gato.cuidado = cuidado
+            gato.temperamento = temperamento
+            gato.moradia = moradia
+            gato.sociavel = sociavel
+            gato.save()
 
-    def post(self, request, *args, **kwargs):
-        gato_form = GatoForm(request.POST, request.FILES)
-        cuidado_form = CuidadoForm(request.POST)
-        temperamento_form = TemperamentoForm(request.POST)
-        moradia_form = MoradiaForm(request.POST)
-        sociavel_form = SociavelForm(request.POST)
+            messages.success(self.request, "Gato e informações relacionadas salvos com sucesso!")
+            return redirect(self.success_url)
+        else:
+            # Renderiza novamente o template com os erros
+            return self.form_invalid(form, cuidado_form, temperamento_form, moradia_form, sociavel_form)
 
-        if all(f.is_valid() for f in [gato_form, cuidado_form, temperamento_form, moradia_form, sociavel_form]):
-            gato = gato_form.save()
-            self._save_related(cuidado_form, gato)
-            self._save_related(temperamento_form, gato)
-            self._save_related(moradia_form, gato)
-            self._save_related(sociavel_form, gato)
+    def form_invalid(self, form, *related_forms):
+        """Exibe erros de validação de todos os formulários."""
+        if not related_forms:
+            cuidado_form = CuidadoForm(self.request.POST or None)
+            temperamento_form = TemperamentoForm(self.request.POST or None)
+            moradia_form = MoradiaForm(self.request.POST or None)
+            sociavel_form = SociavelForm(self.request.POST or None)
+        else:
+            cuidado_form, temperamento_form, moradia_form, sociavel_form = related_forms
 
-            messages.success(request, "Gato e formulários relacionados salvos com sucesso.")
-            return redirect(self.get_success_url())
-        
-        # Renderiza com erros
-        context = self.get_context_data()
-        context['gato_form'] = gato_form
-        context['cuidado_form'] = cuidado_form
-        context['temperamento_form'] = temperamento_form
-        context['moradia_form'] = moradia_form
-        context['sociavel_form'] = sociavel_form
-        return render(request, self.template_name, context)
+        context = self.get_context_data(
+            cuidado_form=cuidado_form,
+            temperamento_form=temperamento_form,
+            moradia_form=moradia_form,
+            sociavel_form=sociavel_form
+        )
+        context['form'] = form
+
+        if form.errors:
+            print("❌ Erros em GatoForm:", form.errors)
+            messages.error(self.request, f"Erros em GatoForm: {form.errors}")
+
+        for related in related_forms or []:
+            if related.errors:
+                print(f"⚠️ Erros em {related.__class__.__name__}: {related.errors}")
+                messages.error(self.request, f"Erros em {related.__class__.__name__}: {related.errors}")
+
+        return self.render_to_response(context)
+
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adotados
 
 # View que vai mandar as informações para os cards e tambem para o filtro
