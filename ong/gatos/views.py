@@ -104,63 +104,83 @@ class GatoCreateView(CreateView):
         context['sociavel_form'] = kwargs.get('sociavel_form') or SociavelForm(data)
         return context
 
-    def form_valid(self, form):
-        """Salva o gato junto com todos os formulários relacionados."""
-        cuidado_form = CuidadoForm(self.request.POST)
-        temperamento_form = TemperamentoForm(self.request.POST)
-        moradia_form = MoradiaForm(self.request.POST)
-        sociavel_form = SociavelForm(self.request.POST)
+    def post(self, request, *args, **kwargs):
+        # todos os forms de uma vez
+        form = self.get_form()
+        cuidado_form = CuidadoForm(request.POST)
+        temperamento_form = TemperamentoForm(request.POST)
+        moradia_form = MoradiaForm(request.POST)
+        sociavel_form = SociavelForm(request.POST)
 
-        # Verifica se todos são válidos
-        if all(f.is_valid() for f in [cuidado_form, temperamento_form, moradia_form, sociavel_form, form]):
-            # Salva os formulários relacionados primeiro
+
+        if all([
+            form.is_valid(),
+            cuidado_form.is_valid(),
+            temperamento_form.is_valid(),
+            moradia_form.is_valid(),
+            sociavel_form.is_valid()
+        ]):
+            
             cuidado = cuidado_form.save()
             temperamento = temperamento_form.save()
             moradia = moradia_form.save()
             sociavel = sociavel_form.save()
 
-            # Agora salva o gato apontando para os objetos criados
             gato = form.save(commit=False)
             gato.cuidado = cuidado
             gato.temperamento = temperamento
             gato.moradia = moradia
             gato.sociavel = sociavel
             gato.save()
-
-            messages.success(self.request, "Gato e informações relacionadas salvos com sucesso!")
+    
+            messages.success(request, "Gato e informações relacionadas salvos com sucesso!")
             return redirect(self.success_url)
         else:
-            # Renderiza novamente o template com os erros
-            return self.form_invalid(form, cuidado_form, temperamento_form, moradia_form, sociavel_form)
 
-    def form_invalid(self, form, *related_forms):
-        """Exibe erros de validação de todos os formulários."""
-        if not related_forms:
-            cuidado_form = CuidadoForm(self.request.POST or None)
-            temperamento_form = TemperamentoForm(self.request.POST or None)
-            moradia_form = MoradiaForm(self.request.POST or None)
-            sociavel_form = SociavelForm(self.request.POST or None)
-        else:
-            cuidado_form, temperamento_form, moradia_form, sociavel_form = related_forms
+            self.object = None  # Necessário para renderizar o template corretamente
+            context = self.get_context_data(
+                form=form,
+                cuidado_form=cuidado_form,
+                temperamento_form=temperamento_form,
+                moradia_form=moradia_form,
+                sociavel_form=sociavel_form
+            )
+            print("❌ Formulário inválido:", form.errors)
+            for f in [cuidado_form, temperamento_form, moradia_form, sociavel_form]:
+                if f.errors:
+                     print(f"⚠️ Erros em {f.__class__.__name__}:", f.errors)
+            return self.render_to_response(context)
+      
 
-        context = self.get_context_data(
-            cuidado_form=cuidado_form,
-            temperamento_form=temperamento_form,
-            moradia_form=moradia_form,
-            sociavel_form=sociavel_form
-        )
-        context['form'] = form
 
-        if form.errors:
-            print("❌ Erros em GatoForm:", form.errors)
-            messages.error(self.request, f"Erros em GatoForm: {form.errors}")
+    # def form_invalid(self, form, *related_forms):
+    #     """Exibe erros de validação de todos os formulários."""
+    #     if not related_forms:
+    #         cuidado_form = CuidadoForm(self.request.POST or None)
+    #         temperamento_form = TemperamentoForm(self.request.POST or None)
+    #         moradia_form = MoradiaForm(self.request.POST or None)
+    #         sociavel_form = SociavelForm(self.request.POST or None)
+    #     else:
+    #         cuidado_form, temperamento_form, moradia_form, sociavel_form = related_forms
 
-        for related in related_forms or []:
-            if related.errors:
-                print(f"⚠️ Erros em {related.__class__.__name__}: {related.errors}")
-                messages.error(self.request, f"Erros em {related.__class__.__name__}: {related.errors}")
+    #     context = self.get_context_data(
+    #         cuidado_form=cuidado_form,
+    #         temperamento_form=temperamento_form,
+    #         moradia_form=moradia_form,
+    #         sociavel_form=sociavel_form
+    #     )
+    #     context['form'] = form
 
-        return self.render_to_response(context)
+    #     if form.errors:
+    #         print("❌ Erros em GatoForm:", form.errors)
+    #         messages.error(self.request, f"Erros em GatoForm: {form.errors}")
+
+    #     for related in related_forms or []:
+    #         if related.errors:
+    #             print(f"⚠️ Erros em {related.__class__.__name__}: {related.errors}")
+    #             messages.error(self.request, f"Erros em {related.__class__.__name__}: {related.errors}")
+
+    #     return self.render_to_response(context)
 
 # ---------------------------------------------------------------------------------------- Da tela dashboard_admin_adotados
 
