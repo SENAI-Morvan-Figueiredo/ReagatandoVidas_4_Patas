@@ -152,8 +152,8 @@ class GatoCreateView(CreateView):
 
 # View que vai mandar as informações para os cards e tambem para o filtro
 def dashboard_admin_adotados(request):
-    # Pega todos os registros de adoção
-    adotados = Adotados.objects.all()
+    # Pega todos os registros de adoção com os relacionamentos otimizados
+    adotados = Adotados.objects.select_related('adocao', 'gato')
 
     # Filtro por nome - nome do gato ou da pessoa
     nome = request.GET.get("nome")
@@ -163,9 +163,12 @@ def dashboard_admin_adotados(request):
             Q(adocao__nome__icontains=nome)
         )
 
-    # Pega só o primeiro nome do adotante
+    # Pega dados do adotante para facilitar no template
     for adotado in adotados:
         adotado.adotante_primeiro_nome = adotado.adocao.nome.split()[0] if adotado.adocao.nome else ''
+        adotado.adotante_nome = adotado.adocao.nome
+        adotado.adotante_email = adotado.adocao.email
+        adotado.adotante_telefone = adotado.adocao.numero_contato
 
     context = {
         "adotados": adotados,
