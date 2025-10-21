@@ -55,9 +55,9 @@
       <h2>RESGATANDO VIDAS 4 PATAS</h2>
       <p class="intro-text">
       A RESGATANDO VIDAS 4PATAS atua desde 2014, como protetora independente em ações de resgate, tratamento e adoção de gatos abandonados ou vítimas de maus-tratos. Sendo que mais ativos desde 2019. Já resgatamos, acolhemos, tratamos e castramos mais de 500 gatos.
-      Todo esse trabalho sempre dependeu de doações de pessoas sensibilizadas pelos casos. Os animais sempre foram acolhidos na minha própria casa, e nos últimos anos, pelo aumento da demanda, em “Lares Temporários” até que possam ser adotados de forma responsável por uma família. Atualmente cuidamos de aproximadamente 50 gatos (entre adultos e filhotes).
+      Todo esse trabalho sempre dependeu de doações de pessoas sensibilizadas pelos casos. Os animais sempre foram acolhidos na minha própria casa, e nos últimos anos, pelo aumento da demanda, em "Lares Temporários" até que possam ser adotados de forma responsável por uma família. Atualmente cuidamos de aproximadamente 50 gatos (entre adultos e filhotes).
       Nossas adoções sempre foram feitas de forma responsável, para pessoas que possam dar continuidade ao nosso trabalho, proporcionando para esses gatinhos, saúde física e emocional, além da segurança que também é primordial para que nossos resgatados não voltem a ter acesso às ruas, voltando a ficarem expostos a todo tipo de perigo do qual foram retirados e salvos. Também realizamos um trabalho constante de acompanhamento dos nossos adotados.
-      “Nunca foi um trabalho fácil! E por diversas vezes já tentei parar, pois muito me sobrecarrega na minha vida pessoal e profissional, porém, infelizmente devido à falta de conscientização da maioria das pessoas em relação à castração e a segurança dos animais, isso nunca foi possível.” Cláudia Lopes (Fundadora e única responsável pela Resgatando Vidas 4Patas)
+      "Nunca foi um trabalho fácil! E por diversas vezes já tentei parar, pois muito me sobrecarrega na minha vida pessoal e profissional, porém, infelizmente devido à falta de conscientização da maioria das pessoas em relação à castração e a segurança dos animais, isso nunca foi possível." Cláudia Lopes (Fundadora e única responsável pela Resgatando Vidas 4Patas)
       </p>
     </div>
 
@@ -66,7 +66,7 @@
     </div>
   </section>
 
-  <!-- SEÇÃO DOE -->
+  <!-- SEÇÃO DOE (FULLSCREEN) -->
   <section class="doe-section">
     <div class="doe-wrapper">
       <!-- Imagem do pote de ração -->
@@ -95,7 +95,7 @@
     </svg>
   </div>
 
-  <!-- SEÇÃO LAR TEMPORÁRIO -->
+  <!-- SEÇÃO LAR TEMPORÁRIO (FULLSCREEN) -->
   <section class="lar" id="lar">
     <div class="container-lg">
       <h3 class="section-title">LAR TEMPORÁRIO</h3>
@@ -135,9 +135,29 @@
     </div>
   </section>
 
+  <!-- SEÇÃO GATO ADULTO (FULLSCREEN) -->
+  <section class="gato-adulto-section">
+    <div class="gato-adulto-image">
+      <img src="{% static 'img/gato_adulto.svg' %}" alt="Gato adulto">
+    </div>
+  </section>
+
+  <!-- SEÇÃO CONSIDERE ADOTAR -->
+  <section class="considere-adotar">
+    <div class="considere-content">
+      <h2>CONSIDERE ADOTAR</h2>
+      <p class="subtitle">UM GATO ADULTO</p>
+      <p class="description">
+        Conheça todos os nossos gatinhos disponíveis para adoção. Cada um tem uma história única e está esperando por uma família amorosa.
+      </p>
+      <a href="{% url 'adocoes:lista' %}" class="btn-adotar">Quero Adotar</a>
+    </div>
+  </section>
+
   <!-- FOOTER vem do base.html (já incluído) -->
 {% endblock content %}
 
 {% block extra_js %}
   <script src="{% static 'js/script.js' %}"></script>
 {% endblock extra_js %}
+
