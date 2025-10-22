@@ -96,21 +96,22 @@ class GatoCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         data = self.request.POST or None
+        files = self.request.FILES or None
 
-        context['gato_form'] = context.get('form')  # Form principal
-        context['cuidado_form'] = kwargs.get('cuidado_form') or CuidadoForm(data)
-        context['temperamento_form'] = kwargs.get('temperamento_form') or TemperamentoForm(data)
-        context['moradia_form'] = kwargs.get('moradia_form') or MoradiaForm(data)
-        context['sociavel_form'] = kwargs.get('sociavel_form') or SociavelForm(data)
+        context['gato_form'] = context.get('form')  # principal
+        context['cuidado_form'] = kwargs.get('cuidado_form') or CuidadoForm(data, prefix='cuidado')
+        context['temperamento_form'] = kwargs.get('temperamento_form') or TemperamentoForm(data, prefix='temperamento')
+        context['moradia_form'] = kwargs.get('moradia_form') or MoradiaForm(data, prefix='moradia')
+        context['sociavel_form'] = kwargs.get('sociavel_form') or SociavelForm(data, prefix='sociavel')
         return context
 
     def post(self, request, *args, **kwargs):
         # todos os forms de uma vez
         form = self.get_form()
-        cuidado_form = CuidadoForm(request.POST)
-        temperamento_form = TemperamentoForm(request.POST)
-        moradia_form = MoradiaForm(request.POST)
-        sociavel_form = SociavelForm(request.POST)
+        cuidado_form = CuidadoForm(request.POST, prefix='cuidado')
+        temperamento_form = TemperamentoForm(request.POST, prefix='temperamento')
+        moradia_form = MoradiaForm(request.POST, prefix='moradia')
+        sociavel_form = SociavelForm(request.POST, prefix='sociavel')
 
 
         if all([
