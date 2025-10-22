@@ -344,39 +344,16 @@ html, body {
 @media (max-width: 991px) {
 #titulo {
   font-size: 1.5rem;
-  margin-top: 5%;
 }
 
 .footer-links p.fw-bold {
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
 }
 
 .footer-bottom {
-  bottom: 8px;
+  bottom: 15px;
 }
 }
 
 @media (max-width: 768px) {
-  .footer-text {
-    top: 50%;
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  #titulo {
-    font-size: 1.6rem;
-    letter-spacing: 3px;
-  }
-
-  .footer-nav {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 8px;
-    bottom: 10px;
-  }
 }

@@ -40,6 +40,7 @@ h2 {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
 
 .card-title {
@@ -114,7 +115,8 @@ h2 {
 /* Placeholder menor - Filtro_Nome */
 .search-input::placeholder {
     font-size: 0.85rem;
-    color: #888; /*  Diz respeito a cor da letra */
+    color: #888;
+    /*  Diz respeito a cor da letra */
 }
 
 
@@ -138,6 +140,88 @@ h2 {
 }
 
 .container.py-4 {
-    padding-bottom: 0 !important; /* remove o padding interno extra */
-    margin-bottom: 0 !important;  /* remove a margem externa */
+    padding-bottom: 0 !important;
+    /* remove o padding interno extra */
+    margin-bottom: 0 !important;
+    /* remove a margem externa */
+}
+
+/* -------- Model dos detalhes do gato */
+
+/* Caixa principal */
+.modal-content {
+    border-radius: 5px !important;
+    overflow: hidden;
+    padding-top: 0;
+}
+
+/* Imagem do Model */
+#modalGato #modalImagem {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Caixas com informações das tabelas auxiliares */
+#modalDetalhes .tag {
+    display: inline-block;
+    background-color: #FFE6E7;
+    color: #F58285;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 2px 2px 2px 0;
+    transition: all 0.2s ease;
+}
+
+/* Caixas com informações das tabelas auxiliares com houver*/
+#modalDetalhes .tag:hover {
+    background-color: #F58285;
+    color: #fff;
+}
+
+/* Coloração do modal */
+.modal-body {
+    background-color: #ffffff;
+}
+
+/* Nome do gato */
+#modalNome {
+    color: #4F76BB;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* Título das seções (“História de...”, “Mais detalhes...”) */
+#modalDetalhes h6 {
+    color: #F58285;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+/* Coloração do texto de sexo e idade */
+#modalInfo {
+    color: #96B3E5 !important;
+}
+
+/* Coloração da história/descrição do gato */
+#modalHistoria {
+    color: #4F76BB !important;
+}
+
+/* Faz o X flutuar no canto superior direito */
+.btn-fechar-modal {
+    position: absolute;
+    top: 30px;    /* distância do topo */
+    right: 30px;  /* distância da direita */
+    z-index: 10;  /* garante que fique acima de tudo */
+}
+
+.modal-header {
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
 }
