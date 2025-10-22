@@ -717,13 +717,25 @@ header h1 em {
 @media (max-width: 768px){
 .wave-separator {
   margin-left: -5%;
-  margin-top: 160%;
+  margin-top: 130%;
 }
 }
 
 @media (max-width: 480px){
 .wave-separator {
-  margin-top: 0;
+  margin-top: 205%;
+}
+}
+
+@media (max-width: 350px){
+.wave-separator {
+  margin-top: 270%;
+}
+}
+
+@media (max-width: 270px){
+.wave-separator {
+  margin-top: 335%;
 }
 }
 
