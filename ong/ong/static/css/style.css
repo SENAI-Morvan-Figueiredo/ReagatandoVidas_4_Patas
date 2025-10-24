@@ -253,15 +253,16 @@ html, body {
 
 #titulo {
   letter-spacing: 5px;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0 auto 8px;
   display: inline-block;
   text-transform: uppercase;
+  margin-top: 5%;
 }
 
 .footer-links p.fw-bold {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   margin-bottom: 0.5rem;
 }
 
@@ -275,7 +276,7 @@ html, body {
 .footer-nav a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 500;
 }
 
@@ -326,6 +327,24 @@ html, body {
 }
 
 /* responsivo */
+@media (max-width: 1400px) {
+.footer-text {
+  width:100%;
+}
+
+#titulo {
+  font-size: 1.8rem;
+}
+
+.footer-links p.fw-bold {
+  font-size: 1.4rem;
+}
+
+.footer-nav a {
+  font-size: 1.2rem;
+}
+}
+
 @media (max-width: 1024px) {
 .footer-text {
   width: 100%;
@@ -356,4 +375,68 @@ html, body {
 }
 
 @media (max-width: 768px) {
+  #titulo {
+  font-size: 1.2rem;
+}
+
+.footer-links p.fw-bold {
+  font-size: 0.9rem;
+}
+
+.footer-nav a {
+  font-size: 0.8rem;
+}
+
+.footer-bottom {
+  bottom: 1px;
+}
+}
+
+@media (max-width: 480px) {
+.footer-text {
+  width: 100%;
+}
+
+#titulo {
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  margin-top: 10%;
+}
+
+.footer-links p.fw-bold {
+  font-size: 0px;
+}
+
+.footer-nav a {
+  font-size: 0px;
+}
+
+.admin-link {
+  font-size: 0.6rem;
+}
+
+.footer-bottom {
+  bottom: 10px;
+}
+
+.social-icon {
+  width: 12px;
+  height: 12px;
+}
+}
+
+@media (max-width: 300px) {
+
+#titulo {
+  font-size: 0.5rem;
+  margin-top: 17%;
+}
+
+.admin-link {
+  font-size: 0.4rem;
+}
+
+.footer-bottom {
+  bottom: 1px;
+}
 }
