@@ -83,17 +83,17 @@
           alimentação adequada, mas também saúde e muito carinho.
         </p>
         <p class="destaque">Cada contribuição transforma vidas!</p>
-        <a href="#" class="btn-doe">Doe amor, Doe comida</a>
+        <a href="{% url 'doacoes' %}" class="btn-doe">Doe amor, Doe comida</a>
       </div>
     </div>
   </section>
 
-  <!-- ONDA SEPARADORA (full-bleed) -->
-  <div class="wave-separator">
-    <svg viewBox="0 0 1440 130" preserveAspectRatio="none" class="wave-svg">
-      <path d="M0,40 C150,140 350,0 540,40 C730,80 930,40 1110,60 C1290,80 1440,40 1440,40 L1440,140 L0,140 Z"></path>
-    </svg>
-  </div>
+  <!-- Ondinha -->
+  <section class="onda-section">
+    <div class="onda-image">
+      <img src="{% static 'img/ondinha.svg' %}" alt="Onda decorativa">
+    </div>
+  </section>
 
   <!-- SEÇÃO LAR TEMPORÁRIO (FULLSCREEN) -->
   <section class="lar" id="lar">
