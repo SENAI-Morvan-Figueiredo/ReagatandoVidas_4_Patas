@@ -575,7 +575,7 @@ header h1 em {
 
 @media (max-width: 991px){
   .doe-section {
-    height: 50vh;
+    height: 70vh;
     margin-left: -22%;
   }
 
@@ -606,7 +606,7 @@ header h1 em {
 
 @media (max-width: 768px) {
   .doe-section {
-    height: 50vh;
+    height: 73vh;
     margin-left: -5%;
   }
 
@@ -628,7 +628,7 @@ header h1 em {
   .doe-section {
     min-height: auto;
     padding: 30px 15px;
-    height: 70vh;
+    height: 110vh;
   }
 
   .doe-image img {
@@ -700,6 +700,7 @@ header h1 em {
 @media (max-width: 1400px){
 .onda-section {
   margin-left: -10%;
+  margin-top: 10%;
 }
 }
 
@@ -718,13 +719,14 @@ header h1 em {
 @media (max-width: 768px) {
   .onda-section {
     margin-left: -5%;
-    margin-top: 5%;
+    margin-top: 10%;
   }
 }
 
 @media (max-width: 480px) {
   .onda-section {
     margin-left: -3%;
+    margin-top: 8%;
   }
 }
 
@@ -900,7 +902,8 @@ header h1 em {
 @media (max-width: 1400px){
   .lar {
     margin-left: -10%;
-    margin-top: -76%;
+    margin-top: -75%;
+    height: 125vh;
 }
 }
 
@@ -908,13 +911,14 @@ header h1 em {
   .lar {
     margin-left: -5%;
     margin-top: -70%;
+    height: 140vh;
 }
 }
 
 @media (max-width: 991px) {
   .lar {
     margin-left: -22%;
-    margin-top: -90%;
+    margin-top: -92%;
 }
 }
 
@@ -922,7 +926,7 @@ header h1 em {
   .lar {
     margin-left: -5%;
     margin-top: -75%;
-    height: 117vh;
+    height: 200vh;
   }
 
   .cards {
@@ -975,6 +979,7 @@ header h1 em {
     min-height: auto;
     padding: 40px 15px;
     margin-top: -79%;
+    height: 170vh;
   }
 
   .lar .container-lg {
