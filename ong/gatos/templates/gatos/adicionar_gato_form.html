@@ -277,30 +277,23 @@
 <script>
 // CHECKBOX 
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleciona todos os labels com a classe chip
     const chips = document.querySelectorAll('.chip');
 
     chips.forEach(chip => {
-        // Encontra o input checkbox dentro do mesmo label
         const checkbox = chip.querySelector('input[type="checkbox"]');
 
-        // Se checkbox já estiver marcado, aplica a classe selected
+        // Aplica a classe 'selected' se estiver marcado inicialmente
         if (checkbox.checked) {
             chip.classList.add('selected');
         }
 
-        // Ao clicar no chipdata:image
-        chip.addEventListener('click', (e) => {
-            e.preventDefault(); // evita qualquer comportamento padrão
-
-            // Alterna o estado do checkbox
-            checkbox.checked = !checkbox.checked;
-
-            // Alterna a classe selected
-            chip.classList.toggle('selected');
+        // Quando o checkbox mudar (marcado/desmarcado), atualiza a classe
+        checkbox.addEventListener('change', () => {
+            chip.classList.toggle('selected', checkbox.checked);
         });
     });
 });
+
 
 
 // FOTO 
