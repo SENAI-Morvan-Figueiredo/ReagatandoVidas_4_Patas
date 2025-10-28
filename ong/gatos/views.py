@@ -88,16 +88,20 @@ def dashboard_admin_lar_temporario(request):
 
 logger = logging.getLogger(__name__)
 
-# --------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------- Da tela adicionar_gato_form
 
+# View que vai adicionar o gato
 def adicionar_gato(request):
+    # Se o método for POST, significa que o usuário clicou em “Enviar” no formulário
     if request.method == 'POST':
+        # Pega as informações dos forms - instância
         gato_form = GatoForm(request.POST, request.FILES)
         cuidado_form = CuidadoForm(request.POST)
         temperamento_form = TemperamentoForm(request.POST)
         sociavel_form = SociavelForm(request.POST)
         moradia_form = MoradiaForm(request.POST)
 
+        # Verificação se todos estão válidos (tipo de dado, campos obrigatorios) - vai vê se foi preenchido da forma certa
         if all([
             gato_form.is_valid(),
             cuidado_form.is_valid(),
@@ -105,6 +109,7 @@ def adicionar_gato(request):
             sociavel_form.is_valid(),
             moradia_form.is_valid()
         ]):
+            
             # Salva cada formulário auxiliar primeiro
             cuidado = cuidado_form.save()
             temperamento = temperamento_form.save()
@@ -112,15 +117,16 @@ def adicionar_gato(request):
             moradia = moradia_form.save()
 
             # Cria o gato, associando os objetos salvos
-            gato = gato_form.save(commit=False)
+            gato = gato_form.save(commit=False) # Cria o objeto gato, mas ainda não salva no bd
             gato.cuidado = cuidado
             gato.temperamento = temperamento
             gato.sociavel = sociavel
             gato.moradia = moradia
-            gato.save()
+            gato.save() # Após todos as informações inseridas, salva no bd
 
-            return redirect('gatos:dashboard_admin_adocoes')
+            return redirect('gatos:dashboard_admin_adocoes') # Se tudo der certinho, vai te redirecionar para a tela de dashboard_admin_adocoes
 
+    # Caso não seja o método POST - Cria todos os formulários vazios, prontos para preenchimento.
     else:
         gato_form = GatoForm()
         cuidado_form = CuidadoForm()
@@ -128,6 +134,7 @@ def adicionar_gato(request):
         sociavel_form = SociavelForm()
         moradia_form = MoradiaForm()
 
+    # Envio dos formulários para o template
     context = {
         'gato_form': gato_form,
         'cuidado_form': cuidado_form,

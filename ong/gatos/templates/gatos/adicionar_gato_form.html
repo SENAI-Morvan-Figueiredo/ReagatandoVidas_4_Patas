@@ -2,11 +2,21 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/adocao.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/adocao.css' %}"> <!-- Css -->
+
+<!-- -------------------------------------------------------------------------------------------- -->
+
+<!-- Botão de voltar -->
 
 <a href="{% url 'gatos:dashboard_admin_adocoes' %}" class="back-link">&larr; Voltar</a>
 
+<!-- -------------------------------------------------------------------------------------------- -->
+
+<!-- Caixa do formulário -->
+
 <div class="form-container">
+
     <h1 class="form-title">ADICIONE UM GATO PARA ADOÇÃO</h1>
 
     <form method="post" enctype="multipart/form-data">
@@ -64,20 +74,22 @@
                     </div>
                 </div>
             </div>
+
         </div>
-                        
+                     
+        
         <!-- Cuidados Veterinários -->
         <div class="form-section">
             <h2 class="section-title">Cuidados Veterinários</h2>
             <div class="checkbox-group">
+
                 <div class="checkbox-item">
                     <label class="chip">
                         {{ cuidado_form.castrado }}
                         <span class="chip-text">Castrado</span>
                     </label>
                     {{ cuidado_form.castrado.errors }}
-                    </div>
-
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -85,7 +97,7 @@
                         <span class="chip-text">Vacinado</span>
                     </label>
                     {{ cuidado_form.vacinado.errors }}
-                    </div>
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -93,7 +105,7 @@
                         <span class="chip-text">Vermifugado</span>
                     </label>
                     {{ cuidado_form.vermifugado.errors }}
-                    </div>
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -101,7 +113,7 @@
                         <span class="chip-text">Cuidado Especial</span>
                     </label>
                     {{ cuidado_form.cuidado_especial.errors }}
-                    </div>
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -109,7 +121,7 @@
                         <span class="chip-text">FIV-</span>
                     </label>
                     {{ cuidado_form.fiv_negativo.errors }}
-                    </div>
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -117,7 +129,7 @@
                         <span class="chip-text">FIV+</span>
                     </label>
                     {{ cuidado_form.fiv_positivo.errors }}
-                    </div>
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -125,7 +137,7 @@
                         <span class="chip-text">FELV-</span>
                     </label>
                     {{ cuidado_form.felv_negativo.errors }}
-                    </div>
+                </div>
 
                 <div class="checkbox-item">
                     <label class="chip">
@@ -133,14 +145,17 @@
                         <span class="chip-text">FELV+</span>
                     </label>
                     {{ cuidado_form.felv_positivo.errors }}
-                    </div>
+                </div>
+
             </div>
         </div>
+
 
         <!-- Temperamento -->
         <div class="form-section">
             <h2 class="section-title">Temperamento</h2>
             <div class="checkbox-group">
+
                 <div class="checkbox-item">
                     <label class="chip">
                         {{ temperamento_form.docil }}
@@ -196,13 +211,16 @@
                     </label>
                     {{ temperamento_form.carente.errors }}
                 </div>
+
             </div>
         </div>
+
 
          <!-- Vive bem com -->
         <div class="form-section">
             <h2 class="section-title">Vive bem com</h2>
             <div class="checkbox-group">
+
                 <div class="checkbox-item">
                     <label class="chip">
                         {{ moradia_form.casa_com_quintal }}
@@ -218,8 +236,10 @@
                     </label>
                     {{ moradia_form.apartamento.errors }}
                 </div>
+
             </div>
         </div>
+
 
         <!-- Sociavel com -->
         <div class="form-section">
@@ -264,18 +284,21 @@
                     </label>
                     {{ sociavel_form.nao_sociavel.errors }}
                 </div>
+
             </div>
         </div>
 
-        <!-- Botão -->
+        <!-- Botão de enviar -->
             <div class="form-actions">
                 <button type="submit" class="btn-submit">Enviar</button>
             </div>
+
     </form>
+
 </div>
 
 <script>
-// CHECKBOX 
+// CHECKBOX - Efeito visual
 document.addEventListener('DOMContentLoaded', () => {
     const chips = document.querySelectorAll('.chip');
 

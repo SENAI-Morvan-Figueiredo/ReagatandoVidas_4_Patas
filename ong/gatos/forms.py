@@ -1,6 +1,8 @@
 from django import forms
 from .models import Gato, Cuidado, Temperamento, Sociavel, Moradia
 
+# Valores de escolha - Tuplas
+
 SIM_NAO_CHOICES = [
     (True, "Sim"),
     (False, "Não"),
@@ -11,8 +13,13 @@ SEXO_CHOICES = [
         ("F", "Fêmea"),
     ]
 
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Formulário das informações da tabela gato
 
 class GatoForm(forms.ModelForm):
+    
+    # Campo para o sexo - Macho ou Fêmea
     sexo = forms.TypedChoiceField(
         choices=Gato.SEXO_CHOICES,
         widget=forms.RadioSelect,
@@ -22,7 +29,8 @@ class GatoForm(forms.ModelForm):
 
     class Meta:
         model = Gato
-        exclude = ['cuidado', 'temperamento', 'sociavel', 'moradia']  # <-- trocado
+        exclude = ['cuidado', 'temperamento', 'sociavel', 'moradia']  # <-- Não vai exibir as informações relacionadas a outras tabelas
+        # Define como cada campo será renderizado - "tipo de input"
         widgets = {
             'lar_temporario': forms.RadioSelect(choices=SIM_NAO_CHOICES),
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
@@ -31,16 +39,21 @@ class GatoForm(forms.ModelForm):
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
 
+    # Remove a opção “------” padrão do campo sexo (deixa obrigatório escolher M ou F).
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['sexo'].empty_label = None
 
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Formulário das informações da tabela auxiliar Cuidado
 
 class CuidadoForm(forms.ModelForm):
     class Meta:
         model = Cuidado
         fields = "__all__" 
 
+        # Define como cada campo será renderizado - "tipo de input"
         widgets = {
             'castrado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'vacinado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
@@ -51,16 +64,23 @@ class CuidadoForm(forms.ModelForm):
             'felv_negativo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'felv_positivo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
-        
+
+    # Remove a opção “------” padrão do campo sexo (deixa obrigatório escolher M ou F).
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.required = False
 
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Formulário das informações da tabela auxiliar Temperamento
+
 class TemperamentoForm(forms.ModelForm):
     class Meta:
         model = Temperamento
         fields = '__all__'
+        
+        # Define como cada campo será renderizado - "tipo de input"
         widgets = {
             'docil': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'agressivo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
@@ -71,31 +91,43 @@ class TemperamentoForm(forms.ModelForm):
             'carente': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
+    # Remove a opção “------” padrão do campo sexo (deixa obrigatório escolher M ou F).
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.required = False
 
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Formulário das informações da tabela auxiliar Moradia
 
 class MoradiaForm(forms.ModelForm):
     class Meta:
         model = Moradia
         fields = '__all__'
+
+        # Define como cada campo será renderizado - "tipo de input"
         widgets = {
             'casa_com_quintal': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'apartamento': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
+    # Remove a opção “------” padrão do campo sexo (deixa obrigatório escolher M ou F).
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.required = False
 
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Formulário das informações da tabela auxiliar Sociavel
 
 class SociavelForm(forms.ModelForm):
     class Meta:
         model = Sociavel
         fields = '__all__'
+        
+        # Define como cada campo será renderizado - "tipo de input"
         widgets = {
             'gatos': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'desconhecidos': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
@@ -104,14 +136,14 @@ class SociavelForm(forms.ModelForm):
             'nao_sociavel': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
+    # Remove a opção “------” padrão do campo sexo (deixa obrigatório escolher M ou F).
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.required = False
         
-        
-        
-        
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+         
 # class LarTemporarioForm(forms.ModelForm):
 #     class Meta:
 #         model = LarTemporario
