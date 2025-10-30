@@ -6,15 +6,17 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
+{% block extra_scripts %}
+<script src="{% static 'js/adm.js' %}" defer></script>
+{% endblock %}
+
 {% block header %}
 <header class="home-header">
   <!-- Top bar: logo + menu -->
   <div class="top-bar">
     <!-- Logo à esquerda -->
     <div class="logo-wrap">
-      <a href="{% url 'home' %}">
         <img src="{% static 'img/logo.png' %}" alt="Logotipo 4 Patas" class="logo">
-      </a>
     </div>
 
     <!-- Menu centralizado -->
@@ -30,10 +32,17 @@
   </div>
 
   <div class="nav-right">
-    <div class="user-circle">
-        <img src="{% static 'img/icone_usuario.svg' %}" alt="Usuário">
+    <button id="userToggle" class="user-circle" aria-expanded="false" aria-controls="userDropdown" aria-label="Abrir menu do usuário">
+      <img src="{% static 'img/icone_usuario.svg' %}" alt="Usuário">
+    </button>
+
+    <div id="userDropdown" class="user-dropdown" role="menu" aria-hidden="true">
+      <ul>
+        <li><a href="{% url 'admin:index' %}"><i class="fa-solid fa-gear"></i> Admin Painel</a></li>
+        <li><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
+      </ul>
     </div>
-  </div> 
+  </div>
 
   <!-- Hero centralizado -->
   <div class="hero-content">
