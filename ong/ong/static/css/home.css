@@ -47,7 +47,7 @@ header.home-header {
   position: relative;
   z-index: 10;
   flex-wrap: wrap;
-  gap: 15px;
+  margin-left: -2.8%;
 }
 
 .logo-wrap {
@@ -74,7 +74,7 @@ header.home-header {
 .menu-centralizado ul {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 40px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -90,11 +90,11 @@ header.home-header {
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .menu-centralizado ul li a:hover {
-  transform: scale(1.05);
-  text-decoration: underline;
+  transform: scale(1.06);
 }
 
 /* Hero centralizado */
@@ -628,7 +628,7 @@ header h1 em {
   .doe-section {
     min-height: auto;
     padding: 30px 15px;
-    height: 110vh;
+    height: 80vh;
   }
 
   .doe-image img {
@@ -918,7 +918,7 @@ header h1 em {
 @media (max-width: 991px) {
   .lar {
     margin-left: -22%;
-    margin-top: -92%;
+    margin-top: -90%;
 }
 }
 
@@ -979,7 +979,7 @@ header h1 em {
     min-height: auto;
     padding: 40px 15px;
     margin-top: -79%;
-    height: 170vh;
+    height: 120vh;
   }
 
   .lar .container-lg {
@@ -1039,6 +1039,17 @@ header h1 em {
 @media (max-width: 300px) {
   .lar {
     margin-top: -96%;
+  }
+
+  .btn-ghost {
+    padding: 14px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 270px) {
+  .lar {
+    margin-top: -100%;
   }
 }
 
