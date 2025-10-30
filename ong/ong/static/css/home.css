@@ -311,7 +311,7 @@ header h1 em {
   display: flex;
   align-items: center;
   padding: 60px 30px;
-  background-color: #f8f9ff;
+  background-color: transparent;
   flex-wrap: wrap;
   gap: 40px;
   margin: 0 auto;
@@ -1062,7 +1062,7 @@ header h1 em {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8f9ff;
+  background-color: transparent;
   padding: 0;
   overflow: hidden;
   margin-left: -24%;
@@ -1126,7 +1126,7 @@ header h1 em {
 ======================= */
 .considere-adotar {
   width: 100%;
-  background-color: #f8f9ff;
+  background-color: transparent;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
