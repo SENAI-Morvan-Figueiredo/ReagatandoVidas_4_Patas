@@ -83,8 +83,13 @@ def formulario_adocao(request):
     if request.method == 'POST':
         form = AdocaoForm(request.POST)
         if form.is_valid():
-            adocao = form.save()
             gato = adocao.gato
+            adocao = form.save(commit=False)
+
+            if gato:
+                adocao.gato = gato
+
+            adocao.save()
             gato.adotado = True
             gato.save()
             Adotados.objects.create(
@@ -94,7 +99,9 @@ def formulario_adocao(request):
                 data_inicio=now().date(),
             )
             return redirect('adocoes:adocao_sucess')
+        else:
+             messages.error(request, "Alguns campos estão incorretos ou faltando. Por favor, confira as informações.")
     else:
         form = AdocaoForm()
 
-    return render(request, 'adocoes/adocao_form.html', {'form': form})
+    return render(request, 'adocoes/adocao_form.html', {'form': form, 'gato': gato})

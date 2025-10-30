@@ -50,7 +50,7 @@ html, body {
 
 .nav-center span,
 .nav-center a {
-    font-size: 1.2rem;
+    font-size: 25px;
     font-weight: bold;
     color: #4F76BB;
     text-decoration: none;
@@ -226,79 +226,6 @@ html, body {
 
 /* --- Footer --- */
 .footer-container {
-    position: relative;
-    margin-top: 100px;
-    width: 100%;
-}
-
-.footer-container .footer-image {
-    width: 100%;
-    height: auto;
-}
-
-.footer-text {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    width: 90%;
-}
-
-#titulo{
-    letter-spacing: 5px;
-    font-size: 2rem;
-    font-weight: bold;
-    width: 33%;
-    margin-left: 33%;
-}
-
-.fw-bold{
-    font-size: 1.5rem;
-}
-
-p{
-    margin-top: 4%;
-}
-
-.footer-links {
-    font-size: 1rem;
-    margin-top: 1.5rem;
-}
-
-.footer-nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.footer-nav span {
-    font-size: 1rem;
-    color: #ffffff;
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-    .footer-text {
-        font-size: 1.2rem;
-        width: 100%;
-    }
-
-    .footer-nav {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .navbar-nav .nav-link {
-        font-size: 1rem;
-    }
-}
-
-/* --- FOOTER AJUSTADO --- */
-.footer-container {
   position: relative;
   margin-top: 100px;
   width: 100%;
@@ -399,26 +326,34 @@ p{
 }
 
 /* responsivo */
+@media (max-width: 1024px) {
+.footer-text {
+  width: 100%;
+}
+
+#titulo {
+  font-size: 1.6rem;
+  margin-top: 5%;
+}
+
+.footer-bottom {
+  bottom: 8px;
+}
+}
+
+@media (max-width: 991px) {
+#titulo {
+  font-size: 1.5rem;
+}
+
+.footer-links p.fw-bold {
+  font-size: 1.1rem;
+}
+
+.footer-bottom {
+  bottom: 15px;
+}
+}
+
 @media (max-width: 768px) {
-  .footer-text {
-    top: 50%;
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  #titulo {
-    font-size: 1.6rem;
-    letter-spacing: 3px;
-  }
-
-  .footer-nav {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 8px;
-    bottom: 10px;
-  }
 }

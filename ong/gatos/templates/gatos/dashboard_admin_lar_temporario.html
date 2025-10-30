@@ -21,7 +21,7 @@ Página do dashboard que mostra os gatos para Lar Temporário -->
                 <h2 class="fw-bold text-primary">Gerenciar Gatos para Lar Temporário</h2>
                 <p class="subtitle-custom mb-0">Adicione, edite ou remova gatos para Lar Temporário</p>
             </div>
-            <a href="" class="btn btn-danger fw-bold shadow-sm rounded-3"> + Registrar Lar Temporário </a>
+            <a href="{% url 'gatos:adicionar_gato' %}" class="btn btn-danger fw-bold shadow-sm rounded-3"> + Registrar Lar Temporário </a>
         </div> 
 
         <!-- Barra de pesquisa e filtros -->
@@ -46,15 +46,15 @@ Página do dashboard que mostra os gatos para Lar Temporário -->
         <div class="row g-4">
             {% for gato in gatos %}
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card border-0 h-100 rounded-4 overflow-hidden position-relative shadow-sm">
+                <div class="card border-0 h-100 rounded-4 overflow-hidden">
 
                     <!-- Status - Se está ou não em um Lar Temporário -->
                     {% if gato.em_lar %}
-                        <div class="position-absolute top-0 end-0 m-2 px-3 py-1 fw-bold rounded-3 text-dark" style="background-color: #B0EEB2; border: 2px solid #227B0C; font-size: 0.9rem;">
+                        <div class="position-absolute top-0 end-0 m-2 px-3 py-1 fw-bold rounded-3" style="background-color: #B0EEB2; font-size: 0.9rem; color: #227B0C;">
                             Em Lar Temporário
                         </div>
                     {% else %}
-                        <div class="position-absolute top-0 end-0 m-2 px-3 py-1 fw-bold rounded-3 text-dark" style="background-color: #EEB0B0; border: 2px solid #7B0C0C; font-size: 0.9rem;">
+                        <div class="position-absolute top-0 end-0 m-2 px-3 py-1 fw-bold rounded-3" style="background-color: #EEB0B0; font-size: 0.9rem; color: #7B0C0C;">
                             Sem Lar Temporário
                         </div>
                     {% endif %}
