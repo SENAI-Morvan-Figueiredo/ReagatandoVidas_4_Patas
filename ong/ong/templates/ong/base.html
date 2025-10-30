@@ -13,7 +13,10 @@
   {% block extra_head %}{% endblock %}
 </head>
 <body>
-  {% include "ong/header.html" %}
+  {% block header %}
+    {% include "ong/header.html" %}
+  {% endblock %}
+
 
   <div class="container my-4">
     {% block content %}{% endblock %}
