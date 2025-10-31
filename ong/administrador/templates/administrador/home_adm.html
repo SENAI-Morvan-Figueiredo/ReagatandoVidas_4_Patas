@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{% static 'js/adm.js' %}" defer></script>
+<script src="{% static 'js/adm.js' %}"></script>
 {% endblock %}
 
 {% block header %}
@@ -36,11 +36,9 @@
       <img src="{% static 'img/icone_usuario.svg' %}" alt="Usuário">
     </button>
 
-    <div id="userDropdown" class="user-dropdown" role="menu" aria-hidden="true">
-      <ul>
-        <li><a href="{% url 'admin:index' %}"><i class="fa-solid fa-gear"></i> Admin Painel</a></li>
-        <li><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
-      </ul>
+    <div id="userDropdown" class="user-dropdown user-card" role="menu" aria-hidden="true">
+        <a href="{% url 'admin:index' %}" class="user-card-link"><i class="fa-solid fa-gear"><img src="{% static 'img/adm_painel.svg' %}" alt=""></i> Admin Painel</a>
+        <a href="{% url 'logout' %}" class="user-card-link"><i class="fa-solid fa-right-from-bracket"><img src="{% static 'img/sair.svg' %}" alt=""></i> Sair</a>
     </div>
   </div>
 
